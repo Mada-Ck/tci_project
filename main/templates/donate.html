@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Donate - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/donate-hero.jpg' %}" alt="Donate to TCI" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Empower Change: Donate to TCI Today</h1>
+            <p>Your gift makes a difference in the Thembi community.</p>
+            <a href="#donation-options" class="button">Donate Now</a>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Why Your Donation Matters</h2>
+        <p>Every donation to TCI directly supports our vital programs, providing essential resources, education, and healthcare to children and families in Thembi. Join us in building a brighter future.</p>
+
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/donate-health.jpg' %}" alt="Provide Life-Saving Healthcare">
+                <h3>Provide Life-Saving Healthcare</h3>
+                <p>Your gift helps provide essential medical care, vaccinations, and HIV/AIDS support.</p>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/donate-education.jpg' %}" alt="Empower Through Education">
+                <h3>Empower Through Education</h3>
+                <p>Support scholarships, school supplies, and early childhood development programs.</p>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/donate-livelihood.jpg' %}" alt="Build Sustainable Livelihoods">
+                <h3>Build Sustainable Livelihoods</h3>
+                <p>Fund skills training, microfinance loans, and entrepreneurship support.</p>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/donate-community.jpg' %}" alt="Strengthen Communities">
+                <h3>Strengthen Communities</h3>
+                <p>Support community-led projects and leadership development.</p>
+            </div>
+        </div>
+
+        <h2 id="donation-options">Choose Your Donation</h2>
+
+        {# Commenting out the payment forms for now
+        <h3>Donate with Credit Card</h3>
+        <div class="credit-card-form">
+            <h4>Make a Secure Donation</h4>
+            <form id="credit-card-donation" action="/charge" method="post">
+              ...
+            </form>
+            <div class="payment-icons">
+               ...
+            </div>
+        </div>
+
+        <h3>Make a One-Time Gift (PayPal)</h3>
+        <div class="donation-options">
+           ...
+        </div>
+
+        <h3>Become a Monthly Supporter (PayPal)</h3>
+        <p>Recurring donations provide sustained support for our programs.</p>
+        <div class="donation-options">
+          ...
+        </div>
+
+        <h3>Other Ways to Support TCI</h3>
+        <ul>
+            <li><a href="{% url 'specific_program' %}">Donate for a Specific Program</a></li>
+            <li><a href="{% url 'donate_child' %}">Donate for a Child</a></li>
+            <li><a href="{% url 'in_kind' %}">Support Anything In Kind</a></li>
+            <li><a href="{% url 'volunteer' %}">Volunteer</a></li>
+            <li><a href="{% url 'corporate' %}">Corporate Partnerships</a></li>
+        </ul>
+
+        <h2>Your Donation is Secure</h2>
+        <p>We use industry-standard encryption to protect your data.</p>
+        <p><a href="#">Privacy Policy</a></p>
+    </section>
+{% endblock %}

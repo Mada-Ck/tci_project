@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Donate for a Specific Program - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/specific-program-hero.jpg' %}" alt="Donate for a Specific Program Hero" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Donate for a Specific Program</h1>
+            <p>Target Your Support to Make a Direct Impact.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Choose Where Your Donation Goes</h2>
+        <p>Direct your donation to the TCI program that resonates most with you. Your contribution will directly support the specific initiative you choose, making a tangible difference in the Thembi community.</p>
+
+        <h3>Program Options</h3>
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/donate-health.jpg' %}" alt="Health Programs">
+                <h3>Health Programs</h3>
+                <p>Support our HIV/AIDS prevention and care, child and maternal health, or community health outreach initiatives.</p>
+                <a href="#" class="button">Donate to Health</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/donate-education.jpg' %}" alt="Education Programs">
+                <h3>Education Programs</h3>
+                <p>Fund scholarships, early childhood development, or school infrastructure projects.</p>
+                <a href="#" class="button">Donate to Education</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/donate-livelihood.jpg' %}" alt="Livelihood Programs">
+                <h3>Livelihood Programs</h3>
+                <p>Contribute to skills training, microfinance, or entrepreneurship support.</p>
+                <a href="#" class="button">Donate to Livelihood</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/donate-community.jpg' %}" alt="Community Empowerment">
+                <h3>Community Empowerment</h3>
+                <p>Support community leadership development and community-led projects.</p>
+                <a href="#" class="button">Donate to Community</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

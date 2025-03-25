@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Top Menu -->
+    <div class="menu-icon">
+        <div class="dots"></div>
+        <div class="dashboard-dropdown">
+            <a href="#" data-section="dashboards">Dashboards</a>
+            <a href="#" data-section="data-entry">Data Entry</a>
+            <a href="#" data-section="reports">Reports</a>
+            <a href="#" data-section="pivot-tables">Pivot Tables</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboards Section -->
+        <div class="section dashboards active">
+            <h2>Dashboard - Past 3 Months</h2>
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>Teen Club</h3>
+                    <p>Total Attendance: {{ teen_club_totals.total_attendance|default:0 }}</p>
+                </div>
+                <div class="card">
+                    <h3>PMTCT</h3>
+                    <p>Total Attendance: {{ pmtct_totals.total_attendance|default:0 }}</p>
+                </div>
+                <div class="card">
+                    <h3>Item Distribution</h3>
+                    <p>Total Quantity: {{ item_totals.total_quantity|default:0 }}</p>
+                </div>
+                <div class="card">
+                    <h3>Health Records</h3>
+                    <p>Total Clinic Visits: {{ health_totals.total_clinic_visits|default:0 }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Entry Section -->
+        <div class="section data-entry">
+            <div class="sidebar">
+                <h3>Form Types</h3>
+                <ul>
+                    <li><a href="#" data-form="teen-club">Teen Club</a></li>
+                    <li><a href="#" data-form="pmtct">PMTCT</a></li>
+                    <li><a href="#" data-form="livestock-distribution">Livestock Distribution</a></li>
+                    <li><a href="#" data-form="other-distribution">Other Distribution</a></li>
+                    <li><a href="#" data-form="iec-material">IEC Material Distribution</a></li>
+                </ul>
+            </div>
+            <div class="form-content">
+                <h2>Data Entry</h2>
+                <p>Close TA Mwaulambya - January 2025 - No Data Element Selected</p>
+
+                <!-- Teen Club Form -->
+                <div class="form-section teen-club">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ teen_form.as_p }}
+                        <button type="submit" name="teen_submit">Submit</button>
+                    </form>
+                </div>
+
+                <!-- PMTCT Form -->
+                <div class="form-section pmtct">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ pmtct_form.as_p }}
+                        <button type="submit" name="pmtct_submit">Submit</button>
+                    </form>
+                </div>
+
+                <!-- Livestock Distribution Form -->
+                <div class="form-section livestock-distribution">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ item_form.as_p }}
+                        <button type="submit" name="item_submit">Submit</button>
+                    </form>
+                </div>
+
+                <!-- Other Distribution Form -->
+                <div class="form-section other-distribution">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ item_form.as_p }}
+                        <button type="submit" name="item_submit">Submit</button>
+                    </form>
+                </div>
+
+                <!-- IEC Material Distribution Form -->
+                <div class="form-section iec-material">
+                    <form method="post">
+                        {% csrf_token %}
+                        <h3>1.1 IEC Material Distribution (Print)</h3>
+                        <p><strong>Organisation Unit:</strong> {{ iec_form.organisation_unit }}</p>
+                        <p><strong>Data Set:</strong> {{ iec_form.data_set }}</p>
+                        <p><strong>Period:</strong> {{ iec_form.period }}</p>
+                        <p><strong>CBO/Implementing Partner:</strong> {{ iec_form.implementing_partner }}</p>
+                        <p><strong>Does Your Organization Distribute IEC Materials?</strong></p>
+                        {{ iec_form.distributes_iec }}
+                        <table class="iec-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">#</th>
+                                    <th rowspan="2">Type of Materials</th>
+                                    <th colspan="4">Distributed to Facilities</th>
+                                    <th colspan="4">Distributed to Communities</th>
+                                    <th colspan="4">Distributed to Hot Spots</th>
+                                </tr>
+                                <tr>
+                                    <th>Prevention</th><th>Care</th><th>Impact Mitigation</th><th>RSSH</th>
+                                    <th>Prevention</th><th>Care</th><th>Impact Mitigation</th><th>RSSH</th>
+                                    <th>Prevention</th><th>Care</th><th>Impact Mitigation</th><th>RSSH</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>IC1</td><td>Posters</td>
+                                    <td>{{ iec_form.posters_facilities_prevention }}</td>
+                                    <td>{{ iec_form.posters_facilities_care }}</td>
+                                    <td>{{ iec_form.posters_facilities_impact }}</td>
+                                    <td>{{ iec_form.posters_facilities_rssh }}</td>
+                                    <td>{{ iec_form.posters_communities_prevention }}</td>
+                                    <td>{{ iec_form.posters_communities_care }}</td>
+                                    <td>{{ iec_form.posters_communities_impact }}</td>
+                                    <td>{{ iec_form.posters_communities_rssh }}</td>
+                                    <td>{{ iec_form.posters_hotspots_prevention }}</td>
+                                    <td>{{ iec_form.posters_hotspots_care }}</td>
+                                    <td>{{ iec_form.posters_hotspots_impact }}</td>
+                                    <td>{{ iec_form.posters_hotspots_rssh }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" name="iec_submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div class="section reports">
+            <h2>Reports - Past 3 Months</h2>
+            <div class="report-grid">
+                <div class="report-card">
+                    <h3>Teen Club</h3>
+                    <p>Total Attendance: {{ teen_club_totals.total_attendance|default:0 }}</p>
+                    <p>Total Missed: {{ teen_club_totals.total_missed|default:0 }}</p>
+                    <p>Newly Enrolled: {{ teen_club_totals.total_newly_enrolled|default:0 }}</p>
+                    <p>Graduated: {{ teen_club_totals.total_graduated|default:0 }}</p>
+                </div>
+                <div class="report-card">
+                    <h3>PMTCT</h3>
+                    <p>Total Attendance: {{ pmtct_totals.total_attendance|default:0 }}</p>
+                    <p>Total Missed: {{ pmtct_totals.total_missed|default:0 }}</p>
+                    <p>HIV Positive: {{ pmtct_totals.total_hiv_positive|default:0 }}</p>
+                    <p>Newly Enrolled: {{ pmtct_totals.total_newly_enrolled|default:0 }}</p>
+                </div>
+                <div class="report-card">
+                    <h3>Item Distribution</h3>
+                    <p>Total Quantity: {{ item_totals.total_quantity|default:0 }}</p>
+                    <p>Total Recipients: {{ item_totals.total_recipients|default:0 }}</p>
+                </div>
+                <div class="report-card">
+                    <h3>Health Records</h3>
+                    <p>Total Clinic Visits: {{ health_totals.total_clinic_visits|default:0 }}</p>
+                    <p>Total Vaccinations: {{ health_totals.total_vaccinations|default:0 }}</p>
+                </div>
+                <div class="report-card">
+                    <h3>IEC Material Distribution</h3>
+                    <p>Posters to Facilities: {{ iec_totals.total_posters_facilities|default:0 }}</p>
+                    <p>Posters to Communities: {{ iec_totals.total_posters_communities|default:0 }}</p>
+                    <p>Posters to Hot Spots: {{ iec_totals.total_posters_hotspots|default:0 }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pivot Tables Section -->
+        <div class="section pivot-tables">
+            <h2>Pivot Tables</h2>
+            <p>Explore data dynamically below:</p>
+            <div id="pivot-table-output" class="pivot-table-container"></div>
+            <script id="pivot-data" type="application/json">{{ pivot_data|safe }}</script>
+        </div>
+    </div>
+</div>
+{% endblock %}

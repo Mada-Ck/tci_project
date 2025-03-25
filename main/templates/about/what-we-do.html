@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}What We Do - TCI{% endblock %}
+
+{% block content %}
+    <!-- Hero Section with Animation -->
+    <section class="about-hero">
+        <img src="{% static 'images/what-we-do-hero.jpg' %}" alt="What We Do Hero Image" class="about-hero-image">
+        <div class="about-hero-text animate-hero">
+            <h1>What We Do</h1>
+            <p>Delivering impactful solutions locally and globally to empower communities.</p>
+        </div>
+    </section>
+
+    <!-- Main Content with Sidebar -->
+    <div class="about-page-content">
+        <aside class="about-sidebar" role="navigation" aria-label="What We Do Navigation">
+            <h3>In this section</h3>
+            <ul>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'what_we_do' %}" class="active">What We Do</a></li>
+                <li><a href="{% url 'governance' %}">Governance</a></li>
+            </ul>
+        </aside>
+
+        <section class="about-main-content">
+            <div class="content-section intro-text">
+                <p>With over a century of experience and a dedicated community of 16,000+ members and volunteers, Thembi Community Initiative acts locally and connects globally to deliver critical support when it’s needed most.</p>
+            </div>
+
+            <!-- Programs Section -->
+            <div class="content-section">
+                <h2>Our Programs</h2>
+                <div class="info-card-row">
+                    <div class="info-card expandable-card">
+                        <img src="{% static 'images/emergency-services.jpg' %}" alt="Emergency Services">
+                        <h3>Emergency Services & Disasters</h3>
+                        <p>Building resilient communities to handle disasters and climate emergencies.</p>
+                        <details>
+                            <summary><span class="read-more">Learn How We Do It</span></summary>
+                            <div class="details-content">
+                                <p>We strengthen community preparedness and recovery through training, resources, and rapid response initiatives.</p>
+                                <a href="#" class="button">Explore More</a>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="info-card expandable-card">
+                        <img src="{% static 'images/migration.jpg' %}" alt="Migration">
+                        <h3>Migration Support</h3>
+                        <p>Creating safe, inclusive spaces for migrants to thrive.</p>
+                        <details>
+                            <summary><span class="read-more">Learn How We Do It</span></summary>
+                            <div class="details-content">
+                                <p>We provide humanitarian aid, legal support, and integration programs for migrants.</p>
+                                <a href="#" class="button">Explore More</a>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="info-card expandable-card">
+                        <img src="{% static 'images/community-activities.jpg' %}" alt="Community Activities">
+                        <h3>Community Programs</h3>
+                        <p>Fostering connection and resilience through local initiatives.</p>
+                        <details>
+                            <summary><span class="read-more">Learn How We Do It</span></summary>
+                            <div class="details-content">
+                                <p>Volunteering opportunities and tailored programs address local humanitarian needs.</p>
+                                <a href="#" class="button">Explore More</a>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="info-card-row">
+                    <div class="info-card expandable-card">
+                        <img src="{% static 'images/international-programs.jpg' %}" alt="International Programs">
+                        <h3>International Programs</h3>
+                        <p>Enhancing global resilience against crises and climate change.</p>
+                        <details>
+                            <summary><span class="read-more">Learn How We Do It</span></summary>
+                            <div class="details-content">
+                                <p>We partner with international communities to build capacity and recovery systems.</p>
+                                <a href="#" class="button">Explore More</a>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="info-card expandable-card">
+                        <img src="{% static 'images/international-humanitarian-law.jpg' %}" alt="International Humanitarian Law">
+                        <h3>International Humanitarian Law</h3>
+                        <p>Improving outcomes in conflict-affected regions.</p>
+                        <details>
+                            <summary><span class="read-more">Learn How We Do It</span></summary>
+                            <div class="details-content">
+                                <p>We advocate for adherence to humanitarian laws to protect vulnerable populations.</p>
+                                <a href="#" class="button">Explore More</a>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="info-card expandable-card">
+                        <img src="{% static 'images/first-nations.jpg' %}" alt="First Nations Centrality">
+                        <h3>First Nations Centrality</h3>
+                        <p>Working with First Nations for cultural safety and equity.</p>
+                        <details>
+                            <summary><span class="read-more">Learn How We Do It</span></summary>
+                            <div class="details-content">
+                                <p>We prioritize First Nations voices to foster inclusion and cultural respect.</p>
+                                <a href="#" class="button">Explore More</a>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="info-card-row">
+                    <div class="info-card expandable-card">
+                        <img src="{% static 'images/lifeblood.jpg' %}" alt="Lifeblood">
+                        <h3>Lifeblood</h3>
+                        <p>Boosting blood and plasma supplies for emergencies and treatments.</p>
+                        <details>
+                            <summary><span class="read-more">Learn How We Do It</span></summary>
+                            <div class="details-content">
+                                <p>We enhance collection and distribution to improve patient outcomes.</p>
+                                <a href="#" class="button">Explore More</a>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Call-to-Action Section -->
+    <section class="image-with-text">
+        <div class="image-container">
+            <img src="{% static 'images/everyone-always.jpg' %}" alt="Community Support">
+        </div>
+        <div class="text-container">
+            <h3>There When They Need Us</h3>
+            <p>Help us support communities in rebuilding and thriving.</p>
+            <a href="{% url 'donate' %}" class="button">Donate Now</a>
+        </div>
+    </section>
+
+    <!-- Subscription Form Section -->
+    <section class="subscription-section">
+        <form class="subscription-form" action="#" method="post">
+            {% csrf_token %}
+            <h3>Stay Connected</h3>
+            <p>Subscribe to receive updates on our work and ways to get involved.</p>
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <button type="submit">Subscribe</button>
+            <p class="privacy-note">We respect your privacy. Learn more in our <a href="#">Privacy Policy</a> and <a href="#">Privacy Collection Notice</a>.</p>
+        </form>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        // Hero Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroText = document.querySelector('.about-hero-text');
+            setTimeout(() => heroText.classList.add('visible'), 100);
+        });
+
+        // Form Submission Feedback (Optional)
+        document.querySelector('.subscription-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing! We’ll keep you updated.');
+            e.target.reset();
+        });
+    </script>
+{% endblock %}

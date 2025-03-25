@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Donate for a Child - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/donate-child-hero.jpg' %}" alt="Donate for a Child Hero" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Donate for a Child</h1>
+            <p>Make a Lasting Impact on a Child's Life.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Change a Life: Sponsor a Child in the Thembi Community</h2>
+        <p>Your generous donation can provide a child in the Thembi community with access to essential resources like education, healthcare, and nutritious food. Sponsor a child today and make a lasting impact.</p>
+
+        <h3>How Your Donation Helps</h3>
+        <ul>
+            <li><strong>Education:</strong> Provides school fees, uniforms, books, and supplies.</li>
+            <li><strong>Healthcare:</strong> Ensures access to essential medical care, including checkups, vaccinations, and treatment for illnesses.</li>
+            <li><strong>Nutrition:</strong> Helps provide nutritious meals to combat malnutrition and promote healthy growth.</li>
+            <li><strong>Support:</strong> Offers psychosocial support and a safe environment for children to thrive.</li>
+        </ul>
+
+        <h3>Sponsorship Options</h3>
+        <p>Choose the sponsorship level that best suits you:</p>
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/sponsor-basic.jpg' %}" alt="Basic Support">
+                <h3>Basic Support</h3>
+                <p>Provide essential needs like food and clothing.</p>
+                <p>$25/month</p>
+                <a href="#" class="button">Sponsor Now</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/sponsor-education.jpg' %}" alt="Education Support">
+                <h3>Educational Support</h3>
+                <p>Cover school fees, supplies, and tutoring.</p>
+                <p>$50/month</p>
+                <a href="#" class="button">Sponsor Now</a>
+            </div>
+        </div>
+
+        <h3>Meet the Children</h3>
+        <p>[Include profiles and photos of children who are waiting for sponsors. This adds a personal touch.]</p>
+
+        <h3>Ready to Make a Difference?</h3>
+        <p>Sponsor a child today and become a part of their journey to a brighter future.</p>
+        <a href="#" class="button">Sponsor a Child</a>
+    </section>
+{% endblock %}

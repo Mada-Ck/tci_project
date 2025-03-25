@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Join Teen Club - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/teen-club-hero.jpg' %}" alt="Join Teen Club Hero Image" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Join Teen Club</h1>
+            <p>Connect, Learn, and Grow with TCI.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Join the TCI Teen Club!</h2>
+        <p>The Thembi Community Initiative Teen Club is a safe and supportive space for teenagers in our community to connect with peers, develop valuable life skills, and access resources that help them thrive. We offer a variety of activities and programs designed to empower teens and help them reach their full potential.</p>
+
+        <h3>What We Offer</h3>
+        <ul>
+            <li><strong>Workshops:</strong> Attend workshops on topics like leadership, communication, financial literacy, and healthy relationships.</li>
+            <li><strong>Mentorship:</strong> Get paired with a positive adult role model who can provide guidance and support.</li>
+            <li><strong>Social Events:</strong> Participate in fun social events, including movie nights, game nights, and community outings.</li>
+            <li><strong>Community Service Projects:</strong> Give back to the community through meaningful volunteer opportunities.</li>
+            <li><strong>Educational Support:</strong> Access tutoring, study groups, and resources to help you succeed in school.</li>
+            <li><strong>Guest Speakers:</strong> Hear from inspiring guest speakers who share their experiences and offer valuable advice.</li>
+        </ul>
+
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/teen-club-activities.jpg' %}" alt="Teen Club Activities">
+                <h3>Fun Activities</h3>
+                <p>We have a wide variety of activities to suit every interest!</p>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/teen-club-support.jpg' %}" alt="Teen Club Support">
+                <h3>Peer Support</h3>
+                <p>Connect with friends who understand what you're going through.</p>
+            </div>
+        </div>
+
+        <h3>Who Can Join?</h3>
+        <p>The TCI Teen Club is open to all teenagers aged 13-19 who live in the Thembi community. We welcome teens from all backgrounds and experiences.</p>
+
+        <h3>How to Join</h3>
+        <p>Joining the Teen Club is easy! Simply fill out our online registration form or visit the TCI office to register in person. There is a small annual membership fee to help cover the cost of activities and resources. Scholarships are available for those who need financial assistance. Contact us for more information</p>
+        <a href="#" class="button">Register Online Now</a>
+
+        <h3>Contact Us</h3>
+        <p>Have questions? Contact our Teen Club Coordinator at [Phone Number] or [Email Address].</p>
+        <p>Learn more about our <a href="{% url 'child_clinic' %}">Child Clinic services</a> or our <a href="{% url 'hiv_services' %}">HIV Community Services</a>.</p>
+    </section>
+{% endblock %}

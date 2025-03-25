@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Board Committees - TCI{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <img src="{% static 'images/committees-hero.jpg' %}" alt="Board Committees Hero Image" class="about-hero-image">
+        <div class="about-hero-text animate-hero">
+            <h1>Board Committees</h1>
+            <p>Specialized teams driving TCI’s strategic goals.</p>
+        </div>
+    </section>
+
+    <!-- Main Content with Sidebar -->
+    <div class="about-page-content">
+        <aside class="about-sidebar" role="navigation" aria-label="Governance Navigation">
+            <h3 class="sidebar-toggle">In this section <span class="toggle-icon">▼</span></h3>
+            <ul class="sidebar-menu">
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'what_we_do' %}">What We Do</a></li>
+                <li><a href="{% url 'governance' %}" class="active">Governance</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'donors_and_supporters' %}">Donors and Supporters</a></li>
+                        <li><a href="{% url 'board_members' %}">Board Members</a></li>
+                        <li><a href="{% url 'board_committees' %}" class="active">Board Committees</a></li>
+                        <li><a href="{% url 'ceo_and_executive_team' %}">CEO and Executive Team</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <section class="about-main-content">
+            <!-- Committees Overview -->
+            <div class="content-section">
+                <h2 class="toggle-header" data-toggle="committees-content">Our Committees <span class="toggle-icon">▼</span></h2>
+                <div id="committees-content" class="toggle-content">
+                    <p>TCI’s Board Committees focus on key areas to support our mission. Comprising board members and experts, they ensure effective governance and program success.</p>
+                </div>
+            </div>
+
+            <!-- Committee List -->
+            <div class="content-section">
+                <h2>Committees</h2>
+                <ul class="structured-list">
+                    <li>
+                        <strong>Finance Committee</strong>
+                        <p>Oversees budgeting, financial transparency, and audits.</p>
+                    </li>
+                    <li>
+                        <strong>Program Committee</strong>
+                        <p>Guides the development and evaluation of community programs.</p>
+                    </li>
+                    <li>
+                        <strong>Governance Committee</strong>
+                        <p>Ensures board performance and ethical standards.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        // Sidebar Toggle
+        document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+            const menu = document.querySelector('.sidebar-menu');
+            const icon = document.querySelector('.sidebar-toggle .toggle-icon');
+            menu.classList.toggle('active');
+            icon.textContent = menu.classList.contains('active') ? '▲' : '▼';
+        });
+
+        // Content Toggle
+        document.querySelectorAll('.toggle-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const contentId = header.getAttribute('data-toggle');
+                const content = document.getElementById(contentId);
+                const icon = header.querySelector('.toggle-icon');
+                content.classList.toggle('active');
+                icon.textContent = content.classList.contains('active') ? '▲' : '▼';
+            });
+        });
+
+        // Hero Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroText = document.querySelector('.about-hero-text');
+            setTimeout(() => heroText.classList.add('visible'), 100);
+        });
+    </script>
+{% endblock %}

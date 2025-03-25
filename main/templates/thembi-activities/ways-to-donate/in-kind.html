@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Support In Kind - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/in-kind-hero.jpg' %}" alt="Support In Kind Hero" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Support Anything In Kind</h1>
+            <p>Give Goods and Services to Help Our Cause.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Donate Goods and Services to Support TCI</h2>
+        <p>In-kind donations are a valuable way to support the Thembi Community Initiative. We accept a variety of goods and services that can directly benefit our programs and the people we serve.</p>
+
+        <h3>Items We Accept</h3>
+        <ul>
+            <li><strong>School Supplies:</strong> Books, stationery, backpacks, and other educational materials.</li>
+            <li><strong>Medical Supplies:</strong> First-aid kits, over-the-counter medications, and medical equipment (please contact us for specific needs).</li>
+            <li><strong>Clothing:</strong> New or gently used clothing for children and adults.</li>
+            <li><strong>Food:</strong> Non-perishable food items to support our nutrition programs.</li>
+            <li><strong>Technology:</strong> Computers, tablets, and other devices to support our education and skills training programs.</li>
+            <li><strong>Services:</strong> Professional services such as medical care, tutoring, or business consulting.</li>
+        </ul>
+
+        <h3>How to Donate In-Kind</h3>
+        <p>To donate goods or services, please contact us to arrange a drop-off or pickup. We will provide you with a donation receipt for tax purposes.</p>
+        <a href="#" class="button">Contact Us</a>
+    </section>
+{% endblock %}

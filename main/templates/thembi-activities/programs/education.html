@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Education - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/education-hero.jpg' %}" alt="Education Hero" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Education</h1>
+            <p>Empowering the Next Generation Through Learning.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Opening Doors Through Education</h2>
+        <p>TCI is committed to improving access to quality education for children and youth in the Thembi community. We believe that education is a fundamental right and a key driver of individual and community development.</p>
+
+        <h3>Our Programs</h3>
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/early-childhood.jpg' %}" alt="Early Childhood">
+                <h3>Early Childhood Development</h3>
+                <p>We support early childhood development programs to ensure children have a strong foundation for future learning.</p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/scholarships.jpg' %}" alt="Scholarships">
+                <h3>Scholarships and Bursaries</h3>
+                <p>We provide scholarships and bursaries to help students from disadvantaged backgrounds access secondary and tertiary education.</p>
+                <a href="#">Apply Now</a>
+            </div>
+        </div>
+
+        <h3>Get Involved</h3>
+        <p>Support our education programs by volunteering as a tutor, donating school supplies, or sponsoring a student's education.</p>
+        <a href="#" class="button">Volunteer</a>
+        <a href="#" class="button">Donate</a>
+    </section>
+{% endblock %}

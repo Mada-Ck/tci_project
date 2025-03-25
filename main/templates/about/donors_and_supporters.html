@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Donors and Supporters - TCI{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <img src="{% static 'images/donors-hero.jpg' %}" alt="Donors and Supporters Hero Image" class="about-hero-image">
+        <div class="about-hero-text animate-hero">
+            <h1>Donors and Supporters</h1>
+            <p>Our partners in creating lasting change for vulnerable communities.</p>
+        </div>
+    </section>
+
+    <!-- Main Content with Sidebar -->
+    <div class="about-page-content">
+        <aside class="about-sidebar" role="navigation" aria-label="Governance Navigation">
+            <h3 class="sidebar-toggle">In this section <span class="toggle-icon">▼</span></h3>
+            <ul class="sidebar-menu">
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'what_we_do' %}">What We Do</a></li>
+                <li><a href="{% url 'governance' %}" class="active">Governance</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'donors_and_supporters' %}" class="active">Donors and Supporters</a></li>
+                        <li><a href="{% url 'board_members' %}">Board Members</a></li>
+                        <li><a href="{% url 'board_committees' %}">Board Committees</a></li>
+                        <li><a href="{% url 'ceo_and_executive_team' %}">CEO and Executive Team</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <section class="about-main-content">
+            <!-- Donors Overview -->
+            <div class="content-section" id="donors">
+                <h2 class="toggle-header" data-toggle="donors-content">Our Donors and Supporters <span class="toggle-icon">▼</span></h2>
+                <div id="donors-content" class="toggle-content">
+                    <p>Thembi Community Initiative (TCI) thrives thanks to the generous support of our donors and partners. Their contributions enable us to deliver holistic support to vulnerable communities, focusing on children, women, and those living with HIV/AIDS.</p>
+                    <p>From individuals to organizations, our supporters share our vision of a healthier, empowered future. Their funding and resources help us implement programs, conduct outreach, and sustain our operations with transparency and accountability.</p>
+                </div>
+            </div>
+
+            <!-- Key Supporters -->
+            <div class="content-section">
+                <h2>Key Supporters</h2>
+                <ul class="structured-list">
+                    <li><strong>Global Health Foundation</strong> - Provides grants for HIV/AIDS care programs.</li>
+                    <li><strong>Chitipa Community Fund</strong> - Supports local initiatives for youth education.</li>
+                    <li><strong>Individual Donors</strong> - Countless contributors who fuel our mission daily.</li>
+                </ul>
+            </div>
+
+            <!-- Get Involved -->
+            <div class="content-section">
+                <h2 class="toggle-header" data-toggle="get-involved-content">Get Involved <span class="toggle-icon">▼</span></h2>
+                <div id="get-involved-content" class="toggle-content">
+                    <p>Join our community of supporters! Whether through donations, partnerships, or volunteering, your involvement makes a difference.</p>
+                    <a href="{% url 'donate' %}" class="button">Donate Now</a>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        // Sidebar Toggle
+        document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+            const menu = document.querySelector('.sidebar-menu');
+            const icon = document.querySelector('.sidebar-toggle .toggle-icon');
+            menu.classList.toggle('active');
+            icon.textContent = menu.classList.contains('active') ? '▲' : '▼';
+        });
+
+        // Content Toggle
+        document.querySelectorAll('.toggle-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const contentId = header.getAttribute('data-toggle');
+                const content = document.getElementById(contentId);
+                const icon = header.querySelector('.toggle-icon');
+                content.classList.toggle('active');
+                icon.textContent = content.classList.contains('active') ? '▲' : '▼';
+            });
+        });
+
+        // Hero Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroText = document.querySelector('.about-hero-text');
+            setTimeout(() => heroText.classList.add('visible'), 100);
+        });
+    </script>
+{% endblock %}

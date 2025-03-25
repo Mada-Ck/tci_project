@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Livelihood - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/livelihood-hero.jpg' %}" alt="Livelihood Hero" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Livelihood</h1>
+            <p>Building Sustainable Livelihoods for a Brighter Future.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Empowering Families Through Sustainable Livelihoods</h2>
+        <p>TCI's livelihood programs aim to improve economic opportunities and reduce poverty in the Thembi community. We provide skills training, access to resources, and support for entrepreneurship.</p>
+
+        <h3>Our Approach</h3>
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/skills-training.jpg' %}" alt="Skills Training">
+                <h3>Skills Training</h3>
+                <p>We offer vocational training in various fields, such as agriculture, tailoring, and carpentry, to equip individuals with marketable skills.</p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/microfinance.jpg' %}" alt="Microfinance">
+                <h3>Microfinance and Entrepreneurship</h3>
+                <p>We provide access to microfinance loans and business development support to help individuals start and grow their own businesses.</p>
+                <a href="#">Learn More</a>
+            </div>
+        </div>
+
+        <h3>Success Stories</h3>
+        <p>[Include inspiring success stories of individuals and families who have benefited from TCI's livelihood programs.]</p>
+
+        <h3>Get Involved</h3>
+        <p>Support our livelihood programs by volunteering your expertise, donating to our microfinance fund, or sponsoring a skills training program.</p>
+        <a href="#" class="button">Volunteer</a>
+        <a href="#" class="button">Donate</a>
+    </section>
+{% endblock %}

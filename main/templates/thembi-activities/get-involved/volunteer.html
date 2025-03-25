@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Volunteer With Us - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/volunteer-hero.jpg' %}" alt="Volunteer Hero Image" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Volunteer With Us</h1>
+            <p>Make a Difference in the Thembi Community.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Volunteer Opportunities at TCI</h2>
+        <p>The Thembi Community Initiative relies on the dedication and passion of volunteers to achieve our mission of empowering the Thembi community. We offer a variety of volunteer opportunities to suit different interests and skill sets.</p>
+
+        <h3>Current Openings</h3>
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/volunteer-health.jpg' %}" alt="Health Volunteer">
+                <h3>Health Program Volunteer</h3>
+                <p>Assist with health education and outreach programs.</p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/volunteer-education.jpg' %}" alt="Education Volunteer">
+                <h3>Education Program Volunteer</h3>
+                <p>Provide tutoring and mentoring to students in our education programs.</p>
+                <a href="#">Learn More</a>
+            </div>
+        </div>
+
+        <h3>How to Apply</h3>
+        <p>To apply for a volunteer position, please complete our online application form. We will review your application and contact you if there is a suitable opening.</p>
+        <a href="#" class="button">Apply Online</a>
+
+        <h3>Volunteer Requirements</h3>
+        <ul>
+            <li>Must be at least 18 years of age</li>
+            <li>Must be able to commit to a minimum of [Number] hours per week</li>
+            <li>Must pass a background check</li>
+            <li>Must have a passion for helping others</li>
+        </ul>
+
+        <h3>Contact Us</h3>
+        <p>If you have any questions about volunteering with TCI, please contact our Volunteer Coordinator at [Phone Number] or [Email Address].</p>
+    </section>
+{% endblock %}

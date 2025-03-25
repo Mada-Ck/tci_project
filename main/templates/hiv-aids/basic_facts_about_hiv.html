@@ -1,0 +1,339 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Basic Facts About HIV/AIDS - Thembi Community Initiative{% endblock %}
+
+{% block content %}
+<!-- Embedded CSS -->
+<style>
+    /* Scope styles to this page only */
+    .page-container {
+        max-width: 800px;
+        width: 100%;
+        background: #fff;
+        padding: 3rem;
+        margin: 2rem auto;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hero Section */
+    .page-container #hero {
+        position: relative;
+        height: 40vh;
+        background: url('{% static "images/malawi_hiv_hero.jpg" %}') no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 2rem;
+    }
+
+    .page-container #hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(26, 60, 126, 0.8), rgba(0, 0, 0, 0.5));
+    }
+
+    .page-container .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .page-container .hero-content h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .page-container .hero-content p {
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+    /* Stats Sections */
+    .page-container .stats-section {
+        margin-bottom: 2rem;
+    }
+
+    .page-container .stats-section h1,
+    .page-container .stats-section h2 {
+        font-family: 'Montserrat', sans-serif;
+        color: #1a3c7e;
+        margin-bottom: 1rem;
+    }
+
+    .page-container .stats-section h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .page-container .stats-section h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .page-container .stats-section p {
+        font-size: 1.1rem;
+        color: #4a5568;
+        margin-bottom: 1rem;
+        line-height: 1.7;
+    }
+
+    .page-container .stats-section a {
+        color: #d4af37;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .page-container .stats-section a:hover {
+        text-decoration: underline;
+    }
+
+    /* Definition List Styling for Key Facts */
+    .page-container .stats-section dl {
+        margin-bottom: 1rem;
+    }
+
+    .page-container .stats-section dt {
+        font-size: 1.1rem;
+        color: #1a202c;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        text-align: left;
+        float: left;
+        width: 250px;
+        clear: left;
+    }
+
+    .page-container .stats-section dd {
+        font-size: 1.1rem;
+        color: #4a5568;
+        margin-left: 260px;
+        margin-bottom: 0.75rem;
+        line-height: 1.7;
+    }
+
+    /* List Styling */
+    .page-container .stats-section ul {
+        list-style: none;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .page-container .stats-section ul li {
+        position: relative;
+        font-size: 1.1rem;
+        color: #4a5568;
+        margin-bottom: 0.75rem;
+    }
+
+    .page-container .stats-section ul li::before {
+        content: "•";
+        color: #d4af37;
+        position: absolute;
+        left: -1rem;
+    }
+
+    /* Image and Text Section */
+    .page-container .image-text-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .page-container .image-container {
+        flex: 1;
+        max-width: 50%;
+    }
+
+    .page-container .image-container img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .page-container .text-container {
+        flex: 1;
+    }
+
+    .page-container .text-item {
+        margin-bottom: 1rem;
+    }
+
+    .page-container .text-item h3 {
+        font-size: 1.3rem;
+        color: #1a202c;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Resources Section */
+    .page-container .resources-item {
+        padding: 1.5rem;
+        background: #f5f6fa;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .page-container .resources-item a {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: #d4af37;
+        color: #1a202c;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .page-container {
+            padding: 2rem;
+            margin: 1rem;
+        }
+        .page-container #hero {
+            height: 30vh;
+        }
+        .page-container .hero-content h1 {
+            font-size: 2rem;
+        }
+        .page-container .hero-content p {
+            font-size: 1rem;
+        }
+        .page-container .stats-section h1 {
+            font-size: 1.8rem;
+        }
+        .page-container .stats-section h2 {
+            font-size: 1.3rem;
+        }
+        .page-container .stats-section dt,
+        .page-container .stats-section dd {
+            font-size: 1rem;
+            float: none;
+            width: auto;
+            margin-left: 0;
+        }
+        .page-container .stats-section dd {
+            margin-left: 1.5rem;
+        }
+        .page-container .stats-section ul li {
+            font-size: 1rem;
+        }
+        .page-container .image-text-content {
+            flex-direction: column;
+        }
+        .page-container .image-container {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .page-container #hero {
+            height: 25vh;
+        }
+        .page-container .hero-content h1 {
+            font-size: 1.5rem;
+        }
+        .page-container .hero-content p {
+            font-size: 0.9rem;
+        }
+        .page-container .stats-section h1 {
+            font-size: 1.5rem;
+        }
+        .page-container .stats-section h2 {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+
+<!-- Page Container -->
+<div class="page-container">
+    <!-- Hero Section -->
+    <div id="hero">
+        <div class="hero-content">
+            <h1>Basic Facts About HIV/AIDS</h1>
+            <p>Understanding the essentials of HIV and AIDS globally and locally.</p>
+        </div>
+    </div>
+
+    <!-- Introduction Section -->
+    <div class="stats-section">
+        <h1>Understanding HIV/AIDS</h1>
+        <p>Since the beginning of the pandemic, 85.6 million people have acquired HIV, and more than 40 million have died of AIDS-related illnesses. This section provides key facts to help you understand HIV/AIDS, its transmission, and prevention.</p>
+    </div>
+
+    <!-- Basic Facts Section -->
+    <div class="stats-section">
+        <h2>What is HIV/AIDS?</h2>
+        <dl>
+            <dt>HIV:</dt>
+            <dd>Human Immunodeficiency Virus is the virus that causes AIDS. It resides and multiplies in white blood cells, weakening the immune system. <a href="{% url 'about-hiv-aids' %}">Learn More →</a></dd>
+            <dt>AIDS:</dt>
+            <dd>Acquired Immunodeficiency Syndrome is the advanced stage of HIV infection, where the immune system is severely damaged, leading to vulnerability to infections and illnesses like pneumonia or cancer.</dd>
+        </dl>
+
+        <h2>Key Questions</h2>
+        <dl>
+            <dt>How do I know if I’m infected?</dt>
+            <dd>Early symptoms may include mild flu-like signs or swollen glands, but many remain asymptomatic. Testing is the only way to confirm HIV status.</dd>
+            <dt>Can I tell if someone has HIV/AIDS?</dt>
+            <dd>No, an infected person can appear healthy; HIV/AIDS cannot be diagnosed by appearance alone.</dd>
+            <dt>How quickly does HIV progress to AIDS?</dt>
+            <dd>Progression varies—some develop AIDS soon after infection, while others remain symptom-free for over a decade. Early treatment with antiretroviral drugs (ART) can delay this significantly.</dd>
+            <dt>How many people are affected?</dt>
+            <dd>Globally, over 39 million people live with HIV. In the U.S., 1.2 million are affected, with 32,000 new diagnoses in 2021, and 13% unaware of their status.</dd>
+        </dl>
+    </div>
+
+    <!-- Transmission Section -->
+    <div class="stats-section">
+        <h2>Transmission of HIV</h2>
+        <p>HIV is carried in blood, semen, vaginal secretions, and breast milk, and is transmitted through:</p>
+        <ul>
+            <li>Unprotected vaginal or anal intercourse with an infected person.</li>
+            <li>Unprotected oral sex (lower risk but still possible).</li>
+            <li>Sharing needles or injection equipment with someone who has HIV.</li>
+            <li>Mother-to-child transmission during pregnancy, childbirth, or breastfeeding (reduced to 1% or less with early treatment in the U.S.).</li>
+        </ul>
+        <p>HIV is <strong>not</strong> transmitted through casual contact (e.g., hugging, kissing, sharing utensils), air, food, insects, or screened blood transfusions in the U.S.</p>
+    </div>
+
+    <!-- Image and Text Section -->
+    <div class="stats-section">
+        <h2>HIV Testing and Prevention</h2>
+        <div class="image-text-content">
+            <div class="image-container">
+                <img src="{% static 'images/adolescent_girls_hiv.jpg' %}" alt="HIV Testing and Prevention">
+            </div>
+            <div class="text-container">
+                <div class="text-item">
+                    <h3>How do I know if I’m infected?</h3>
+                    <p>Testing is critical as symptoms may not appear. Rapid tests (20-40 minutes) or home kits like OraQuick are available.</p>
+                </div>
+                <div class="text-item">
+                    <h3>How can I reduce my risk?</h3>
+                    <p>Use condoms consistently, limit partners, avoid sharing needles, and consider PrEP if at high risk. PEP can prevent infection if taken within 72 hours of exposure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resources Section -->
+    <div class="stats-section">
+        <h2>Resources and Support</h2>
+        <div class="resources-item">
+            <p>Learn more and contribute to the fight against HIV/AIDS through organizations like <a href="https://www.amfar.org">amfAR</a>, <a href="https://www.cdc.gov/hiv">CDC</a>, and <a href="https://www.unaids.org">UNAIDS</a>. Volunteer, educate others, or support research efforts.</p>
+            <a href="{% url 'about-hiv-aids' %}">Explore Resources</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Health - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/health-hero.jpg' %}" alt="Health Hero" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Health</h1>
+            <p>Improving Health Outcomes in the Thembi Community.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Comprehensive Healthcare for a Healthier Community</h2>
+        <p>TCI is committed to providing access to essential healthcare services and promoting healthy lifestyles in the Thembi community. We focus on addressing critical health challenges and improving overall well-being.</p>
+
+        <h3>Our Focus Areas</h3>
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/hiv-aids.jpg' %}" alt="HIV/AIDS">
+                <h3>HIV/AIDS Prevention and Care</h3>
+                <p>We offer comprehensive HIV/AIDS prevention, testing, treatment, and support services, with a particular focus on children, adolescents, and women.</p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/child-health.jpg' %}" alt="Child Health">
+                <h3>Child and Maternal Health</h3>
+                <p>We provide essential healthcare services for children and mothers, including immunizations, prenatal care, and postnatal support.</p>
+                <a href="#">Learn More</a>
+            </div>
+        </div>
+
+        <h3>Get Involved</h3>
+        <p>Support our health programs by volunteering, donating medical supplies, or sponsoring a community health worker.</p>
+        <a href="#" class="button">Volunteer</a>
+        <a href="#" class="button">Donate</a>
+    </section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}PMTCT & HIV+ Women - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/pmtct-hero.jpg' %}" alt="PMTCT Hero Image" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>PMTCT & Support for HIV+ Women</h1>
+            <p>Dedicated Programs for Mothers and Children.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>PMTCT and Support for HIV+ Women</h2>
+        <p>[Your comprehensive content about the PMTCT program and support services for HIV+ women goes here. This is where you'll add the bulk of your information. Break it down into logical sections, as shown below.]</p>
+
+        <h3>What is PMTCT?</h3>
+        <p>[Explain what PMTCT (Prevention of Mother-to-Child Transmission) is.]</p>
+
+        <h3>Our Services</h3>
+        <ul>
+            <li><strong>Antiretroviral Therapy (ART):</strong> [Describe how you provide ART.]</li>
+            <li><strong>Counseling and Support:</strong> [Explain the counseling services offered.]</li>
+            <li><strong>Infant Feeding Guidance:</strong> [Provide information on safe infant feeding practices.]</li>
+            <li><strong>Partner Testing and Treatment:</strong> [Describe services for partners.]</li>
+            <li><strong>Early Infant Diagnosis:</strong> [Explain how you provide early testing for infants.]</li>
+            <!-- Add other services as needed -->
+        </ul>
+
+        <h3>Support for HIV+ Women</h3>
+        <p>[Describe any additional support services you offer to HIV+ women beyond PMTCT, such as support groups, mental health services, or economic empowerment programs.]</p>
+
+        <h3>How to Access Services</h3>
+        <p>[Provide clear instructions on how women can access your PMTCT and support services. Include contact information, clinic locations, and any eligibility requirements.]</p>
+
+        <h3>Success Stories</h3>
+        <p>[Include real-life success stories (with appropriate consent and anonymization) to illustrate the positive impact of your programs.]</p>
+        <!-- You could use the info-card class here for testimonials if you like -->
+
+        <h3>Frequently Asked Questions (FAQs)</h3>
+        <details>
+            <summary>What is the most effective way to prevent mother-to-child transmission of HIV?</summary>
+            <p>The most effective way is through a combination of antiretroviral therapy (ART) for the mother, safe delivery practices, and appropriate infant feeding. [Expand on this with more detail].</p>
+        </details>
+        <details>
+            <summary>Can I breastfeed my baby?</summary>
+            <p>This a very good question [Expand on this with more detail].</p>
+        </details>
+        <details>
+            <summary>When should I visit the clinic?</summary>
+            <p>[Provide a clear answer, with specific timings and recommendations.]</p>
+        </details>
+        <!-- Add more FAQs as needed -->
+    </section>
+{% endblock %}

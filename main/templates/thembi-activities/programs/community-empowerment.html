@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Community Empowerment - TCI{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <img src="{% static 'images/community-empowerment-hero.jpg' %}" alt="Community Empowerment Hero" class="about-hero-image">
+        <div class="about-hero-text">
+            <h1>Community Empowerment</h1>
+            <p>Building a Stronger Thembi, Together.</p>
+        </div>
+    </section>
+
+    <section class="get-help-content">
+        <h2>Empowering Communities for Sustainable Change</h2>
+        <p>At TCI, we believe that sustainable change starts with empowered communities. Our community empowerment programs focus on building local capacity, fostering leadership, and promoting self-reliance.</p>
+
+        <h3>Key Initiatives</h3>
+        <div class="info-card-row">
+            <div class="info-card">
+                <img src="{% static 'images/community-leadership.jpg' %}" alt="Community Leadership">
+                <h3>Community Leadership Development</h3>
+                <p>We provide training and resources to local leaders, helping them effectively address community needs and advocate for positive change.</p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="info-card">
+                <img src="{% static 'images/community-projects.jpg' %}" alt="Community-Led Projects">
+                <h3>Community-Led Projects</h3>
+                <p>We support community-led projects that address local priorities, such as infrastructure development, resource management, and conflict resolution.</p>
+                <a href="#">Get Involved</a>
+            </div>
+        </div>
+
+        <h3>Success Stories</h3>
+        <p>[Include inspiring success stories of how TCI's community empowerment programs have made a positive impact.]</p>
+
+        <h3>Get Involved</h3>
+        <p>We welcome volunteers, partners, and donors who share our commitment to community empowerment. Contact us to learn how you can contribute.</p>
+        <a href="#" class="button">Contact Us</a>
+    </section>
+{% endblock %}

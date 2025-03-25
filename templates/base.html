@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Thembi Community Initiative{% endblock %}</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- PivotTable.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.css">
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Favicon and Icons -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'android-chrome-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{% static 'android-chrome-512x512.png' %}">
+    <link rel="icon" type="image/png" sizes="150x150" href="{% static 'mstile-150x150.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Updated Navigation with Bootstrap -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="{% static 'images/tci-logo.png' %}" alt="TCI Logo" style="height: 40px;">
+                Thembi Community Initiative
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="{% url 'about_us' %}">About Us</a></li>
+                            <li><a class="dropdown-item" href="{% url 'what_we_do' %}">What We Do</a></li>
+                            <li><a class="dropdown-item" href="{% url 'governance' %}">Governance</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="getHelpDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Get Help
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="getHelpDropdown">
+                            <li><a class="dropdown-item" href="{% url 'join_teen_club' %}">Join Teen Club</a></li>
+                            <li><a class="dropdown-item" href="{% url 'child_clinic' %}">Child Clinic</a></li>
+                            <li><a class="dropdown-item" href="{% url 'hiv_services' %}">HIV Services</a></li>
+                            <li><a class="dropdown-item" href="{% url 'pmtct' %}">PMTCT & HIV Women</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="activitiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Thembi Activities
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="activitiesDropdown">
+                            <li><a class="dropdown-item" href="{% url 'volunteer' %}">Volunteer</a></li>
+                            <li><a class="dropdown-item" href="{% url 'youth' %}">It Starts with YOUth</a></li>
+                            <li><a class="dropdown-item" href="{% url 'fundraise' %}">Fundraise for TCI</a></li>
+                            <li><a class="dropdown-item" href="{% url 'corporate' %}">Corporate Partnerships</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'health' %}">Health</a></li>
+                            <li><a class="dropdown-item" href="{% url 'livelihood' %}">Livelihood</a></li>
+                            <li><a class="dropdown-item" href="{% url 'community_empowerment' %}">Community Empowerment</a></li>
+                            <li><a class="dropdown-item" href="{% url 'youth_empowerment' %}">Youth Empowerment</a></li>
+                            <li><a class="dropdown-item" href="{% url 'education' %}">Education</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'specific_program' %}">Donate for a Specific Program</a></li>
+                            <li><a class="dropdown-item" href="{% url 'general_program' %}">Donate for General Programs</a></li>
+                            <li><a class="dropdown-item" href="{% url 'donate_child' %}">Donate for a Child</a></li>
+                            <li><a class="dropdown-item" href="{% url 'in_kind' %}">Support Anything In Kind</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="hivDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            HIV/AIDS
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="hivDropdown">
+                            <li><a class="dropdown-item" href="{% url 'about_hiv_aids' %}">About HIV/AIDS</a></li>
+                            <li><a class="dropdown-item" href="{% url 'malawi_statistics' %}">HIV Statistics in Malawi</a></li>
+                            <li><a class="dropdown-item" href="{% url 'basic_facts' %}">Basic Facts about HIV/AIDS</a></li>
+                            <li><a class="dropdown-item" href="{% url 'world_hiv_statistics' %}">World HIV Statistics</a></li>
+                        </ul>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="recordsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Records
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="recordsDropdown">
+                                <li><a class="dropdown-item" href="{% url 'create_teen_club' %}">Create Teen Club Record</a></li>
+                                <li><a class="dropdown-item" href="{% url 'list_teen_clubs' %}">Teen Club Records</a></li>
+                                <li><a class="dropdown-item" href="{% url 'create_pmct' %}">Create PMCT Record</a></li>
+                                <li><a class="dropdown-item" href="{% url 'list_pmct' %}">PMCT Records</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link btn btn-link">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'donate' %}">Donate</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer (Unchanged) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-options">
+                    <div class="contact-option">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Call our Care Team<br>1800 123 456</span>
+                    </div>
+                    <div class="contact-option">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Find TCI offices and<br>training near you</span>
+                    </div>
+                    <div class="contact-option">
+                        <i class="fas fa-envelope"></i>
+                        <span>Send us a message</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-acknowledgement">
+                <img src="{% static 'images/tci-symbol.png' %}" alt="TCI Symbol" class="footer-logo">
+                <p>TCI pays our respects to the Traditional Custodians of the land where we work, and to Elders past, present and emerging.</p>
+                <p>Learn about our [Community Engagement Plan] and how we can all work together.</p>
+                <p>This website may contain the images, voices or names of people who have passed away.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="{% url 'about_us' %}">About Us</a></li>
+                        <li><a href="{% url 'governance' %}">Governance</a></li>
+                        <li><a href="{% url 'what_we_do' %}">What We Do</a></li>
+                        <li><a href="#">Research & Reports</a></li>
+                        <li><a href="#">History & Heritage</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">For School Students</a></li>
+                        <li><a href="#">For Parents & Educators</a></li>
+                        <li><a href="#">For Businesses</a></li>
+                        <li><a href="#">For Journalists</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="#">Humanitarian Action</a></li>
+                        <li><a href="#">Global Network</a></li>
+                        <li><a href="#">Community Projects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <img src="{% static 'images/accreditation-logo.png' %}" alt="Accreditation Logo" class="accreditation-logo">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Map Section -->
+        <div class="footer-map">
+            <h4>Our Location</h4>
+            <div id="map-container" class="map-small">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.8279913647047!2d33.266667!3d-9.700000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNDInMDAuMCJTIDMzCsE2JzAwLjAiRQ!5e0!3m2!1sen!2sus!4v1630000000000!5m2!1sen!2sus" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <button id="toggle-map" class="button">View Larger Map</button>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="currentYear"></span> Thembi Community Initiative. All rights reserved.</p>
+            <p><a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Cookies</a> | <a href="#">Security</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.js"></script>
+    <!-- Plotly Enhancements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/plotly_renderers.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Leaflet JS for Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+    <!-- ScrollMagic for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
