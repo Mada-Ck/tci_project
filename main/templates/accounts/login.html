@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - Thembi Community Initiative{% endblock %}
+
+{% block content %}
+<!-- Embedded CSS from your provided stylesheet -->
+<style>
+    /* Reset and base styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    @font-face {
+        font-family: 'LiberationSans';
+        src: url('https://ext.same-assets.com/273131754/2528189272.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    body {
+        height: 100%;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .loginPage {
+        background-color: #1c548b;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100vh;
+    }
+
+    /* Header styles */
+    #headerArea {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+    #headerArea img {
+        width: 100px;
+        height: auto;
+        margin-right: 15px;
+    }
+
+    #titleArea {
+        font-family: 'LiberationSans', Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #introArea {
+        display: block;
+        font-size: 16px;
+    }
+
+    /* Login area styles */
+    #loginField {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    #loginArea {
+        background-color: white;
+        border-radius: 3px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        width: 330px;
+        color: #333;
+        text-align: center;
+        padding: 40px 0 20px;
+    }
+
+    #bannerArea {
+        margin-bottom: 20px;
+    }
+
+    #bannerArea a {
+        display: inline-block;
+    }
+
+    #bannerArea img {
+        width: 180px;
+    }
+
+    #signInLabel {
+        font-size: 16px;
+        color: #212934;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    #loginForm {
+        padding: 0 20px;
+    }
+
+    #loginForm input[type="text"],
+    #loginForm input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #d5dbe0;
+        border-radius: 3px;
+    }
+
+    #loginForm button#signIn {
+        background-color: #e0e0e0;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        border-radius: 3px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    #loginForm button#signIn:hover {
+        background-color: #d0d0d0;
+    }
+
+    .twoFactorChkbox {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    #loginForm label {
+        font-size: 13px;
+        margin-left: 5px;
+    }
+
+    #forgotPasswordLink {
+        font-size: 13px;
+        color: #1c548b;
+        text-decoration: none;
+    }
+
+    #forgotPasswordLink:hover {
+        text-decoration: underline;
+    }
+
+    #notificationArea {
+        background-color: #ebf5fa;
+        margin: 20px;
+        padding: 15px;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #333;
+        text-align: left;
+    }
+
+    /* Footer styles */
+    #footerArea {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        font-size: 12px;
+        color: #81b2d3;
+    }
+
+    .innerFooterArea {
+        padding: 5px;
+    }
+
+    #footerArea a {
+        color: white;
+        text-decoration: none;
+    }
+
+    #footerArea a:hover {
+        text-decoration: underline;
+    }
+
+    #localeSelect {
+        background-color: transparent;
+        color: white;
+        border: 1px solid #81b2d3;
+        padding: 2px;
+        font-size: 12px;
+    }
+
+    #localeSelect option {
+        background-color: white;
+        color: black;
+    }
+</style>
+
+<div class="loginPage">
+    <!-- Header Area -->
+    <div id="headerArea">
+        <!-- Logo from base.html -->
+        <img src="{% static 'images/logo.png' %}" alt="Thembi Community Initiative Logo">
+        <div>
+            <span id="titleArea">Thembi Community Initiative</span>
+            <span id="introArea">
+                <div>TCI Data Hub</div>
+            </span>
+        </div>
+    </div>
+
+    <!-- Login Field -->
+    <div id="loginField">
+        <div id="loginArea">
+            <div id="bannerArea">
+                <a href="http://www.dhis2.org">
+                    <img src="https://ext.same-assets.com/273131754/3442712304.png" alt="DHIS2 Logo">
+                </a>
+            </div>
+
+            <form id="loginForm" method="post">
+                {% csrf_token %}
+                <div>
+                    <div id="signInLabel">Sign in</div>
+                    <div>
+                        <input type="text" id="id_username" name="username" placeholder="Username" required>
+                    </div>
+                    <div>
+                        <input type="password" id="id_password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="twoFactorChkbox">
+                        <input type="checkbox" id="twoFactorAuth" name="twoFactorAuth">
+                        <label for="twoFactorAuth">Login using two factor authentication</label>
+                    </div>
+                    <div>
+                        <button type="submit" id="signIn">Sign in</button>
+                    </div>
+                </div>
+
+                <div style="padding-bottom: 10px">
+                    <a id="forgotPasswordLink" href="{% url 'password_reset' %}">Forgot password?</a>
+                </div>
+            </form>
+
+            <div id="notificationArea">
+                For Help and Support, please call TCI - ICT on 0884256909 or 0996737077
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Area -->
+    <div id="footerArea">
+        <div id="leftFooterArea" class="innerFooterArea">
+            Powered by <a href="http://www.thembicommunityinitiative.org">TCI</a> 
+            <span id="applicationFooter">Thembi Community Initiative - ICT-Data Division</span>
+        </div>
+        <div id="rightFooterArea" class="innerFooterArea">
+            <span id="applicationRightFooter">Support Email ict@tci.org</span>
+            <select id="localeSelect">
+                <option value="">[ Change language ]</option>
+                <option value="ar">Arabic</option>
+                <option value="bn">Bangla</option>
+                <option value="zh">Chinese</option>
+                <option value="en">English</option>
+                <option value="fr">French</option>
+                <option value="pt">Portuguese</option>
+                <option value="ru">Russian</option>
+                <option value="es">Spanish</option>
+                <option value="sv">Swedish</option>
+            </select>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Optional: Add JavaScript if needed for two-factor auth or language selection -->
+<script type="module" src="{% static 'js/main.js' %}"></script>
+{% endblock %}

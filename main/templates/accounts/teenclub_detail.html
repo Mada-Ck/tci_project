@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Teen Club Details{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Teen Club Record Details</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Record ID: {{ record.id }}</h5>
+            <p class="card-text"><strong>Date:</strong> {{ record.date }}</p>
+            <p class="card-text"><strong>Age Group:</strong> {{ record.age_group }}</p>
+            <p class="card-text"><strong>Booked Teens:</strong> {{ record.booked_teens }}</p>
+            <p class="card-text"><strong>Attendance (Male):</strong> {{ record.attendance_male }}</p>
+            <p class="card-text"><strong>Attendance (Female):</strong> {{ record.attendance_female }}</p>
+            <p class="card-text"><strong>Viral Load Samples:</strong> {{ record.viral_load_samples }}</p>
+            <p class="card-text"><strong>Samples Collected:</strong> {{ record.samples_collected }}</p>
+            <!-- Add more fields as per your TeenClub model -->
+        </div>
+    </div>
+    <div class="mt-3">
+        <a href="{% url 'teen_club_edit' record.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'teen_club_delete' record.pk %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'list_teen_clubs' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+{% endblock %}

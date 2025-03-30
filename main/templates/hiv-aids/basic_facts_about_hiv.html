@@ -6,7 +6,6 @@
 {% block content %}
 <!-- Embedded CSS -->
 <style>
-    /* Scope styles to this page only */
     .page-container {
         max-width: 800px;
         width: 100%;
@@ -17,7 +16,6 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    /* Hero Section */
     .page-container #hero {
         position: relative;
         height: 40vh;
@@ -57,7 +55,6 @@
         font-weight: 300;
     }
 
-    /* Stats Sections */
     .page-container .stats-section {
         margin-bottom: 2rem;
     }
@@ -98,7 +95,6 @@
         text-decoration: underline;
     }
 
-    /* Definition List Styling for Key Facts */
     .page-container .stats-section dl {
         margin-bottom: 1rem;
     }
@@ -122,7 +118,6 @@
         line-height: 1.7;
     }
 
-    /* List Styling */
     .page-container .stats-section ul {
         list-style: none;
         padding-left: 1.5rem;
@@ -143,7 +138,6 @@
         left: -1rem;
     }
 
-    /* Image and Text Section */
     .page-container .image-text-content {
         display: flex;
         align-items: flex-start;
@@ -177,7 +171,6 @@
         margin-bottom: 0.5rem;
     }
 
-    /* Resources Section */
     .page-container .resources-item {
         padding: 1.5rem;
         background: #f5f6fa;
@@ -194,7 +187,6 @@
         font-weight: 600;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
         .page-container {
             padding: 2rem;
@@ -276,7 +268,7 @@
         <h2>What is HIV/AIDS?</h2>
         <dl>
             <dt>HIV:</dt>
-            <dd>Human Immunodeficiency Virus is the virus that causes AIDS. It resides and multiplies in white blood cells, weakening the immune system. <a href="{% url 'about-hiv-aids' %}">Learn More →</a></dd>
+            <dd>Human Immunodeficiency Virus is the virus that causes AIDS. It resides and multiplies in white blood cells, weakening the immune system. <a href="{% url 'about_hiv_aids' %}">Learn More →</a></dd>
             <dt>AIDS:</dt>
             <dd>Acquired Immunodeficiency Syndrome is the advanced stage of HIV infection, where the immune system is severely damaged, leading to vulnerability to infections and illnesses like pneumonia or cancer.</dd>
         </dl>
@@ -332,7 +324,7 @@
         <h2>Resources and Support</h2>
         <div class="resources-item">
             <p>Learn more and contribute to the fight against HIV/AIDS through organizations like <a href="https://www.amfar.org">amfAR</a>, <a href="https://www.cdc.gov/hiv">CDC</a>, and <a href="https://www.unaids.org">UNAIDS</a>. Volunteer, educate others, or support research efforts.</p>
-            <a href="{% url 'about-hiv-aids' %}">Explore Resources</a>
+            <a href="{% url 'about_hiv_aids' %}">Explore Resources</a>
         </div>
     </div>
 </div>

@@ -5,20 +5,20 @@ from .models import (
     JobOpening, IECMaterialDistribution, EducationRecord, YouthRecord
 )
 
-# Existing forms with enhancements
-
 class TeenClubForm(forms.ModelForm):
     class Meta:
         model = TeenClub
         fields = [
-            'date', 'booked', 'attendance_male', 'attendance_female', 'missed',
-            'samples_high_viral', 'samples_ldl', 'malnutrition_moderate',
-            'malnutrition_severe', 'referrals_psychosocial', 'referrals_clinic',
-            'referrals_other', 'newly_enrolled', 'graduated'
+            'date', 'age_group', 'booked_teens', 'attendance_male', 'attendance_female',
+            'viral_load_samples', 'suppressed_viral_loads', 'samples_collected',
+            'disclosures_made', 'psychosocial_conducted', 'referrals_made',
+            'next_date_current_age_group', 'next_date_other_age_groups'
         ]
         exclude = ['staff', 'created_at']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
+            'next_date_current_age_group': forms.DateInput(attrs={'type': 'date'}),
+            'next_date_other_age_groups': forms.DateInput(attrs={'type': 'date'}),
         }
 
     def clean(self):
@@ -26,62 +26,53 @@ class TeenClubForm(forms.ModelForm):
         cleaned_data = super().clean()
 
         # Extract relevant fields
-        booked = cleaned_data.get('booked')
-        attendance_male = cleaned_data.get('attendance_male', 0)  # Default to 0 if None
-        attendance_female = cleaned_data.get('attendance_female', 0)  # Default to 0 if None
-        missed = cleaned_data.get('missed', 0)
-        samples_high_viral = cleaned_data.get('samples_high_viral')
-        samples_ldl = cleaned_data.get('samples_ldl')
-        malnutrition_moderate = cleaned_data.get('malnutrition_moderate', 0)
-        malnutrition_severe = cleaned_data.get('malnutrition_severe', 0)
-        referrals_psychosocial = cleaned_data.get('referrals_psychosocial', 0)
-        referrals_clinic = cleaned_data.get('referrals_clinic', 0)
-        referrals_other = cleaned_data.get('referrals_other', 0)
-        newly_enrolled = cleaned_data.get('newly_enrolled', 0)
-        graduated = cleaned_data.get('graduated', 0)
+        booked_teens = cleaned_data.get('booked_teens')
+        attendance_male = cleaned_data.get('attendance_male', 0)
+        attendance_female = cleaned_data.get('attendance_female', 0)
+        viral_load_samples = cleaned_data.get('viral_load_samples')
+        samples_collected = cleaned_data.get('samples_collected')
+        suppressed_viral_loads = cleaned_data.get('suppressed_viral_loads')
+        disclosures_made = cleaned_data.get('disclosures_made', 0)
+        psychosocial_conducted = cleaned_data.get('psychosocial_conducted', 0)
+        referrals_made = cleaned_data.get('referrals_made', 0)
 
-        # Validation 1: Total attendance must not exceed booked
-        if booked is not None:
+        # Validation 1: Total attendance must not exceed booked_teens
+        if booked_teens is not None:
             total_attendance = attendance_male + attendance_female
-            if total_attendance > booked:
+            if total_attendance > booked_teens:
                 raise ValidationError(
-                    f"Total attendance ({total_attendance}) cannot exceed booked teens ({booked})."
+                    f"Total attendance ({total_attendance}) cannot exceed booked teens ({booked_teens})."
                 )
 
         # Validation 2: Ensure non-negative values for numeric fields
         numeric_fields = {
-            'booked': booked,
+            'booked_teens': booked_teens,
             'attendance_male': attendance_male,
             'attendance_female': attendance_female,
-            'missed': missed,
-            'malnutrition_moderate': malnutrition_moderate,
-            'malnutrition_severe': malnutrition_severe,
-            'referrals_psychosocial': referrals_psychosocial,
-            'referrals_clinic': referrals_clinic,
-            'referrals_other': referrals_other,
-            'newly_enrolled': newly_enrolled,
-            'graduated': graduated,
+            'viral_load_samples': viral_load_samples,
+            'suppressed_viral_loads': suppressed_viral_loads,
+            'samples_collected': samples_collected,
+            'disclosures_made': disclosures_made,
+            'psychosocial_conducted': psychosocial_conducted,
+            'referrals_made': referrals_made,
         }
         for field_name, value in numeric_fields.items():
             if value is not None and value < 0:
                 raise ValidationError(f"{field_name.replace('_', ' ').title()} cannot be negative.")
 
-        # Validation 3: Samples validation (assuming samples_high_viral and samples_ldl are counts)
-        total_samples = 0
-        if samples_high_viral is not None:
-            total_samples += samples_high_viral
-            if samples_high_viral < 0:
-                raise ValidationError("Samples with high viral load cannot be negative.")
-        if samples_ldl is not None:
-            total_samples += samples_ldl
-            if samples_ldl < 0:
-                raise ValidationError("Samples with LDL cannot be negative.")
+        # Validation 3: Samples collected must not exceed viral load samples
+        if viral_load_samples is not None and samples_collected is not None:
+            if samples_collected > viral_load_samples:
+                raise ValidationError(
+                    f"Samples collected ({samples_collected}) cannot exceed viral load samples ({viral_load_samples})."
+                )
 
-        # Validation 4: Check consistency with booked and attendance
-        if booked is not None and total_attendance + missed > booked:
-            raise ValidationError(
-                f"Total attendance ({total_attendance}) plus missed ({missed}) cannot exceed booked ({booked})."
-            )
+        # Validation 4: Suppressed viral loads must not exceed viral load samples
+        if viral_load_samples is not None and suppressed_viral_loads is not None:
+            if suppressed_viral_loads > viral_load_samples:
+                raise ValidationError(
+                    f"Suppressed viral loads ({suppressed_viral_loads}) cannot exceed viral load samples ({viral_load_samples})."
+                )
 
         return cleaned_data
 
@@ -89,8 +80,15 @@ class PMTCTForm(forms.ModelForm):
     class Meta:
         model = PMTCT
         fields = [
-            'date', 'booked', 'attendance_breastfeeding', 'attendance_antenatal',
-            'due_dbs', 'missed', 'hiv_positive', 'hiv_negative', 'newly_enrolled'
+            'date', 'total_pregnant_women_anc', 'women_counseled_hiv_testing',
+            'women_tested_for_hiv', 'women_with_known_hiv_status',
+            'women_tested_for_syphilis', 'women_positive_syphilis',
+            'hiv_positive_pregnant_women_initiated_art', 'hiv_positive_pregnant_women_current_art',
+            'hiv_exposed_infants_art_prophylaxis', 'hiv_positive_women_safe_delivery',
+            'hiv_positive_women_delivery_complications', 'hiv_exposed_infants_tested',
+            'hiv_exposed_infants_positive', 'infants_exclusive_breastfeeding',
+            'infants_exclusive_formula_feeding', 'infants_mixed_feeding',
+            'male_partners_counseled_tested', 'support_group_participants'
         ]
         exclude = ['staff', 'created_at']
         widgets = {
@@ -101,30 +99,55 @@ class PMTCTForm(forms.ModelForm):
         """Custom validation for PMTCT form."""
         cleaned_data = super().clean()
 
-        # Extract fields
-        booked = cleaned_data.get('booked')
-        attendance_breastfeeding = cleaned_data.get('attendance_breastfeeding', 0)
-        attendance_antenatal = cleaned_data.get('attendance_antenatal', 0)
-        missed = cleaned_data.get('missed', 0)
+        # Extract relevant fields
+        total_pregnant_women_anc = cleaned_data.get('total_pregnant_women_anc')
+        women_tested_for_hiv = cleaned_data.get('women_tested_for_hiv', 0)
+        hiv_positive_pregnant_women_initiated_art = cleaned_data.get('hiv_positive_pregnant_women_initiated_art', 0)
+        hiv_positive_pregnant_women_current_art = cleaned_data.get('hiv_positive_pregnant_women_current_art', 0)
+        hiv_exposed_infants_tested = cleaned_data.get('hiv_exposed_infants_tested', 0)
+        hiv_exposed_infants_positive = cleaned_data.get('hiv_exposed_infants_positive', 0)
+        infants_exclusive_breastfeeding = cleaned_data.get('infants_exclusive_breastfeeding', 0)
+        infants_exclusive_formula_feeding = cleaned_data.get('infants_exclusive_formula_feeding', 0)
+        infants_mixed_feeding = cleaned_data.get('infants_mixed_feeding', 0)
 
-        # Validation 1: Total attendance must not exceed booked
-        if booked is not None:
-            total_attendance = attendance_breastfeeding + attendance_antenatal
-            if total_attendance > booked:
-                raise ValidationError(
-                    f"Total attendance ({total_attendance}) cannot exceed booked ({booked})."
-                )
+        # Validation 1: Women tested for HIV should not exceed total pregnant women at ANC
+        if total_pregnant_women_anc is not None and women_tested_for_hiv > total_pregnant_women_anc:
+            raise ValidationError(
+                f"Women tested for HIV ({women_tested_for_hiv}) cannot exceed total pregnant women at ANC ({total_pregnant_women_anc})."
+            )
 
-        # Validation 2: Non-negative values
+        # Validation 2: Current ART should not exceed initiated ART
+        if hiv_positive_pregnant_women_initiated_art is not None and hiv_positive_pregnant_women_current_art > hiv_positive_pregnant_women_initiated_art:
+            raise ValidationError(
+                f"Women currently on ART ({hiv_positive_pregnant_women_current_art}) cannot exceed those initiated on ART ({hiv_positive_pregnant_women_initiated_art})."
+            )
+
+        # Validation 3: Positive infants should not exceed tested infants
+        if hiv_exposed_infants_tested is not None and hiv_exposed_infants_positive > hiv_exposed_infants_tested:
+            raise ValidationError(
+                f"HIV-positive infants ({hiv_exposed_infants_positive}) cannot exceed tested infants ({hiv_exposed_infants_tested})."
+            )
+
+        # Validation 4: Non-negative values for all numeric fields
         numeric_fields = {
-            'booked': booked,
-            'attendance_breastfeeding': attendance_breastfeeding,
-            'attendance_antenatal': attendance_antenatal,
-            'missed': missed,
-            'due_dbs': cleaned_data.get('due_dbs', 0),
-            'hiv_positive': cleaned_data.get('hiv_positive', 0),
-            'hiv_negative': cleaned_data.get('hiv_negative', 0),
-            'newly_enrolled': cleaned_data.get('newly_enrolled', 0),
+            'total_pregnant_women_anc': total_pregnant_women_anc,
+            'women_counseled_hiv_testing': cleaned_data.get('women_counseled_hiv_testing', 0),
+            'women_tested_for_hiv': women_tested_for_hiv,
+            'women_with_known_hiv_status': cleaned_data.get('women_with_known_hiv_status', 0),
+            'women_tested_for_syphilis': cleaned_data.get('women_tested_for_syphilis', 0),
+            'women_positive_syphilis': cleaned_data.get('women_positive_syphilis', 0),
+            'hiv_positive_pregnant_women_initiated_art': hiv_positive_pregnant_women_initiated_art,
+            'hiv_positive_pregnant_women_current_art': hiv_positive_pregnant_women_current_art,
+            'hiv_exposed_infants_art_prophylaxis': cleaned_data.get('hiv_exposed_infants_art_prophylaxis', 0),
+            'hiv_positive_women_safe_delivery': cleaned_data.get('hiv_positive_women_safe_delivery', 0),
+            'hiv_positive_women_delivery_complications': cleaned_data.get('hiv_positive_women_delivery_complications', 0),
+            'hiv_exposed_infants_tested': hiv_exposed_infants_tested,
+            'hiv_exposed_infants_positive': hiv_exposed_infants_positive,
+            'infants_exclusive_breastfeeding': infants_exclusive_breastfeeding,
+            'infants_exclusive_formula_feeding': infants_exclusive_formula_feeding,
+            'infants_mixed_feeding': infants_mixed_feeding,
+            'male_partners_counseled_tested': cleaned_data.get('male_partners_counseled_tested', 0),
+            'support_group_participants': cleaned_data.get('support_group_participants', 0),
         }
         for field_name, value in numeric_fields.items():
             if value is not None and value < 0:
@@ -221,8 +244,6 @@ class IECMaterialForm(forms.ModelForm):
             raise ValidationError("If distributing IEC materials, at least one type must have a positive count.")
 
         return cleaned_data
-
-# Newly added forms with basic validation
 
 class EducationRecordForm(forms.ModelForm):
     class Meta:

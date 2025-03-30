@@ -43,23 +43,24 @@ urlpatterns = [
     path('in-kind/', views.in_kind, name='in_kind'),
 
     # HIV/AIDS section
-    path('about-hiv-aids/', views.about_hiv, name='about_hiv_aids'),  # Name uses underscores
+    path('about-hiv-aids/', views.about_hiv, name='about_hiv_aids'),
     path('malawi-statistics/', views.malawi_statistics, name='malawi_statistics'),
     path('basic_facts/', views.basic_facts, name='basic_facts'),
     path('world-hiv-statistics/', views.world_hiv_statistics, name='world_hiv_statistics'),
 
     # Authentication and dashboard
-    path('register/', views.register_view, name='register'),  # Updated to use new view
-    path('login/', views.login_view, name='login'),  # Updated to use new view
-    path('logout/', views.logout_view, name='logout'),  # Updated to use new view
-    path('profile/', views.profile_view, name='profile'),  # Added profile view
+    path('register/', views.register_view, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('profile/', views.profile_view, name='profile'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('health-data-entry/', views.health_data_entry, name='health_data_entry'),
 
     # Teen Club Records Management
+    path('teen-club/create/', views.TeenClubCreateView.as_view(), name='create_teen_club'),  # Added create view
     path('teen-club/<int:pk>/', views.TeenClubDetailView.as_view(), name='teen_club_detail'),
     path('teen-club/<int:pk>/edit/', views.TeenClubUpdateView.as_view(), name='teen_club_edit'),
     path('teen-club/<int:pk>/delete/', views.TeenClubDeleteView.as_view(), name='teen_club_delete'),
     path('teen-club/search/', views.search_teen_clubs, name='search_teen_clubs'),
-    path('teen-clubs/', views.list_teen_clubs, name='list_teen_clubs'),  # Added list view assumption
+    path('teen-clubs/', views.list_teen_clubs, name='list_teen_clubs'),
 ]

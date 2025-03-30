@@ -101,8 +101,9 @@
                             <ul class="dropdown-menu" aria-labelledby="recordsDropdown">
                                 <li><a class="dropdown-item" href="{% url 'create_teen_club' %}">Create Teen Club Record</a></li>
                                 <li><a class="dropdown-item" href="{% url 'list_teen_clubs' %}">Teen Club Records</a></li>
-                                <li><a class="dropdown-item" href="{% url 'create_pmct' %}">Create PMCT Record</a></li>
-                                <li><a class="dropdown-item" href="{% url 'list_pmct' %}">PMCT Records</a></li>
+                                <!-- Removed PMCT links to avoid NoReverseMatch -->
+                                <!-- <li><a class="dropdown-item" href="{% url 'create_pmct' %}">Create PMCT Record</a></li> -->
+                                <!-- <li><a class="dropdown-item" href="{% url 'list_pmct' %}">PMCT Records</a></li> -->
                             </ul>
                         </li>
                     {% endif %}

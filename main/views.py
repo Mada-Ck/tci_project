@@ -4,13 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
-from .models import TeenClub
-from .forms import TeenClubForm
+from .models import TeenClub, PMTCT
+from .forms import TeenClubForm, PMTCTForm
 
-# Static page views (unchanged)
+# Static page views
 def index(request):
     return render(request, 'index.html')
 
@@ -104,21 +103,21 @@ def basic_facts(request):
 def world_hiv_statistics(request):
     return render(request, 'hiv-aids/world_hiv_statistics.html')
 
-# Authentication views (updated)
-def register(request):
+# Authentication views
+def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, 'Registration successful! Welcome!')
+            messages.success(request, 'Registration successful!')
             return redirect('dashboard')
     else:
         form = UserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'accounts/register.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -131,13 +130,9 @@ def login_view(request):
                 login(request, user)
                 messages.success(request, 'Logged in successfully!')
                 return redirect('dashboard')
-            else:
-                messages.error(request, 'Invalid credentials.')
-        else:
-            messages.error(request, 'Invalid form submission.')
     else:
         form = AuthenticationForm()
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'accounts/login.html', {'form': form})
 
 @login_required
 def logout_view(request):
@@ -147,70 +142,46 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'registration/profile.html')
+    return render(request, 'accounts/profile.html')
 
-# Dashboard view (unchanged)
 @login_required
 def dashboard(request):
     return render(request, 'main/dashboard.html')
 
-# Data entry view (unchanged)
 @login_required
 def health_data_entry(request):
     return render(request, 'data-entry/health_data_entry.html')
 
-# Teen Club detailed views (unchanged)
-class TeenClubDetailView(LoginRequiredMixin, DetailView):
-    model = TeenClub
-    template_name = 'teenclub_detail.html'
-    context_object_name = 'record'
-
-class TeenClubUpdateView(LoginRequiredMixin, UpdateView):
+# Teen Club views
+class TeenClubCreateView(LoginRequiredMixin, CreateView):
     model = TeenClub
     form_class = TeenClubForm
     template_name = 'create_record.html'
     success_url = reverse_lazy('list_teen_clubs')
 
     def form_valid(self, form):
-        messages.success(self.request, 'Record updated successfully!')
+        form.instance.staff = self.request.user
+        messages.success(self.request, 'Teen Club record created successfully!')
         return super().form_valid(form)
 
-class TeenClubDeleteView(LoginRequiredMixin, DeleteView):
-    model = TeenClub
-    template_name = 'confirm_delete.html'
-    success_url = reverse_lazy('list_teen_clubs')
-
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, 'Record deleted successfully!')
-        return super().delete(request, *args, **kwargs)
-
-# Search functionality (unchanged)
-@login_required
-def search_teen_clubs(request):
-    query = request.GET.get('q')
-    age_group = request.GET.get('age_group')
-    
-    teen_clubs = TeenClub.objects.all()
-    
-    if query:
-        teen_clubs = teen_clubs.filter(
-            Q(date__icontains=query) | 
-            Q(age_group__icontains=query)
-        )
-    
-    if age_group:
-        teen_clubs = teen_clubs.filter(age_group=age_group)
-    
-    return render(request, 'list_records.html', {
-        'records': teen_clubs,
-        'title': 'Filtered Teen Clubs'
-    })
-
-# List Teen Clubs (unchanged)
 @login_required
 def list_teen_clubs(request):
     teen_clubs = TeenClub.objects.all()
-    return render(request, 'list_records.html', {
-        'records': teen_clubs,
-        'title': 'Teen Club Records'
-    })
+    return render(request, 'list_records.html', {'records': teen_clubs, 'title': 'Teen Club Records'})
+
+# PMTCT views
+class PMTCTCreateView(LoginRequiredMixin, CreateView):
+    model = PMTCT
+    form_class = PMTCTForm
+    template_name = 'main/pmtct_create.html'
+    success_url = reverse_lazy('list_pmct')
+
+    def form_valid(self, form):
+        form.instance.staff = self.request.user
+        messages.success(self.request, 'PMTCT record created successfully!')
+        return super().form_valid(form)
+
+@login_required
+def list_pmtct(request):
+    pmtct_records = PMTCT.objects.all()
+    return render(request, 'main/pmtct_list.html', {'records': pmtct_records, 'title': 'PMTCT Records'})
