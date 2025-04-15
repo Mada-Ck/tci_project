@@ -1,81 +1,733 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Donate - TCI{% endblock %}
+{% block title %}Donate to Thembi Community Initiative{% endblock %}
 
 {% block content %}
-    <section class="about-hero">
-        <img src="{% static 'images/donate-hero.jpg' %}" alt="Donate to TCI" class="about-hero-image">
-        <div class="about-hero-text">
-            <h1>Empower Change: Donate to TCI Today</h1>
-            <p>Your gift makes a difference in the Thembi community.</p>
-            <a href="#donation-options" class="button">Donate Now</a>
-        </div>
-    </section>
+<style>
+    :root {
+        --brand-primary: #d4af37; /* Thembi Gold */
+        --brand-secondary: #1a3c7e; /* Thembi Navy */
+        --brand-red: #e5261c; /* Red for buttons */
+        --brand-red-darker: #c41a0c; /* Darker red for hover */
+        --text-dark: #333;
+        --text-light: #555;
+        --border-color: #ddd;
+        --background-light: #f9f9f9;
+        --active-button-bg: var(--brand-primary);
+        --active-button-text: var(--text-dark);
+    }
 
-    <section class="get-help-content">
-        <h2>Why Your Donation Matters</h2>
-        <p>Every donation to TCI directly supports our vital programs, providing essential resources, education, and healthcare to children and families in Thembi. Join us in building a brighter future.</p>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-        <div class="info-card-row">
-            <div class="info-card">
-                <img src="{% static 'images/donate-health.jpg' %}" alt="Provide Life-Saving Healthcare">
-                <h3>Provide Life-Saving Healthcare</h3>
-                <p>Your gift helps provide essential medical care, vaccinations, and HIV/AIDS support.</p>
+    /* Main Content Area */
+    .main-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .main-image-column {
+        flex: 1 1 55%;
+        min-width: 300px;
+    }
+
+    .main-image-column img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .main-image-column figcaption {
+        font-size: 0.85em;
+        color: var(--text-light);
+        margin-top: 8px;
+    }
+
+    .donation-column {
+        flex: 1 1 35%;
+        min-width: 300px;
+    }
+
+    .donation-box {
+        border: 1px solid var(--border-color);
+        padding: 25px;
+        border-radius: 5px;
+        background-color: var(--background-light);
+    }
+
+    .donation-box h1 {
+        font-size: 1.8em;
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--brand-red);
+        font-family: 'Montserrat', Arial, sans-serif;
+    }
+
+    .donation-box p {
+        margin-bottom: 20px;
+        font-size: 0.95em;
+        color: var(--text-light);
+    }
+
+    /* Donation Form Styles */
+    .donation-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .donation-form label {
+        display: block;
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: var(--text-dark);
+    }
+
+    .donation-form select,
+    .donation-form input[type="text"],
+    .donation-form input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-size: 1em;
+    }
+
+    .donation-form input[type="radio"] {
+        margin-right: 8px;
+    }
+
+    .donation-form .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .donation-form .error {
+        color: #e53e3e;
+        font-size: 0.85em;
+        margin-top: -10px;
+        margin-bottom: 15px;
+    }
+
+    .donation-form .success {
+        color: #2f855a;
+        font-size: 0.85em;
+        margin-bottom: 15px;
+    }
+
+    .donation-form .amount-selector {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .donation-form .amount-selector button {
+        flex: 1 1 auto;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        background-color: #fff;
+        color: var(--brand-primary);
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        text-align: center;
+        min-width: 80px;
+    }
+
+    .donation-form .amount-selector button.active,
+    .donation-form .amount-selector button:hover {
+        background-color: var(--active-button-bg);
+        color: var(--active-button-text);
+        border-color: var(--active-button-bg);
+    }
+
+    .donation-form .custom-amount {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        margin-bottom: 20px;
+        padding: 0 10px 0 15px;
+        background-color: #fff;
+    }
+
+    .donation-form .custom-amount span {
+        font-size: 1em;
+        font-weight: bold;
+        color: var(--text-light);
+        padding-right: 8px;
+        line-height: 1;
+    }
+
+    .donation-form .custom-amount input {
+        flex-grow: 1;
+        padding: 12px 5px;
+        border: none;
+        outline: none;
+        font-size: 1em;
+        width: 80%;
+        background-color: transparent;
+    }
+
+    .donation-form .custom-amount input::-webkit-outer-spin-button,
+    .donation-form .custom-amount input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .donation-form .custom-amount input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .donation-form .donate-button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: var(--brand-red);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .donation-form .donate-button:hover {
+        background-color: var(--brand-red-darker);
+    }
+
+    .donation-form .payment-note {
+        font-size: 0.85em;
+        color: var(--text-light);
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    /* Bank Details */
+    .bank-details {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #f0f2f5;
+        border: 1px solid #e0e4e8;
+        border-radius: 5px;
+    }
+
+    .bank-details h3 {
+        font-size: 1.3em;
+        color: var(--brand-secondary);
+        margin-top: 0;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .bank-details p {
+        font-size: 0.95em;
+        color: var(--text-light);
+        margin: 8px 0;
+        line-height: 1.5;
+    }
+
+    .bank-details p strong {
+        color: var(--text-dark);
+        min-width: 110px;
+        display: inline-block;
+    }
+
+    /* Mission Section */
+    .mission-section {
+        margin: 50px 0;
+        padding: 0 15px;
+    }
+
+    .mission-section h2 {
+        text-align: center;
+        color: var(--brand-secondary);
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .mission-section p,
+    .mission-section ul {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        color: var(--text-light);
+        font-size: 1em;
+        line-height: 1.6;
+    }
+
+    .mission-section ul {
+        list-style: disc;
+        padding-left: 40px;
+        margin-bottom: 20px;
+    }
+
+    .mission-section li {
+        margin-bottom: 8px;
+    }
+
+    /* Impact Section */
+    .impact-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-bottom: 50px;
+    }
+
+    .impact-card {
+        flex: 1 1 22%;
+        min-width: 200px;
+        max-width: 280px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        text-align: center;
+        padding: 0;
+        background-color: #fff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .impact-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .impact-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .impact-card-content {
+        padding: 20px;
+        flex-grow: 1;
+    }
+
+    .impact-card h3 {
+        font-size: 1.8em;
+        color: var(--brand-secondary);
+        margin: 0 0 10px 0;
+    }
+
+    .impact-card p {
+        font-size: 0.9em;
+        color: var(--text-light);
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* FAQ Section */
+    .faq-heading {
+        font-size: 1.6em;
+        color: var(--text-dark);
+        margin-top: 40px;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .faq-section {
+        max-width: 800px;
+        margin: 30px auto 50px auto;
+    }
+
+    .faq-item details {
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px 0;
+    }
+
+    .faq-item:first-of-type details {
+        border-top: 1px solid var(--border-color);
+    }
+
+    .faq-item summary {
+        font-weight: bold;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--brand-secondary);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-item summary::after {
+        content: '+';
+        font-size: 1.5em;
+        color: var(--brand-primary);
+        transition: transform 0.2s ease;
+    }
+
+    .faq-item details[open] summary::after {
+        content: '-';
+    }
+
+    .faq-item div {
+        padding: 15px 0 0 0;
+        color: var(--text-light);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+        .main-content { flex-direction: column; }
+        .donation-column { order: -1; }
+        .main-image-column { margin-top: 30px; }
+        .impact-card { flex-basis: 45%; max-width: none; }
+    }
+
+    @media (max-width: 768px) {
+        .donation-box h1 { font-size: 1.6em; }
+        .faq-heading { font-size: 1.4em; }
+    }
+
+    @media (max-width: 576px) {
+        .container { padding: 15px; }
+        .impact-card { flex-basis: 100%; }
+        .donation-form .amount-selector button {
+            min-width: 70px;
+            font-size: 1em;
+        }
+        .mission-section p,
+        .mission-section ul {
+            margin-left: 0;
+            margin-right: 0;
+            max-width: none;
+            padding-left: 20px;
+        }
+        .mission-section ul {
+            padding-left: 40px;
+        }
+    }
+</style>
+
+<main class="container">
+    <!-- Main Content: Image and Donation Form -->
+    <div class="main-content">
+        <section class="main-image-column">
+            <figure>
+                <img src="{% static 'images/community_work.jpg' %}" alt="Thembi Community Initiative supporting local youth">
+                <figcaption>
+                    Thembi Community Initiative empowers youth in Chitipa, Malawi, through education and health programs. Image: Thembi Community Initiative.
+                </figcaption>
+            </figure>
+        </section>
+
+        <aside class="donation-column">
+            <div class="donation-box">
+                <h1>Donate to Thembi Community Initiative</h1>
+                <p>Your generosity fuels our work in education, health, and youth empowerment in Chitipa, Malawi.</p>
+
+                <form method="post" action="{% url 'main:donate' %}" class="donation-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_donation_purpose">Donation Purpose</label>
+                        {{ form.donation_purpose }}
+                        {% if form.donation_purpose.errors %}
+                            <div class="error">{{ form.donation_purpose.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group" id="specific-program-section" style="display: none;">
+                        <label for="id_specific_program">Select Program</label>
+                        {{ form.specific_program }}
+                        {% if form.specific_program.errors %}
+                            <div class="error">{{ form.specific_program.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_donor_name">Donor Name <span style="font-weight: normal;">(Optional)</span></label>
+                        {{ form.donor_name }}
+                        {% if form.donor_name.errors %}
+                            <div class="error">{{ form.donor_name.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_amount">Amount</label>
+                        <div class="amount-selector">
+                            <button type="button" data-amount="10000">MWK 10k</button>
+                            <button type="button" data-amount="25000">MWK 25k</button>
+                            <button type="button" data-amount="50000">MWK 50k</button>
+                        </div>
+                        <div class="custom-amount">
+                            <span id="currency-symbol">MWK</span>
+                            {{ form.amount }}
+                        </div>
+                        {% if form.amount.errors %}
+                            <div class="error">{{ form.amount.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Currency</label>
+                        <div class="radio-group">
+                            {{ form.currency }}
+                        </div>
+                        {% if form.currency.errors %}
+                            <div class="error">{{ form.currency.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div class="radio-group">
+                            {{ form.payment_method }}
+                        </div>
+                        {% if form.payment_method.errors %}
+                            <div class="error">{{ form.payment_method.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group" id="phone-section" style="display: none;">
+                        <label for="id_phone_number">Phone Number (for Mobile Payments)</label>
+                        {{ form.phone_number }}
+                        {% if form.phone_number.errors %}
+                            <div class="error">{{ form.phone_number.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    {% if messages %}
+                        <div class="form-group">
+                            {% for message in messages %}
+                                <div class="{% if message.tags == 'error' %}error{% else %}success{% endif %}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <button type="submit" class="donate-button">Proceed to Payment</button>
+
+                    <p class="payment-note">
+                        Mobile payments (Airtel Money, TNM Mpamba) are available in MWK only.
+                    </p>
+                </form>
+
+                <div class="bank-details">
+                    <h3>Bank Transfer Details</h3>
+                    <p><strong>Bank:</strong> {{ settings.BANK_ACCOUNTS.MWK.bank }}</p>
+                    <p><strong>Branch:</strong> {{ settings.BANK_ACCOUNTS.MWK.branch }}</p>
+                    <p><strong>Account Name:</strong> {{ settings.BANK_ACCOUNTS.MWK.account_name }}</p>
+
+                    <h4 style="margin-top: 15px; margin-bottom: 5px; color: var(--text-dark);">Malawi Kwacha (MWK)</h4>
+                    <p><strong>Account No:</strong> {{ settings.BANK_ACCOUNTS.MWK.account_number }}</p>
+
+                    <h4 style="margin-top: 15px; margin-bottom: 5px; color: var(--text-dark);">US Dollar (USD)</h4>
+                    <p><strong>Account No:</strong> {{ settings.BANK_ACCOUNTS.USD.account_number }}</p>
+                    <p><strong>Swift Code:</strong> {{ settings.BANK_ACCOUNTS.USD.swift_code | default:'NBMAMWMW' }}</p>
+
+                    <p style="margin-top: 15px;"><strong>Reference:</strong> Please include your name or "Donation".</p>
+                </div>
             </div>
-            <div class="info-card">
-                <img src="{% static 'images/donate-education.jpg' %}" alt="Empower Through Education">
-                <h3>Empower Through Education</h3>
-                <p>Support scholarships, school supplies, and early childhood development programs.</p>
-            </div>
-            <div class="info-card">
-                <img src="{% static 'images/donate-livelihood.jpg' %}" alt="Build Sustainable Livelihoods">
-                <h3>Build Sustainable Livelihoods</h3>
-                <p>Fund skills training, microfinance loans, and entrepreneurship support.</p>
-            </div>
-            <div class="info-card">
-                <img src="{% static 'images/donate-community.jpg' %}" alt="Strengthen Communities">
-                <h3>Strengthen Communities</h3>
-                <p>Support community-led projects and leadership development.</p>
-            </div>
-        </div>
+        </aside>
+    </div>
 
-        <h2 id="donation-options">Choose Your Donation</h2>
-
-        {# Commenting out the payment forms for now
-        <h3>Donate with Credit Card</h3>
-        <div class="credit-card-form">
-            <h4>Make a Secure Donation</h4>
-            <form id="credit-card-donation" action="/charge" method="post">
-              ...
-            </form>
-            <div class="payment-icons">
-               ...
-            </div>
-        </div>
-
-        <h3>Make a One-Time Gift (PayPal)</h3>
-        <div class="donation-options">
-           ...
-        </div>
-
-        <h3>Become a Monthly Supporter (PayPal)</h3>
-        <p>Recurring donations provide sustained support for our programs.</p>
-        <div class="donation-options">
-          ...
-        </div>
-
-        <h3>Other Ways to Support TCI</h3>
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <h2>Support Our Mission Today</h2>
+        <p>
+            Thembi Community Initiative is dedicated to uplifting vulnerable communities in Chitipa, Malawi. We provide essential HIV/AIDS support, empower youth through education and skills training, and ensure families have the resources they need to thrive.
+        </p>
         <ul>
-            <li><a href="{% url 'specific_program' %}">Donate for a Specific Program</a></li>
-            <li><a href="{% url 'donate_child' %}">Donate for a Child</a></li>
-            <li><a href="{% url 'in_kind' %}">Support Anything In Kind</a></li>
-            <li><a href="{% url 'volunteer' %}">Volunteer</a></li>
-            <li><a href="{% url 'corporate' %}">Corporate Partnerships</a></li>
+            <li>Transforming lives every day.</li>
+            <li>Building community-driven, inclusive programs.</li>
+            <li>Empowering people with health, education, and opportunities.</li>
         </ul>
-
-        <h2>Your Donation is Secure</h2>
-        <p>We use industry-standard encryption to protect your data.</p>
-        <p><a href="#">Privacy Policy</a></p>
+        <p>
+            Your donation helps us create lasting change for children, youth, and families in Malawi.
+        </p>
     </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <div class="impact-card">
+            <img src="{% static 'images/hiv_support.jpg' %}" alt="HIV support">
+            <div class="impact-card-content">
+                <h3>MWK 10,000</h3>
+                <p>Provides HIV testing and counseling for a community member.</p>
+            </div>
+        </div>
+        <div class="impact-card">
+            <img src="{% static 'images/youth_training.jpg' %}" alt="Youth training">
+            <div class="impact-card-content">
+                <h3>MWK 25,000</h3>
+                <p>Funds vocational training materials for a young person.</p>
+            </div>
+        </div>
+        <div class="impact-card">
+            <img src="{% static 'images/education.jpg' %}" alt="Education support">
+            <div class="impact-card-content">
+                <h3>MWK 50,000</h3>
+                <p>Supplies essential school materials for children in need.</p>
+            </div>
+        </div>
+        <div class="impact-card">
+            <img src="{% static 'images/community.jpg' %}" alt="Community empowerment">
+            <div class="impact-card-content">
+                <h3>MWK 100,000</h3>
+                <p>Supports a community health awareness workshop.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <h2 class="faq-heading">About Your Donation</h2>
+    <section class="faq-section">
+        <div class="faq-item">
+            <details>
+                <summary>Where will my donation go?</summary>
+                <div>
+                    <p>Your donation supports our programs in Malawi, including HIV/AIDS services, youth empowerment, education, and community development. Funds are allocated where the need is greatest, unless you specify a program.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>How does my donation make a difference?</summary>
+                <div>
+                    <p>Every contribution counts. For example, MWK 10,000 provides HIV testing, MWK 25,000 funds youth training, MWK 50,000 supplies school materials, and MWK 100,000 supports community workshops.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>What payment methods are accepted?</summary>
+                <div>
+                    <p>We accept Bank Transfer, Mobile Money (Airtel Money, TNM Mpamba), and Credit/Debit Card payments via PayChangu.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>How do I make a bank transfer?</summary>
+                <div>
+                    <p>Use the MWK account (1008087012) for local transfers or the USD account (1008501897) for international transfers (Swift Code: NBMAMWMW), both at National Bank of Malawi, Chitipa Branch. Include your name or “Donation” as the reference.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Is my donation tax-deductible?</summary>
+                <div>
+                    <p>Thembi Community Initiative is a registered NGO in Malawi. Tax deductibility depends on your country’s regulations. Please consult your local tax advisor.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Who can I contact for more questions?</summary>
+                <div>
+                    <p>Contact us at madalitsokalua@gmail.com or zibapatrick@yahoo.com, or visit our <a href="{% url 'main:contact' %}">Contact page</a>.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const donationPurposeSelect = document.getElementById('id_donation_purpose');
+    const specificProgramSection = document.getElementById('specific-program-section');
+    const currencyRadios = document.querySelectorAll('input[name="currency"]');
+    const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
+    const phoneSection = document.getElementById('phone-section');
+    const amountButtons = document.querySelectorAll('.amount-selector button');
+    const amountInput = document.getElementById('id_amount');
+    const currencySymbol = document.getElementById('currency-symbol');
+
+    function updateForm() {
+        // Show/hide specific program section
+        if (donationPurposeSelect.value === 'specific_program') {
+            specificProgramSection.style.display = 'block';
+            document.getElementById('id_specific_program').setAttribute('required', 'required');
+        } else {
+            specificProgramSection.style.display = 'none';
+            document.getElementById('id_specific_program').removeAttribute('required');
+        }
+
+        // Update currency and payment method logic
+        const selectedCurrency = document.querySelector('input[name="currency"]:checked').value;
+        const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value;
+
+        currencySymbol.textContent = selectedCurrency;
+
+        if (selectedPaymentMethod === 'airtel_money' || selectedPaymentMethod === 'tnm_mpamba') {
+            phoneSection.style.display = 'block';
+            document.getElementById('id_phone_number').setAttribute('required', 'required');
+            document.getElementById('id_currency_0').checked = true;
+            document.getElementById('id_currency_1').disabled = true;
+            currencySymbol.textContent = 'MWK';
+        } else {
+            phoneSection.style.display = 'none';
+            document.getElementById('id_phone_number').removeAttribute('required');
+            document.getElementById('id_currency_1').disabled = false;
+        }
+
+        // Update amount buttons with selected currency
+        amountButtons.forEach(button => {
+            const amount = button.getAttribute('data-amount');
+            const formattedAmount = parseInt(amount).toLocaleString();
+            const displayAmount = amount >= 10000 ? (parseInt(amount) / 1000) + 'k' : formattedAmount;
+            button.textContent = `${selectedCurrency} ${displayAmount}`;
+        });
+    }
+
+    // Amount selector button logic
+    amountButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            amountButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            if (amountInput) {
+                amountInput.value = button.getAttribute('data-amount');
+                amountInput.dispatchEvent(new Event('input'));
+            }
+        });
+    });
+
+    // Update button active state based on input
+    if (amountInput) {
+        amountInput.addEventListener('input', () => {
+            amountButtons.forEach(btn => btn.classList.remove('active'));
+            const currentVal = amountInput.value;
+            amountButtons.forEach(btn => {
+                if (btn.getAttribute('data-amount') === currentVal) {
+                    btn.classList.add('active');
+                }
+            });
+        });
+        // Initialize active state based on initial value
+        const initialVal = amountInput.value;
+        if (initialVal) {
+            amountButtons.forEach(btn => {
+                if (btn.getAttribute('data-amount') === initialVal) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+    }
+
+    // Event listeners for form updates
+    donationPurposeSelect.addEventListener('change', updateForm);
+    currencyRadios.forEach(radio => radio.addEventListener('change', updateForm));
+    paymentMethodRadios.forEach(radio => radio.addEventListener('change', updateForm));
+
+    updateForm(); // Initialize form on load
+});
+</script>
 {% endblock %}

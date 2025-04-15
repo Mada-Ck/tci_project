@@ -1,0 +1,396 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Welcome to Thembi Community Initiative{% endblock %}
+
+{% block extra_head %}
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Thembi Community Initiative supports HIV-affected families in Malawi with healthcare, education, and empowerment.">
+    <meta name="keywords" content="HIV/AIDS, nonprofit, Malawi, Thembi, healthcare, education">
+    <!-- Favicon (assumed) -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Message Bar -->
+    <div class="message-bar">
+        <div class="message-content">
+            <p>Support our HIV Care programs today!</p>
+            <p>Join our Teen Club to empower youth in Malawi.</p>
+            <p>Your donation helps 200+ mothers through PMTCT.</p>
+        </div>
+    </div>
+
+    <!-- Hero Section with Carousel -->
+    <section id="hero" class="carousel slide" data-bs-ride="carousel" role="region" aria-label="Featured Impact Stories">
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <video src="{% static 'videos/tci-impact.mp4' %}" muted autoplay loop playsinline poster="{% static 'images/hero-community.jpg' %}" class="hero-image" aria-hidden="true"></video>
+                <img src="{% static 'images/hero-community.jpg' %}" alt="TCI supporting HIV-affected community in Chitipa, Malawi" class="hero-image fallback" loading="lazy">
+                <div class="hero-content">
+                    <h1 class="hero-title" data-default="A Promise of Hope: We're With You" data-welcome-back="Welcome back! Your support keeps us going.">A Promise of Hope: We're With You</h1>
+                    <p>At Thembi Community Initiative, we stand beside the most vulnerable—children, teens, and families affected by HIV and poverty. Through healthcare, education, and empowerment, we foster resilience and hope.</p>
+                    <a href="{% url 'main:donate' %}" class="button" aria-label="Donate to support HIV programs">Donate Now</a>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="{% static 'images/hero-youth.jpg' %}" alt="Youth empowerment program in Malawi" class="hero-image" loading="lazy">
+                <div class="hero-content">
+                    <h1>Empowering Communities, Changing Lives</h1>
+                    <p>Our youth programs inspire confidence and skills, creating leaders for tomorrow’s Malawi.</p>
+                    <a href="{% url 'main:youth_empowerment' %}" class="button" aria-label="Join our youth programs">Join Us</a>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <img src="{% static 'images/hero-health.jpg' %}" alt="HIV testing clinic in Chitipa, Malawi" class="hero-image" loading="lazy">
+                <div class="hero-content">
+                    <h1>Living Positively Together</h1>
+                    <p>From HIV testing to child clinics, we support families to thrive without stigma.</p>
+                    <a href="{% url 'main:health' %}" class="button" aria-label="Learn about our HIV health services">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#hero" data-bs-slide="prev" aria-label="Previous Slide">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#hero" data-bs-slide="next" aria-label="Next Slide">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <button class="carousel-pause" type="button" data-bs-target="#hero" data-bs-pause="hover" aria-label="Pause Carousel">Pause</button>
+    </section>
+
+    <!-- HIV Services Section -->
+    <section id="hiv-services" class="fade-in">
+        <h2>Fighting HIV/AIDS in Malawi</h2>
+        <p>We provide free testing, counseling, and PMTCT to empower communities and reduce stigma.</p>
+        <div class="hiv-row">
+            <div class="hiv-card">
+                <h3>HIV Testing</h3>
+                <p>Reached 500+ community members with free HIV tests.</p>
+                <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+            </div>
+            <div class="hiv-card">
+                <h3>PMTCT</h3>
+                <p>Supported 200+ mothers to prevent HIV transmission to infants.</p>
+                <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+            </div>
+            <div class="hiv-card">
+                <h3>Counseling</h3>
+                <p>Empowering families with stigma-free support.</p>
+                <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Initiatives Section -->
+    <section id="initiatives" class="fade-in">
+        <h2>Our Initiatives</h2>
+        <div class="initiative-row">
+            <div class="initiative-card">
+                <img src="{% static 'images/initiative-emergency-appeal.jpg' %}" alt="TCI emergency relief distribution in Chitipa" loading="lazy">
+                <div class="initiative-text">
+                    <h3>Emergency Appeal</h3>
+                    <p>Provided relief to 300+ families during disasters in Thembi.</p>
+                    <a href="{% url 'main:donate' %}" class="button">Donate Now</a>
+                </div>
+            </div>
+            <div class="initiative-card">
+                <img src="{% static 'images/initiative-volunteering.jpg' %}" alt="Volunteers at TCI community event" loading="lazy">
+                <div class="initiative-text">
+                    <h3>Volunteering</h3>
+                    <p>Join 50+ volunteers transforming lives in Malawi.</p>
+                    <a href="{% url 'main:volunteer' %}" class="button">Find Out More</a>
+                </div>
+            </div>
+        </div>
+        <div class="initiative-row">
+            <div class="initiative-card">
+                <img src="{% static 'images/initiative-family-support.jpg' %}" alt="TCI counselor aiding HIV-affected family" loading="lazy">
+                <div class="initiative-text">
+                    <h3>Family Support</h3>
+                    <p>Empowered 200+ families with HIV counseling and resources.</p>
+                    <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+                </div>
+            </div>
+            <div class="initiative-card">
+                <img src="{% static 'images/initiative-community-dev.jpg' %}" alt="TCI sustainable community project in Malawi" loading="lazy">
+                <div class="initiative-text">
+                    <h3>Community Development</h3>
+                    <p>Built 10+ sustainable projects for resilient communities.</p>
+                    <a href="{% url 'main:community_empowerment' %}" class="button">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="fade-in">
+        <h2>Our Services</h2>
+        <div class="service-row">
+            <div class="service-card">
+                <img src="{% static 'images/service-hiv-testing.png' %}" alt="HIV Testing and Care Icon" class="service-icon">
+                <h3>HIV Testing & Care</h3>
+                <p>Free Testing and Support</p>
+                <p class="service-description">Providing accessible HIV testing and counseling in Chitipa.</p>
+                <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+            </div>
+            <div class="service-card">
+                <img src="{% static 'images/service-community-support.png' %}" alt="Community Support Icon" class="service-icon">
+                <h3>Community Support</h3>
+                <p>Empowering Families</p>
+                <p class="service-description">Reconnecting families and providing holistic support.</p>
+                <a href="{% url 'main:what_we_do' %}" class="button">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="fade-in">
+        <h2>Latest Updates</h2>
+        <div class="blog-row">
+            <div class="blog-card">
+                <img src="{% static 'images/blog-post1.jpg' %}" alt="TCI aiding flood-affected family in Malawi" loading="lazy">
+                <div class="blog-text">
+                    <h3>Supporting Families in Crisis</h3>
+                    <p>Learn how TCI aids families affected by hunger.</p>
+                    <a href="#" class="button">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="{% static 'images/blog-post2.jpg' %}" alt="Teen Club empowerment session" loading="lazy">
+                <div class="blog-text">
+                    <h3>Teen Club Success</h3>
+                    <p>Discover how our Teen Club empowers youth.</p>
+                    <a href="{% url 'main:join_teen_club' %}" class="button">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="{% static 'images/blog-hiv.jpg' %}" alt="HIV awareness event in Chitipa" loading="lazy">
+                <div class="blog-text">
+                    <h3>Fighting HIV Stigma</h3>
+                    <p>Our campaign reached 300+ youth with prevention education.</p>
+                    <a href="#" class="button">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="fade-in">
+        <h2>Our Programs</h2>
+        <div class="program-row">
+            <div class="program-card">
+                <img src="{% static 'images/program-health.png' %}" alt="Health Services Icon" class="program-icon">
+                <h3>Health Services</h3>
+                <p>Provided HIV testing to 500+ community members.</p>
+                <a href="{% url 'main:health' %}" class="button">Explore</a>
+            </div>
+            <div class="program-card">
+                <img src="{% static 'images/program-education.png' %}" alt="Education Support Icon" class="program-icon">
+                <h3>Education Support</h3>
+                <p>Empowered 400+ youth with tutoring and skills training.</p>
+                <a href="{% url 'main:education' %}" class="button">Explore</a>
+            </div>
+            <div class="program-card">
+                <img src="{% static 'images/program-livelihood.png' %}" alt="Livelihood Development Icon" class="program-icon">
+                <h3>Livelihood Development</h3>
+                <p>Trained 350+ for sustainable growth.</p>
+                <a href="{% url 'main:livelihood' %}" class="button">Explore</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved Section -->
+    <section id="get-involved" class="fade-in">
+        <h2>Get Involved</h2>
+        <div class="involvement-row">
+            <div class="involvement-card">
+                <img src="{% static 'images/get-involved-volunteer.png' %}" alt="Volunteer Icon" class="involvement-icon">
+                <h3>Volunteer</h3>
+                <p>Be an HIV peer educator to empower youth.</p>
+                <a href="{% url 'main:volunteer' %}" class="button">Join Now</a>
+            </div>
+            <div class="involvement-card">
+                <img src="{% static 'images/get-involved-fundraise.png' %}" alt="Fundraise Icon" class="involvement-icon">
+                <h3>Fundraise</h3>
+                <p>Create a campaign to support our HIV programs.</p>
+                <a href="{% url 'main:fundraise' %}" class="button">Start Fundraising</a>
+            </div>
+            <div class="involvement-card">
+                <img src="{% static 'images/get-involved-corporate.png' %}" alt="Corporate Partnership Icon" class="involvement-icon">
+                <h3>Corporate Partnership</h3>
+                <p>Enhance your CSR goals with us.</p>
+                <a href="{% url 'main:corporate' %}" class="button">Partner With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories Section -->
+    <section id="stories" class="fade-in">
+        <h2>Stories of Impact</h2>
+        <div class="story-row">
+            <div class="story-card">
+                <img src="{% static 'images/story-child.jpg' %}" alt="Child receiving care at TCI clinic" loading="lazy">
+                <h3>A Child’s New Beginning</h3>
+                <p>Thandi thrives thanks to TCI’s child clinic.</p>
+                <a href="#" class="story-link">Read More</a>
+            </div>
+            <div class="story-card">
+                <img src="{% static 'images/story-teen.jpg' %}" alt="Teen leading TCI project" loading="lazy">
+                <h3>Empowering Teens</h3>
+                <p>Sipho leads projects through our Teen Club.</p>
+                <a href="{% url 'main:join_teen_club' %}" class="story-link">Read More</a>
+            </div>
+            <div class="story-card">
+                <video src="{% static 'videos/story-mother.mp4' %}" controls poster="{% static 'images/story-mother.jpg' %}" aria-label="Mother in PMTCT program sharing her story"></video>
+                <h3>A Mother’s Hope</h3>
+                <p>Grace’s journey with our PMTCT program.</p>
+                <a href="#" class="story-link">Watch More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donate Section -->
+    <section id="donate" class="fade-in">
+        <h2>Make a Difference Today</h2>
+        <p>90% of your donation goes directly to HIV programs like testing and PMTCT.</p>
+        <div class="donation-progress">Raised: $5,000 / Goal: $10,000</div>
+        <div class="donate-options">
+            <a href="{% url 'main:donate' %}" class="button">Donate Money</a>
+            <a href="{% url 'main:in_kind' %}" class="button">Donate In-Kind</a>
+            <a href="{% url 'main:donate_child' %}" class="button">Support a Child</a>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="fade-in">
+        <h2>Our Impact</h2>
+        <div class="impact-stats">
+            <div class="impact-item" data-count="300">
+                <img src="{% static 'images/impact-health-records.png' %}" alt="Health Records Icon" class="impact-icon">
+                <span>0</span>
+                <p>Health Records</p>
+            </div>
+            <div class="impact-item" data-count="280">
+                <img src="{% static 'images/impact-teen-club.png' %}" alt="Teen Club Members Icon" class="impact-icon">
+                <span>0</span>
+                <p>Teen Club Members</p>
+            </div>
+            <div class="impact-item" data-count="90">
+                <img src="{% static 'images/impact-pmtct.png' %}" alt="PMTCT Cases Icon" class="impact-icon">
+                <span>0</span>
+                <p>PMTCT Cases</p>
+            </div>
+            <div class="impact-item" data-count="400">
+                <img src="{% static 'images/impact-education.png' %}" alt="Education Beneficiaries Icon" class="impact-icon">
+                <span>0</span>
+                <p>Education Beneficiaries</p>
+            </div>
+            <div class="impact-item" data-count="350">
+                <img src="{% static 'images/impact-youth-trained.png' %}" alt="Youth Trained Icon" class="impact-icon">
+                <span>0</span>
+                <p>Youth Trained</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Signals Section -->
+    <section id="trust" class="fade-in">
+        <h2>Trusted by Our Community</h2>
+        <div class="trust-signals">
+            <img src="{% static 'images/ngora-logo.png' %}" alt="NGORA Accreditation" loading="lazy">
+            <img src="{% static 'images/thembi-logo.png' %}" alt="Thembi Community Initiative Logo" loading="lazy">
+            <p>Accredited by the Malawi Government and recognized by NGORA.</p>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="fade-in">
+        <h2>Join Our Community</h2>
+        <p>Receive updates on our HIV programs and impact in Malawi.</p>
+        <form action="{% url 'main:subscribe' %}" method="post" class="subscription-form">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Your Email" required aria-label="Email for newsletter subscription">
+            <button type="submit" class="button" aria-label="Subscribe to newsletter">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2>Contact Us</h2>
+        <p>We’d love to hear from you! Reach out to learn more or get involved.</p>
+        <div class="contact-info">
+            <p><strong>Email:</strong> thembicommunityinitiatives@gmail.com</p>
+            <p><strong>Phone:</strong> +265 888 30 96 55</p>
+            <p><strong>Address:</strong> Thembi Community Initiative (TCI), Box 79, Chitipa, Malawi</p>
+        </div>
+        <form action="{% url 'main:contact' %}" method="post" class="contact-form">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Your Email" required aria-label="Your email address">
+            <textarea name="message" placeholder="Your Message" required aria-label="Your message"></textarea>
+            <button type="submit" class="button" aria-label="Send contact message">Send</button>
+        </form>
+    </section>
+
+    <!-- Sticky CTA -->
+    <a href="{% url 'main:donate' %}" class="sticky-cta" aria-label="Support our HIV programs">Support Us</a>
+{% endblock %}
+
+{% block extra_js %}
+    <!-- Ensure Bootstrap JS is loaded -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Personalization and Carousel Fix -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Personalize Hero Title
+            const heroTitle = document.querySelector('.carousel-item.active .hero-title');
+            if (document.cookie.includes("visited=true")) {
+                heroTitle.textContent = heroTitle.dataset.welcomeBack;
+            } else {
+                heroTitle.textContent = heroTitle.dataset.default;
+                document.cookie = "visited=true; max-age=31536000";
+            }
+
+            // Impact Counter Animation
+            document.querySelectorAll('.impact-item').forEach(item => {
+                let count = 0;
+                const target = parseInt(item.dataset.count);
+                const span = item.querySelector('span');
+                const interval = setInterval(() => {
+                    if (count >= target) {
+                        clearInterval(interval);
+                        span.textContent = target + '+';
+                    } else {
+                        span.textContent = count++;
+                    }
+                }, 20);
+            });
+
+            // Video Fallback
+            const video = document.querySelector('.hero-image:not(.fallback)');
+            if (video && !video.canPlayType('video/mp4')) {
+                video.style.display = 'none';
+                video.nextElementSibling.style.display = 'block';
+            }
+
+            // Fix Carousel Duplication
+            const carousel = document.querySelector('#hero');
+            carousel.addEventListener('slid.bs.carousel', function() {
+                const items = carousel.querySelectorAll('.carousel-item');
+                items.forEach(item => {
+                    if (!item.classList.contains('active')) {
+                        item.style.display = 'none';
+                    } else {
+                        item.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

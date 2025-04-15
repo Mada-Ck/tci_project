@@ -1,11 +1,7 @@
+# main/admin.py
 from django.contrib import admin
-from .models import TeenClub, PMTCT, ItemDistribution, PatientHealthRecord, ClinicHealthRecord, JobOpening, IECMaterialDistribution
+from .models import Donation, ContactMessage
 
-# Register your models here.
-admin.site.register(TeenClub)
-admin.site.register(PMTCT)
-admin.site.register(ItemDistribution)
-admin.site.register(PatientHealthRecord)
-admin.site.register(ClinicHealthRecord)
-admin.site.register(JobOpening)
-admin.site.register(IECMaterialDistribution)
+# Register your models here
+admin.site.register(Donation)
+admin.site.register(ContactMessage)

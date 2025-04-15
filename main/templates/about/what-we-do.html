@@ -6,7 +6,7 @@
 {% block content %}
     <!-- Hero Section with Animation -->
     <section class="about-hero">
-        <img src="{% static 'images/what-we-do-hero.jpg' %}" alt="What We Do Hero Image" class="about-hero-image">
+        <img src="{% static 'images/what-we-do-hero.jpg' %}" alt="What We Do Hero Image" class="about-hero-image" loading="lazy">
         <div class="about-hero-text animate-hero">
             <h1>What We Do</h1>
             <p>Delivering impactful solutions locally and globally to empower communities.</p>
@@ -18,9 +18,9 @@
         <aside class="about-sidebar" role="navigation" aria-label="What We Do Navigation">
             <h3>In this section</h3>
             <ul>
-                <li><a href="{% url 'about_us' %}">About Us</a></li>
-                <li><a href="{% url 'what_we_do' %}" class="active">What We Do</a></li>
-                <li><a href="{% url 'governance' %}">Governance</a></li>
+                <li><a href="{% url 'main:about_us' %}">About Us</a></li>
+                <li><a href="{% url 'main:what_we_do' %}" class="active">What We Do</a></li>
+                <li><a href="{% url 'main:governance' %}">Governance</a></li>
             </ul>
         </aside>
 
@@ -34,7 +34,7 @@
                 <h2>Our Programs</h2>
                 <div class="info-card-row">
                     <div class="info-card expandable-card">
-                        <img src="{% static 'images/emergency-services.jpg' %}" alt="Emergency Services">
+                        <img src="{% static 'images/emergency-services.jpg' %}" alt="Emergency Services" loading="lazy">
                         <h3>Emergency Services & Disasters</h3>
                         <p>Building resilient communities to handle disasters and climate emergencies.</p>
                         <details>
@@ -46,7 +46,7 @@
                         </details>
                     </div>
                     <div class="info-card expandable-card">
-                        <img src="{% static 'images/migration.jpg' %}" alt="Migration">
+                        <img src="{% static 'images/migration.jpg' %}" alt="Migration" loading="lazy">
                         <h3>Migration Support</h3>
                         <p>Creating safe, inclusive spaces for migrants to thrive.</p>
                         <details>
@@ -58,7 +58,7 @@
                         </details>
                     </div>
                     <div class="info-card expandable-card">
-                        <img src="{% static 'images/community-activities.jpg' %}" alt="Community Activities">
+                        <img src="{% static 'images/community-activities.jpg' %}" alt="Community Activities" loading="lazy">
                         <h3>Community Programs</h3>
                         <p>Fostering connection and resilience through local initiatives.</p>
                         <details>
@@ -73,7 +73,7 @@
 
                 <div class="info-card-row">
                     <div class="info-card expandable-card">
-                        <img src="{% static 'images/international-programs.jpg' %}" alt="International Programs">
+                        <img src="{% static 'images/international-programs.jpg' %}" alt="International Programs" loading="lazy">
                         <h3>International Programs</h3>
                         <p>Enhancing global resilience against crises and climate change.</p>
                         <details>
@@ -85,7 +85,7 @@
                         </details>
                     </div>
                     <div class="info-card expandable-card">
-                        <img src="{% static 'images/international-humanitarian-law.jpg' %}" alt="International Humanitarian Law">
+                        <img src="{% static 'images/international-humanitarian-law.jpg' %}" alt="International Humanitarian Law" loading="lazy">
                         <h3>International Humanitarian Law</h3>
                         <p>Improving outcomes in conflict-affected regions.</p>
                         <details>
@@ -97,7 +97,7 @@
                         </details>
                     </div>
                     <div class="info-card expandable-card">
-                        <img src="{% static 'images/first-nations.jpg' %}" alt="First Nations Centrality">
+                        <img src="{% static 'images/first-nations.jpg' %}" alt="First Nations Centrality" loading="lazy">
                         <h3>First Nations Centrality</h3>
                         <p>Working with First Nations for cultural safety and equity.</p>
                         <details>
@@ -112,7 +112,7 @@
 
                 <div class="info-card-row">
                     <div class="info-card expandable-card">
-                        <img src="{% static 'images/lifeblood.jpg' %}" alt="Lifeblood">
+                        <img src="{% static 'images/lifeblood.jpg' %}" alt="Lifeblood" loading="lazy">
                         <h3>Lifeblood</h3>
                         <p>Boosting blood and plasma supplies for emergencies and treatments.</p>
                         <details>
@@ -131,12 +131,12 @@
     <!-- Call-to-Action Section -->
     <section class="image-with-text">
         <div class="image-container">
-            <img src="{% static 'images/everyone-always.jpg' %}" alt="Community Support">
+            <img src="{% static 'images/everyone-always.jpg' %}" alt="Community Support" loading="lazy">
         </div>
         <div class="text-container">
             <h3>There When They Need Us</h3>
             <p>Help us support communities in rebuilding and thriving.</p>
-            <a href="{% url 'donate' %}" class="button">Donate Now</a>
+            <a href="{% url 'main:donate' %}" class="button">Donate Now</a>
         </div>
     </section>
 
@@ -165,18 +165,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script>
-        // Hero Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroText = document.querySelector('.about-hero-text');
-            setTimeout(() => heroText.classList.add('visible'), 100);
-        });
-
-        // Form Submission Feedback (Optional)
-        document.querySelector('.subscription-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for subscribing! We’ll keep you updated.');
-            e.target.reset();
-        });
-    </script>
+    <script src="{% static 'js/what_we_do.js' %}"></script>
 {% endblock %}

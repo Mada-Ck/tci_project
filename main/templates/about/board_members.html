@@ -6,7 +6,7 @@
 {% block content %}
     <!-- Hero Section -->
     <section class="about-hero">
-        <img src="{% static 'images/board-members-hero.jpg' %}" alt="Board Members Hero Image" class="about-hero-image">
+        <img src="{% static 'images/board-members-hero.jpg' %}" alt="Board Members Hero Image" class="about-hero-image" loading="lazy">
         <div class="about-hero-text animate-hero">
             <h1>Board Members</h1>
             <p>Meet the dedicated leaders guiding TCI’s mission.</p>
@@ -18,14 +18,14 @@
         <aside class="about-sidebar" role="navigation" aria-label="Governance Navigation">
             <h3 class="sidebar-toggle">In this section <span class="toggle-icon">▼</span></h3>
             <ul class="sidebar-menu">
-                <li><a href="{% url 'about_us' %}">About Us</a></li>
-                <li><a href="{% url 'what_we_do' %}">What We Do</a></li>
-                <li><a href="{% url 'governance' %}" class="active">Governance</a>
+                <li><a href="{% url 'main:about_us' %}">About Us</a></li>
+                <li><a href="{% url 'main:what_we_do' %}">What We Do</a></li>
+                <li><a href="{% url 'main:governance' %}" class="active">Governance</a>
                     <ul class="sub-menu">
-                        <li><a href="{% url 'donors_and_supporters' %}">Donors and Supporters</a></li>
-                        <li><a href="{% url 'board_members' %}" class="active">Board Members</a></li>
-                        <li><a href="{% url 'board_committees' %}">Board Committees</a></li>
-                        <li><a href="{% url 'ceo_and_executive_team' %}">CEO and Executive Team</a></li>
+                        <li><a href="{% url 'main:donors_and_supporters' %}">Donors and Supporters</a></li>
+                        <li><a href="{% url 'main:board_members' %}" class="active">Board Members</a></li>
+                        <li><a href="{% url 'main:board_committees' %}">Board Committees</a></li>
+                        <li><a href="{% url 'main:ceo_and_executive_team' %}">CEO and Executive Team</a></li>
                     </ul>
                 </li>
             </ul>
@@ -46,31 +46,31 @@
                 <div class="board-container">
                     <ul class="board-members">
                         <li class="member-card animate-card">
-                            <img src="{% static 'images/board/louise-laubscher.jpg' %}" alt="Ms Louise Laubscher" class="member-image">
+                            <img src="{% static 'images/board/louise-laubscher.jpg' %}" alt="Ms Louise Laubscher" class="member-image" loading="lazy">
                             <div class="member-name">Ms Louise Laubscher</div>
                             <div class="member-role">Chairperson</div>
                             <div class="member-desc">Leads with extensive community development experience.</div>
                         </li>
                         <li class="member-card animate-card">
-                            <img src="{% static 'images/board/kolezi-phiri.jpg' %}" alt="Counsel Kolezi Phiri" class="member-image">
+                            <img src="{% static 'images/board/kolezi-phiri.jpg' %}" alt="Counsel Kolezi Phiri" class="member-image" loading="lazy">
                             <div class="member-name">Counsel Kolezi Phiri</div>
                             <div class="member-role">Vice Chairperson</div>
                             <div class="member-desc">Offers legal expertise and leadership support.</div>
                         </li>
                         <li class="member-card animate-card">
-                            <img src="{% static 'images/board/mphatso-chikhwaza.jpg' %}" alt="Mrs Mphatso Chikhwaza" class="member-image">
+                            <img src="{% static 'images/board/mphatso-chikhwaza.jpg' %}" alt="Mrs Mphatso Chikhwaza" class="member-image" loading="lazy">
                             <div class="member-name">Mrs Mphatso Chikhwaza</div>
                             <div class="member-role">Executive Director & Secretary</div>
                             <div class="member-desc">Ensures mission alignment and operational oversight.</div>
                         </li>
                         <li class="member-card animate-card">
-                            <img src="{% static 'images/board/bornwell-kaunga.jpg' %}" alt="Mr Bornwell Kaunga" class="member-image">
+                            <img src="{% static 'images/board/bornwell-kaunga.jpg' %}" alt="Mr Bornwell Kaunga" class="member-image" loading="lazy">
                             <div class="member-name">Mr Bornwell Kaunga</div>
                             <div class="member-role">Member</div>
                             <div class="member-desc">Brings finance and engagement insights.</div>
                         </li>
                         <li class="member-card animate-card">
-                            <img src="{% static 'images/board/aston-gondwe.jpg' %}" alt="Mr Aston Gondwe" class="member-image">
+                            <img src="{% static 'images/board/aston-gondwe.jpg' %}" alt="Mr Aston Gondwe" class="member-image" loading="lazy">
                             <div class="member-name">Mr Aston Gondwe</div>
                             <div class="member-role">Member</div>
                             <div class="member-desc">Expert in sustainable development.</div>
@@ -83,41 +83,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script>
-        // Sidebar Toggle
-        document.querySelector('.sidebar-toggle').addEventListener('click', () => {
-            const menu = document.querySelector('.sidebar-menu');
-            const icon = document.querySelector('.sidebar-toggle .toggle-icon');
-            menu.classList.toggle('active');
-            icon.textContent = menu.classList.contains('active') ? '▲' : '▼';
-        });
-
-        // Content Toggle
-        document.querySelectorAll('.toggle-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const contentId = header.getAttribute('data-toggle');
-                const content = document.getElementById(contentId);
-                const icon = header.querySelector('.toggle-icon');
-                content.classList.toggle('active');
-                icon.textContent = content.classList.contains('active') ? '▲' : '▼';
-            });
-        });
-
-        // Hero Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroText = document.querySelector('.about-hero-text');
-            setTimeout(() => heroText.classList.add('visible'), 100);
-        });
-
-        // Board Member Animation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.member-card').forEach(card => observer.observe(card));
-    </script>
+    <script src="{% static 'js/board_members.js' %}"></script>
 {% endblock %}

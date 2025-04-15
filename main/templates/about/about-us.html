@@ -5,9 +5,11 @@
 
 {% block content %}
     <!-- Hero Section with Animation -->
-    <section class="about-hero">
-        <img src="{% static 'images/about-us-hero.jpg' %}" alt="About Us Hero Image" class="about-hero-image">
-        <div class="about-hero-text animate-hero">
+    <section id="hero">
+        <div class="carousel">
+            <img src="{% static 'images/about-us-hero.jpg' %}" alt="About Us Hero Image" class="hero-image" loading="lazy">
+        </div>
+        <div class="hero-content animate-hero">
             <h1>About Us</h1>
             <p>Discover how Thembi Community Initiative restores hope and empowers vulnerable communities.</p>
         </div>
@@ -18,9 +20,9 @@
         <aside class="about-sidebar" role="navigation" aria-label="About Us Navigation">
             <h3>In this section</h3>
             <ul>
-                <li><a href="{% url 'about_us' %}" class="active">About Us</a></li>
-                <li><a href="{% url 'what_we_do' %}">What We Do</a></li>
-                <li><a href="{% url 'governance' %}">Governance</a></li>
+                <li><a href="{% url 'main:about_us' %}" class="active">About Us</a></li>
+                <li><a href="{% url 'main:what_we_do' %}">What We Do</a></li>
+                <li><a href="{% url 'main:governance' %}">Governance</a></li>
             </ul>
         </aside>
 
@@ -87,19 +89,19 @@
             <h2>Explore More</h2>
             <div class="info-card-row">
                 <div class="info-card expandable-card">
-                    <img src="{% static 'images/what-we-do.jpg' %}" alt="What We Do">
+                    <img src="{% static 'images/what-we-do.jpg' %}" alt="What We Do" loading="lazy">
                     <h3>What We Do</h3>
                     <p>Transforming lives through health, livelihood, and empowerment programs.</p>
                     <details>
                         <summary><span class="read-more">Learn More</span></summary>
                         <div class="details-content">
                             <p>Our comprehensive programs focus on sustainable solutions for HIV-positive children, teens, and women.</p>
-                            <a href="{% url 'what_we_do' %}" class="button">Visit What We Do</a>
+                            <a href="{% url 'main:what_we_do' %}" class="button">Visit What We Do</a>
                         </div>
                     </details>
                 </div>
                 <div class="info-card expandable-card">
-                    <img src="{% static 'images/how-we-work.jpg' %}" alt="How We Work">
+                    <img src="{% static 'images/how-we-work.jpg' %}" alt="How We Work" loading="lazy">
                     <h3>How We Work</h3>
                     <p>Community-centered, evidence-based approaches for impactful development.</p>
                     <details>
@@ -110,14 +112,14 @@
                     </details>
                 </div>
                 <div class="info-card expandable-card">
-                    <img src="{% static 'images/governance-hero.jpg' %}" alt="Governance">
+                    <img src="{% static 'images/governance-hero.jpg' %}" alt="Governance" loading="lazy">
                     <h3>Governance</h3>
                     <p>Ensuring transparency and accountability in our mission.</p>
                     <details>
                         <summary><span class="read-more">Learn More</span></summary>
                         <div class="details-content">
                             <p>TCI operates with a robust structure for effective impact.</p>
-                            <a href="{% url 'governance' %}" class="button">Visit Governance</a>
+                            <a href="{% url 'main:governance' %}" class="button">Visit Governance</a>
                         </div>
                     </details>
                 </div>
@@ -126,7 +128,7 @@
             <!-- Additional Info Cards -->
             <div class="info-card-row">
                 <div class="info-card expandable-card">
-                    <img src="{% static 'images/what-we-stand-for.jpg' %}" alt="What We Stand For">
+                    <img src="{% static 'images/what-we-stand-for.jpg' %}" alt="What We Stand For" loading="lazy">
                     <h3>What We Stand For</h3>
                     <p>Guided by humanitarian principles in all our actions.</p>
                     <details>
@@ -137,7 +139,7 @@
                     </details>
                 </div>
                 <div class="info-card expandable-card">
-                    <img src="{% static 'images/inclusion-and-diversity.jpg' %}" alt="Inclusion and diversity">
+                    <img src="{% static 'images/inclusion-and-diversity.jpg' %}" alt="Inclusion and diversity" loading="lazy">
                     <h3>Inclusion and Diversity</h3>
                     <p>Embracing diversity for a welcoming community.</p>
                     <details>
@@ -176,34 +178,17 @@
         <!-- Image with Text Section -->
         <section class="image-with-text">
             <div class="image-container">
-                <img src="{% static 'images/everyone-always.jpg' %}" alt="Community Support">
+                <img src="{% static 'images/everyone-always.jpg' %}" alt="Community Support" loading="lazy">
             </div>
             <div class="text-container">
                 <h3>There When They Need Us</h3>
                 <p>Supporting communities to rebuild and thrive.</p>
-                <a href="{% url 'donate' %}" class="button">Donate Now</a>
+                <a href="{% url 'main:donate' %}" class="button">Donate Now</a>
             </div>
         </section>
     </div>
 {% endblock %}
 
 {% block extra_js %}
-    <script>
-        // Toggle Sections
-        document.querySelectorAll('.toggle-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const contentId = header.getAttribute('data-toggle');
-                const content = document.getElementById(contentId);
-                const icon = header.querySelector('.toggle-icon');
-                content.classList.toggle('active');
-                icon.textContent = content.classList.contains('active') ? '▲' : '▼';
-            });
-        });
-
-        // Hero Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroText = document.querySelector('.about-hero-text');
-            setTimeout(() => heroText.classList.add('visible'), 100);
-        });
-    </script>
+    <script src="{% static 'js/about_us.js' %}"></script>
 {% endblock %}

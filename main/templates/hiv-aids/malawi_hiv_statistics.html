@@ -3,242 +3,25 @@
 
 {% block title %}Malawi HIV Statistics - Thembi Community Initiative{% endblock %}
 
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/hiv-aids.css' %}">
+{% endblock %}
+
 {% block content %}
-<!-- Embedded CSS -->
-<style>
-    /* Scope styles to this page only */
-    .page-container {
-        max-width: 800px;
-        width: 100%;
-        background: #fff;
-        padding: 3rem;
-        margin: 2rem auto;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Hero Section */
-    .page-container #hero {
-        position: relative;
-        height: 40vh;
-        background: url('{% static "images/malawi_hiv_hero.jpg" %}') no-repeat center center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 2rem;
-    }
-
-    .page-container #hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(26, 60, 126, 0.8), rgba(0, 0, 0, 0.5));
-    }
-
-    .page-container .hero-content {
-        position: relative;
-        z-index: 1;
-    }
-
-    .page-container .hero-content h1 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-    }
-
-    .page-container .hero-content p {
-        font-size: 1.2rem;
-        font-weight: 300;
-    }
-
-    /* Stats Sections */
-    .page-container .stats-section {
-        margin-bottom: 2rem;
-    }
-
-    .page-container .stats-section h1,
-    .page-container .stats-section h2 {
-        font-family: 'Montserrat', sans-serif;
-        color: #1a3c7e;
-        margin-bottom: 1rem;
-    }
-
-    .page-container .stats-section h1 {
-        font-size: 2rem;
-        font-weight: 700;
-        text-align: center;
-    }
-
-    .page-container .stats-section h2 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        text-align: left;
-    }
-
-    .page-container .stats-section p {
-        font-size: 1.1rem;
-        color: #4a5568;
-        margin-bottom: 1rem;
-        line-height: 1.7;
-    }
-
-    .page-container .stats-section a {
-        color: #d4af37;
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-    .page-container .stats-section a:hover {
-        text-decoration: underline;
-    }
-
-    /* Definition List Styling for Stats and Demographics */
-    .page-container .stats-section dl {
-        margin-bottom: 1rem;
-    }
-
-    .page-container .stats-section dt {
-        font-size: 1.1rem;
-        color: #1a202c;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        text-align: left;
-        float: left;
-        width: 250px;
-        clear: left;
-    }
-
-    .page-container .stats-section dd {
-        font-size: 1.1rem;
-        color: #4a5568;
-        margin-left: 260px;
-        margin-bottom: 0.75rem;
-        line-height: 1.7;
-    }
-
-    /* Chart Styling */
-    .page-container #unaids-chart {
-        margin: 1.5rem 0;
-    }
-
-    /* Challenges Section Specific Styling */
-    .page-container .challenges-content {
-        display: flex;
-        align-items: flex-start;
-        gap: 1.5rem;
-        margin-top: 1rem;
-    }
-
-    .page-container .image-container {
-        flex: 1;
-        max-width: 50%;
-    }
-
-    .page-container .image-container img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-    }
-
-    .page-container .text-container {
-        flex: 1;
-    }
-
-    .page-container .challenge-item {
-        position: relative;
-        padding-left: 1.5rem;
-        margin-bottom: 1rem;
-        font-size: 1.1rem;
-        color: #4a5568;
-        line-height: 1.7;
-    }
-
-    .page-container .challenge-item::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 4px;
-        height: 100%;
-        background: #d4af37;
-    }
-
-    .page-container .challenge-item strong {
-        color: #1a202c;
-        font-weight: 700;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .page-container {
-            padding: 2rem;
-            margin: 1rem;
-        }
-        .page-container #hero {
-            height: 30vh;
-        }
-        .page-container .hero-content h1 {
-            font-size: 2rem;
-        }
-        .page-container .hero-content p {
-            font-size: 1rem;
-        }
-        .page-container .stats-section h1 {
-            font-size: 1.8rem;
-        }
-        .page-container .stats-section h2 {
-            font-size: 1.3rem;
-        }
-        .page-container .stats-section dt,
-        .page-container .stats-section dd {
-            font-size: 1rem;
-            float: none;
-            width: auto;
-            margin-left: 0;
-        }
-        .page-container .stats-section dd {
-            margin-left: 1.5rem;
-        }
-        .page-container .challenges-content {
-            flex-direction: column;
-        }
-        .page-container .image-container {
-            max-width: 100%;
-        }
-        .page-container .challenge-item {
-            font-size: 1rem;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .page-container #hero {
-            height: 25vh;
-        }
-        .page-container .hero-content h1 {
-            font-size: 1.5rem;
-        }
-        .page-container .hero-content p {
-            font-size: 0.9rem;
-        }
-        .page-container .stats-section h1 {
-            font-size: 1.5rem;
-        }
-        .page-container .stats-section h2 {
-            font-size: 1.2rem;
-        }
-    }
-</style>
-
-<!-- Page Container -->
 <div class="page-container">
+    <!-- Sidebar -->
+    <aside class="about-sidebar" role="navigation" aria-label="HIV/AIDS Navigation">
+        <h3>In this section</h3>
+        <ul>
+            <li><a href="{% url 'main:about_hiv' %}">About HIV/AIDS</a></li>
+            <li><a href="{% url 'main:malawi_statistics' %}" class="active">Malawi Statistics</a></li>
+            <li><a href="{% url 'main:basic_facts' %}">Basic Facts</a></li>
+            <li><a href="{% url 'main:world_hiv_statistics' %}">World Statistics</a></li>
+        </ul>
+    </aside>
+
     <!-- Hero Section -->
-    <div id="hero">
+    <div class="hero" style="background-image: url('{% static 'images/malawi_hiv_hero.jpg' %}');">
         <div class="hero-content">
             <h1>HIV/AIDS Statistics in Malawi</h1>
             <p>Key data from the National AIDS Commission (2023)</p>
@@ -293,7 +76,7 @@
         <h2>Challenges and Focus Areas</h2>
         <div class="challenges-content">
             <div class="image-container">
-                <img src="{% static 'images/adolescent_girls_hiv.jpg' %}" alt="Adolescent Girls and HIV">
+                <img src="{% static 'images/adolescent_girls_hiv.jpg' %}" alt="Adolescent Girls and HIV" loading="lazy">
             </div>
             <div class="text-container">
                 <div class="challenge-item">
@@ -309,51 +92,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script>
-    // UNAIDS Chart
-    var unaidsData = [{
-        type: 'bar',
-        x: [95, 91, 87],
-        y: ['Know Their Status', 'On Treatment', 'Virally Suppressed'],
-        orientation: 'h',
-        marker: {
-            color: '#1a3c7e',
-            line: { color: '#153267', width: 2 }
-        },
-        text: ['95%', '91%', '87%'],
-        textposition: 'auto',
-        hoverinfo: 'text',
-        hovertext: [
-            '95% of 991,600 PLHIV know their status: 941,020',
-            '91% of diagnosed on treatment: 927,310',
-            '87% of those on ART virally suppressed: 852,301'
-        ]
-    }];
-
-    var unaidsLayout = {
-        title: {
-            text: 'Malawi\'s Progress Towards UNAIDS 95-95-95 Targets (2023)',
-            font: { size: 18, color: '#1a3c7e', family: 'Montserrat, sans-serif' }
-        },
-        xaxis: {
-            title: 'Percentage Achieved (%)',
-            range: [0, 100],
-            titlefont: { color: '#4a5568', family: 'Open Sans, sans-serif' },
-            tickfont: { color: '#4a5568', family: 'Open Sans, sans-serif' }
-        },
-        yaxis: {
-            title: 'UNAIDS Targets',
-            titlefont: { color: '#4a5568', family: 'Open Sans, sans-serif' },
-            tickfont: { color: '#4a5568', family: 'Open Sans, sans-serif' }
-        },
-        margin: { t: 50, b: 50, l: 120, r: 50 },
-        height: 400,
-        plot_bgcolor: '#fff',
-        paper_bgcolor: '#fff',
-        showlegend: false,
-        hovermode: 'closest'
-    };
-
-    Plotly.newPlot('unaids-chart', unaidsData, unaidsLayout);
-</script>
+    <script src="{% static 'js/malawi_stats.js' %}"></script>
 {% endblock %}

@@ -1,24 +1,22 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from django.urls import reverse_lazy
-from django.views.generic import CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import TeenClub, PMTCT
-from .forms import TeenClubForm, PMTCTForm
+from django.conf import settings
+import requests
+import json
+import uuid
+from .forms import DonationForm, ContactForm
+from .models import Donation, ContactMessage
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+import hmac
+import hashlib
 
-# Static page views
+# Static Pages - Home
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'main/index.html')
 
-def donate(request):
-    return render(request, 'donate.html')
-
-def get_help(request):
-    return render(request, 'get_help.html')
-
+# Static Pages - About Section
 def about_us(request):
     return render(request, 'about/about-us.html')
 
@@ -28,9 +26,6 @@ def what_we_do(request):
 def governance(request):
     return render(request, 'about/governance.html')
 
-def donors_and_supporters(request):
-    return render(request, 'about/donors_and_supporters.html')
-
 def board_members(request):
     return render(request, 'about/board_members.html')
 
@@ -39,6 +34,13 @@ def board_committees(request):
 
 def ceo_and_executive_team(request):
     return render(request, 'about/ceo_and_executive_team.html')
+
+def donors_and_supporters(request):
+    return render(request, 'about/donors_and_supporters.html')
+
+# Static Pages - Get Help Section
+def get_help(request):
+    return render(request, 'get_help.html')
 
 def join_teen_club(request):
     return render(request, 'get-help/join-teen-club.html')
@@ -52,6 +54,8 @@ def hiv_services(request):
 def pmtct(request):
     return render(request, 'get-help/pmtct.html')
 
+# Static Pages - Thembi Activities Section
+# Get Involved
 def volunteer(request):
     return render(request, 'thembi-activities/get-involved/volunteer.html')
 
@@ -64,6 +68,7 @@ def fundraise(request):
 def corporate(request):
     return render(request, 'thembi-activities/get-involved/corporate.html')
 
+# Programs
 def health(request):
     return render(request, 'thembi-activities/programs/health.html')
 
@@ -79,6 +84,7 @@ def youth_empowerment(request):
 def education(request):
     return render(request, 'thembi-activities/programs/education.html')
 
+# Ways to Donate
 def specific_program(request):
     return render(request, 'thembi-activities/ways-to-donate/specific-program.html')
 
@@ -91,6 +97,7 @@ def donate_child(request):
 def in_kind(request):
     return render(request, 'thembi-activities/ways-to-donate/in-kind.html')
 
+# Static Pages - HIV/AIDS Section
 def about_hiv(request):
     return render(request, 'hiv-aids/about_hiv.html')
 
@@ -103,85 +110,148 @@ def basic_facts(request):
 def world_hiv_statistics(request):
     return render(request, 'hiv-aids/world_hiv_statistics.html')
 
-# Authentication views
-def register_view(request):
+# Static Pages - Legal Pages
+def privacy_policy(request):
+    return render(request, 'main/privacy_policy.html')
+
+def terms_of_use(request):
+    return render(request, 'main/terms_of_use.html')
+
+# Donation Handling
+def donate(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = DonationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            messages.success(request, 'Registration successful!')
-            return redirect('dashboard')
-    else:
-        form = UserCreationForm()
-    return render(request, 'accounts/register.html', {'form': form})
+            donation = form.save(commit=False)
+            donation.transaction_id = str(uuid.uuid4())
 
-def login_view(request):
+            # Enforce MWK for mobile payments
+            if donation.payment_method in ('airtel_money', 'tnm_mpamba'):
+                donation.currency = 'MWK'
+
+            donation.save()
+
+            if donation.payment_method == 'bank_transfer':
+                messages.success(request, f'Thank you! Please complete the bank transfer to the {donation.currency} account.')
+                return redirect('main:donate_success')
+
+            # PayChangu Integration
+            try:
+                headers = {
+                    'Authorization': f'Bearer {settings.PAYCHANGU_API_KEY}',
+                    'Content-Type': 'application/json',
+                }
+                payload = {
+                    'amount': float(donation.amount),
+                    'currency': donation.currency,
+                    'transaction_id': donation.transaction_id,
+                    'description': f"Donation: {donation.get_donation_purpose_display()}{' - ' + donation.specific_program if donation.specific_program else ''}",
+                    'payer': {
+                        'name': donation.donor_name or 'Anonymous',
+                        'phone': donation.phone_number if donation.payment_method in ('airtel_money', 'tnm_mpamba') else '',
+                        'email': 'donor@example.com',
+                    },
+                    'return_url': request.build_absolute_uri('/donate/success/'),
+                    'cancel_url': request.build_absolute_uri('/donate/'),
+                    'payment_method': 'mobile_money' if donation.payment_method in ('airtel_money', 'tnm_mpamba') else 'card',
+                    'account_number': settings.BANK_ACCOUNTS[donation.currency]['account_number'],
+                }
+                response = requests.post(
+                    f"{settings.PAYCHANGU_BASE_URL}/checkout",
+                    headers=headers,
+                    data=json.dumps(payload)
+                )
+                response_data = response.json()
+                if response.status_code == 200 and response_data.get('status') == 'success':
+                    return redirect(response_data['data']['checkout_url'])
+                else:
+                    donation.status = 'failed'
+                    donation.save()
+                    messages.error(request, f'Payment initiation failed: {response_data.get("message", "Unknown error")}')
+            except Exception as e:
+                donation.status = 'failed'
+                donation.save()
+                messages.error(request, f'Payment error: {str(e)}')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = DonationForm()
+    return render(request, 'donate.html', {'form': form})
+
+def donate_success(request):
+    return render(request, 'main/donate_success.html')
+
+# Contact Form Handling
+def contact(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = ContactForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.success(request, 'Logged in successfully!')
-                return redirect('dashboard')
+            contact_message = form.save()
+            subject = f"New Contact Message: {contact_message.subject}"
+            message = f"""
+            Name: {contact_message.name}
+            Email: {contact_message.email}
+            Subject: {contact_message.subject}
+            Message: {contact_message.message}
+            Date: {contact_message.created_at}
+            """
+            try:
+                send_mail(
+                    subject,
+                    message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    settings.CONTACT_EMAILS,
+                    fail_silently=False,
+                )
+                messages.success(request, 'Your message has been sent successfully!')
+                return redirect('main:contact_success')
+            except Exception as e:
+                messages.error(request, f'Error sending email: {str(e)}')
+        else:
+            messages.error(request, 'Please correct the errors below.')
     else:
-        form = AuthenticationForm()
-    return render(request, 'accounts/login.html', {'form': form})
+        form = ContactForm()
+    return render(request, 'main/contact.html', {'form': form})
 
-@login_required
-def logout_view(request):
-    logout(request)
-    messages.success(request, 'Logged out successfully!')
-    return redirect('login')
+def contact_success(request):
+    return render(request, 'main/contact_success.html')
 
-@login_required
-def profile_view(request):
-    return render(request, 'accounts/profile.html')
+# Newsletter Subscription Handling
+def subscribe(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if email:
+            # Placeholder: In a real app, save email to database or external service
+            messages.success(request, 'Thank you for subscribing to our newsletter!')
+            return redirect('main:index')
+        else:
+            messages.error(request, 'Please provide a valid email address.')
+    return redirect('main:index')
 
-@login_required
-def dashboard(request):
-    return render(request, 'main/dashboard.html')
+# PayChangu Webhook
+@csrf_exempt
+def paychangu_webhook(request):
+    if request.method == 'POST':
+        signature = request.headers.get('Signature')
+        payload = request.body
+        computed_signature = hmac.new(
+            settings.PAYCHANGU_SECRET.encode(),
+            payload,
+            hashlib.sha256
+        ).hexdigest()
 
-@login_required
-def health_data_entry(request):
-    return render(request, 'data-entry/health_data_entry.html')
-
-# Teen Club views
-class TeenClubCreateView(LoginRequiredMixin, CreateView):
-    model = TeenClub
-    form_class = TeenClubForm
-    template_name = 'create_record.html'
-    success_url = reverse_lazy('list_teen_clubs')
-
-    def form_valid(self, form):
-        form.instance.staff = self.request.user
-        messages.success(self.request, 'Teen Club record created successfully!')
-        return super().form_valid(form)
-
-@login_required
-def list_teen_clubs(request):
-    teen_clubs = TeenClub.objects.all()
-    return render(request, 'list_records.html', {'records': teen_clubs, 'title': 'Teen Club Records'})
-
-# PMTCT views
-class PMTCTCreateView(LoginRequiredMixin, CreateView):
-    model = PMTCT
-    form_class = PMTCTForm
-    template_name = 'main/pmtct_create.html'
-    success_url = reverse_lazy('list_pmct')
-
-    def form_valid(self, form):
-        form.instance.staff = self.request.user
-        messages.success(self.request, 'PMTCT record created successfully!')
-        return super().form_valid(form)
-
-@login_required
-def list_pmtct(request):
-    pmtct_records = PMTCT.objects.all()
-    return render(request, 'main/pmtct_list.html', {'records': pmtct_records, 'title': 'PMTCT Records'})
+        if signature == computed_signature:
+            data = json.loads(payload)
+            event_type = data.get('event_type')
+            if event_type == 'api.charge.payment':
+                transaction_id = data.get('reference')
+                status = data.get('status')
+                try:
+                    donation = Donation.objects.get(transaction_id=transaction_id)
+                    donation.status = 'completed' if status == 'success' else 'failed'
+                    donation.save()
+                except Donation.DoesNotExist:
+                    pass
+            return HttpResponse(status=200)
+        return HttpResponse(status=403)
+    return HttpResponse(status=400)

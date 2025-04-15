@@ -5,53 +5,90 @@
 
 {% block content %}
     <section class="about-hero">
-        <img src="{% static 'images/pmtct-hero.jpg' %}" alt="PMTCT Hero Image" class="about-hero-image">
-        <div class="about-hero-text">
+        <img src="{% static 'images/pmtct-hero.jpg' %}" alt="PMTCT Hero Image" class="about-hero-image" loading="lazy">
+        <div class="about-hero-text animate-hero">
             <h1>PMTCT & Support for HIV+ Women</h1>
             <p>Dedicated Programs for Mothers and Children.</p>
         </div>
     </section>
 
-    <section class="get-help-content">
-        <h2>PMTCT and Support for HIV+ Women</h2>
-        <p>[Your comprehensive content about the PMTCT program and support services for HIV+ women goes here. This is where you'll add the bulk of your information. Break it down into logical sections, as shown below.]</p>
+    <div class="get-help-content">
+        <aside class="about-sidebar" role="navigation" aria-label="Get Help Navigation">
+            <h3>In this section</h3>
+            <ul>
+                <li><a href="{% url 'main:child_clinic' %}">Child Clinic</a></li>
+                <li><a href="{% url 'main:hiv_services' %}">HIV Community Services</a></li>
+                <li><a href="{% url 'main:join_teen_club' %}">Teen Club</a></li>
+                <li><a href="{% url 'main:pmtct' %}" class="active">PMTCT & HIV+ Women</a></li>
+            </ul>
+        </aside>
 
-        <h3>What is PMTCT?</h3>
-        <p>[Explain what PMTCT (Prevention of Mother-to-Child Transmission) is.]</p>
+        <section class="main-content">
+            <h2>PMTCT and Support for HIV+ Women</h2>
+            <p>The Thembi Community Initiative offers comprehensive programs to prevent mother-to-child transmission (PMTCT) of HIV and provide holistic support for HIV-positive women. Our services empower mothers, protect infants, and strengthen families.</p>
 
-        <h3>Our Services</h3>
-        <ul>
-            <li><strong>Antiretroviral Therapy (ART):</strong> [Describe how you provide ART.]</li>
-            <li><strong>Counseling and Support:</strong> [Explain the counseling services offered.]</li>
-            <li><strong>Infant Feeding Guidance:</strong> [Provide information on safe infant feeding practices.]</li>
-            <li><strong>Partner Testing and Treatment:</strong> [Describe services for partners.]</li>
-            <li><strong>Early Infant Diagnosis:</strong> [Explain how you provide early testing for infants.]</li>
-            <!-- Add other services as needed -->
-        </ul>
+            <h3>What is PMTCT?</h3>
+            <p>Prevention of Mother-to-Child Transmission (PMTCT) is a set of interventions designed to prevent HIV transmission from an HIV-positive mother to her child during pregnancy, childbirth, or breastfeeding. Our PMTCT program ensures access to testing, treatment, and support for healthy outcomes.</p>
 
-        <h3>Support for HIV+ Women</h3>
-        <p>[Describe any additional support services you offer to HIV+ women beyond PMTCT, such as support groups, mental health services, or economic empowerment programs.]</p>
+            <h3>Our Services</h3>
+            <ul>
+                <li><strong>Antiretroviral Therapy (ART):</strong> Providing ART to HIV-positive mothers to reduce viral load and prevent transmission.</li>
+                <li><strong>Counseling and Support:</strong> Offering individual and group counseling to address emotional and social challenges.</li>
+                <li><strong>Infant Feeding Guidance:</strong> Educating mothers on safe infant feeding practices to minimize HIV transmission risks.</li>
+                <li><strong>Partner Testing and Treatment:</strong> Encouraging HIV testing and linkage to care for partners to support family health.</li>
+                <li><strong>Early Infant Diagnosis:</strong> Conducting early HIV testing for infants to ensure timely intervention if needed.</li>
+            </ul>
 
-        <h3>How to Access Services</h3>
-        <p>[Provide clear instructions on how women can access your PMTCT and support services. Include contact information, clinic locations, and any eligibility requirements.]</p>
+            <div class="info-card-row">
+                <div class="info-card">
+                    <img src="{% static 'images/pmtct-art.jpg' %}" alt="Antiretroviral Therapy" loading="lazy">
+                    <h3>ART Access</h3>
+                    <p>Ensuring mothers receive life-saving treatment.</p>
+                </div>
+                <div class="info-card">
+                    <img src="{% static 'images/pmtct-counseling.jpg' %}" alt="Counseling Support" loading="lazy">
+                    <h3>Counseling</h3>
+                    <p>Supporting emotional and mental well-being.</p>
+                </div>
+            </div>
 
-        <h3>Success Stories</h3>
-        <p>[Include real-life success stories (with appropriate consent and anonymization) to illustrate the positive impact of your programs.]</p>
-        <!-- You could use the info-card class here for testimonials if you like -->
+            <h3>Support for HIV+ Women</h3>
+            <p>Beyond PMTCT, we offer support groups, mental health services, and economic empowerment programs to help HIV-positive women thrive. Our peer-led initiatives foster community and resilience.</p>
 
-        <h3>Frequently Asked Questions (FAQs)</h3>
-        <details>
-            <summary>What is the most effective way to prevent mother-to-child transmission of HIV?</summary>
-            <p>The most effective way is through a combination of antiretroviral therapy (ART) for the mother, safe delivery practices, and appropriate infant feeding. [Expand on this with more detail].</p>
-        </details>
-        <details>
-            <summary>Can I breastfeed my baby?</summary>
-            <p>This a very good question [Expand on this with more detail].</p>
-        </details>
-        <details>
-            <summary>When should I visit the clinic?</summary>
-            <p>[Provide a clear answer, with specific timings and recommendations.]</p>
-        </details>
-        <!-- Add more FAQs as needed -->
-    </section>
+            <h3>How to Access Services</h3>
+            <p>Visit our office at [Address] or call [Phone Number] to enroll in our PMTCT program. Services are free and confidential. Contact us for eligibility details or to schedule a visit.</p>
+            <a href="{% url 'main:contact' %}" class="button">Contact Us</a>
+
+            <h3>Success Stories</h3>
+            <p>With consent, we share anonymized stories of mothers who have benefited from our programs, highlighting healthy births and empowered lives. [Add specific stories here.]</p>
+
+            <h3>Frequently Asked Questions (FAQs)</h3>
+            <div class="faq-container">
+                <details class="faq-item">
+                    <summary class="toggle-header" data-toggle="faq-1">What is the most effective way to prevent mother-to-child transmission of HIV? <span class="toggle-icon">▼</span></summary>
+                    <div id="faq-1" class="toggle-content">
+                        <p>The most effective way is through a combination of antiretroviral therapy (ART) for the mother, safe delivery practices, and appropriate infant feeding. ART reduces the mother’s viral load, significantly lowering transmission risk.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="toggle-header" data-toggle="faq-2">Can I breastfeed my baby? <span class="toggle-icon">▼</span></summary>
+                    <div id="faq-2" class="toggle-content">
+                        <p>With proper ART and guidance, breastfeeding can be safe. We provide counseling on exclusive breastfeeding and other options to minimize risks. Consult our team for personalized advice.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="toggle-header" data-toggle="faq-3">When should I visit the clinic? <span class="toggle-icon">▼</span></summary>
+                    <div id="faq-3" class="toggle-content">
+                        <p>Visit as soon as you know you’re pregnant or suspect you may be HIV-positive. Early intervention is key. We recommend regular check-ups throughout pregnancy and after delivery.</p>
+                    </div>
+                </details>
+            </div>
+
+            <p>Learn more about our <a href="{% url 'main:child_clinic' %}">Child Clinic services</a> or <a href="{% url 'main:hiv_services' %}">HIV Community Services</a>.</p>
+        </section>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/pmtct.js' %}"></script>
 {% endblock %}

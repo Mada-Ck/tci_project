@@ -6,7 +6,7 @@
 {% block content %}
     <!-- Hero Section with Animation -->
     <section class="about-hero">
-        <img src="{% static 'images/governance-hero.jpg' %}" alt="Governance Hero Image" class="about-hero-image">
+        <img src="{% static 'images/governance-hero.jpg' %}" alt="Governance Hero Image" class="about-hero-image" loading="lazy">
         <div class="about-hero-text animate-hero">
             <h1>Governance</h1>
             <p>Ensuring integrity, transparency, and community-driven impact at Thembi Community Initiative.</p>
@@ -18,14 +18,14 @@
         <aside class="about-sidebar" role="navigation" aria-label="Governance Navigation">
             <h3 class="sidebar-toggle">In this section <span class="toggle-icon">▼</span></h3>
             <ul class="sidebar-menu">
-                <li><a href="{% url 'about_us' %}">About Us</a></li>
-                <li><a href="{% url 'what_we_do' %}">What We Do</a></li>
-                <li><a href="{% url 'governance' %}" class="active">Governance</a>
+                <li><a href="{% url 'main:about_us' %}">About Us</a></li>
+                <li><a href="{% url 'main:what_we_do' %}">What We Do</a></li>
+                <li><a href="{% url 'main:governance' %}" class="active">Governance</a>
                     <ul class="sub-menu">
-                        <li><a href="{% url 'donors_and_supporters' %}">Donors and Supporters</a></li>
-                        <li><a href="{% url 'board_members' %}">Board Members</a></li>
-                        <li><a href="{% url 'board_committees' %}">Board Committees</a></li>
-                        <li><a href="{% url 'ceo_and_executive_team' %}">CEO and Executive Team</a></li>
+                        <li><a href="{% url 'main:donors_and_supporters' %}">Donors and Supporters</a></li>
+                        <li><a href="{% url 'main:board_members' %}">Board Members</a></li>
+                        <li><a href="{% url 'main:board_committees' %}">Board Committees</a></li>
+                        <li><a href="{% url 'main:ceo_and_executive_team' %}">CEO and Executive Team</a></li>
                     </ul>
                 </li>
             </ul>
@@ -71,30 +71,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script>
-        // Sidebar Toggle
-        document.querySelector('.sidebar-toggle').addEventListener('click', () => {
-            const menu = document.querySelector('.sidebar-menu');
-            const icon = document.querySelector('.sidebar-toggle .toggle-icon');
-            menu.classList.toggle('active');
-            icon.textContent = menu.classList.contains('active') ? '▲' : '▼';
-        });
-
-        // Content Toggle
-        document.querySelectorAll('.toggle-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const contentId = header.getAttribute('data-toggle');
-                const content = document.getElementById(contentId);
-                const icon = header.querySelector('.toggle-icon');
-                content.classList.toggle('active');
-                icon.textContent = content.classList.contains('active') ? '▲' : '▼';
-            });
-        });
-
-        // Hero Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroText = document.querySelector('.about-hero-text');
-            setTimeout(() => heroText.classList.add('visible'), 100);
-        });
-    </script>
+    <script src="{% static 'js/governance.js' %}"></script>
 {% endblock %}

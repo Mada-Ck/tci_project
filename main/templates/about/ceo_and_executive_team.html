@@ -6,7 +6,7 @@
 {% block content %}
     <!-- Hero Section -->
     <section class="about-hero">
-        <img src="{% static 'images/executive-hero.jpg' %}" alt="CEO and Executive Team Hero Image" class="about-hero-image">
+        <img src="{% static 'images/executive-hero.jpg' %}" alt="CEO and Executive Team Hero Image" class="about-hero-image" loading="lazy">
         <div class="about-hero-text animate-hero">
             <h1>CEO and Executive Team</h1>
             <p>Driving TCI’s vision with expertise and passion.</p>
@@ -18,14 +18,14 @@
         <aside class="about-sidebar" role="navigation" aria-label="Governance Navigation">
             <h3 class="sidebar-toggle">In this section <span class="toggle-icon">▼</span></h3>
             <ul class="sidebar-menu">
-                <li><a href="{% url 'about_us' %}">About Us</a></li>
-                <li><a href="{% url 'what_we_do' %}">What We Do</a></li>
-                <li><a href="{% url 'governance' %}" class="active">Governance</a>
+                <li><a href="{% url 'main:about_us' %}">About Us</a></li>
+                <li><a href="{% url 'main:what_we_do' %}">What We Do</a></li>
+                <li><a href="{% url 'main:governance' %}" class="active">Governance</a>
                     <ul class="sub-menu">
-                        <li><a href="{% url 'donors_and_supporters' %}">Donors and Supporters</a></li>
-                        <li><a href="{% url 'board_members' %}">Board Members</a></li>
-                        <li><a href="{% url 'board_committees' %}">Board Committees</a></li>
-                        <li><a href="{% url 'ceo_and_executive_team' %}" class="active">CEO and Executive Team</a></li>
+                        <li><a href="{% url 'main:donors_and_supporters' %}">Donors and Supporters</a></li>
+                        <li><a href="{% url 'main:board_members' %}">Board Members</a></li>
+                        <li><a href="{% url 'main:board_committees' %}">Board Committees</a></li>
+                        <li><a href="{% url 'main:ceo_and_executive_team' %}" class="active">CEO and Executive Team</a></li>
                     </ul>
                 </li>
             </ul>
@@ -46,19 +46,19 @@
                 <div class="board-container">
                     <ul class="board-members">
                         <li class="member-card animate-card">
-                            <img src="{% static 'images/executive/jane-doe.jpg' %}" alt="Jane Doe" class="member-image">
+                            <img src="{% static 'images/executive/jane-doe.jpg' %}" alt="Jane Doe" class="member-image" loading="lazy">
                             <div class="member-name">Jane Doe</div>
                             <div class="member-role">Chief Executive Officer</div>
                             <div class="member-desc">Guides TCI with a vision for sustainable impact.</div>
                         </li>
                         <li class="member-card animate-card">
-                            <img src="{% static 'images/executive/john-smith.jpg' %}" alt="John Smith" class="member-image">
+                            <img src="{% static 'images/executive/john-smith.jpg' %}" alt="John Smith" class="member-image" loading="lazy">
                             <div class="member-name">John Smith</div>
                             <div class="member-role">Chief Operating Officer</div>
                             <div class="member-desc">Oversees program execution and operations.</div>
                         </li>
                         <li class="member-card animate-card">
-                            <img src="{% static 'images/executive/mary-jones.jpg' %}" alt="Mary Jones" class="member-image">
+                            <img src="{% static 'images/executive/mary-jones.jpg' %}" alt="Mary Jones" class="member-image" loading="lazy">
                             <div class="member-name">Mary Jones</div>
                             <div class="member-role">Chief Financial Officer</div>
                             <div class="member-desc">Manages financial strategy and transparency.</div>
@@ -71,41 +71,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script>
-        // Sidebar Toggle
-        document.querySelector('.sidebar-toggle').addEventListener('click', () => {
-            const menu = document.querySelector('.sidebar-menu');
-            const icon = document.querySelector('.sidebar-toggle .toggle-icon');
-            menu.classList.toggle('active');
-            icon.textContent = menu.classList.contains('active') ? '▲' : '▼';
-        });
-
-        // Content Toggle
-        document.querySelectorAll('.toggle-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const contentId = header.getAttribute('data-toggle');
-                const content = document.getElementById(contentId);
-                const icon = header.querySelector('.toggle-icon');
-                content.classList.toggle('active');
-                icon.textContent = content.classList.contains('active') ? '▲' : '▼';
-            });
-        });
-
-        // Hero Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroText = document.querySelector('.about-hero-text');
-            setTimeout(() => heroText.classList.add('visible'), 100);
-        });
-
-        // Executive Animation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.member-card').forEach(card => observer.observe(card));
-    </script>
+    <script src="{% static 'js/ceo_and_executive_team.js' %}"></script>
 {% endblock %}
