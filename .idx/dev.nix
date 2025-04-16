@@ -1,43 +1,23 @@
-{ pkgs, ... }: {
-  # Use a stable Nixpkgs channel
-  channel = "stable-24.11";
+{ pkgs ? import <nixpkgs> {} }:
 
-  # Packages for Django
+pkgs.mkShell {
   packages = [
-    pkgs.python311          # Python 3.11
-    pkgs.python311Packages.pip  # Pip for installing Python packages
-    pkgs.python311Packages.virtualenv  # Virtualenv for isolated environments
-    pkgs.git                # Git for version control
+    pkgs.python311
+    pkgs.postgresql
+    pkgs.nodejs
   ];
 
-  # Environment variables (optional)
-  env = {
-    PYTHONPATH = "";        # Clear PYTHONPATH to avoid conflicts
-    DJANGO_SETTINGS_MODULE = "tci_project.settings";  # Adjust if your settings module differs
-  };
+  shellHook = ''
+    export PYTHONPATH=$PWD
+    export PGDATA=$PWD/postgres_data
+    export PGHOST=localhost
+    export PGUSER=postgres
+    export PGPASSWORD=postgres
 
-  # Install dependencies on workspace creation
-  idx.workspace.onCreate = {
-    install = ''
-      python -m venv .venv
-      source .venv/bin/activate
-      pip install -r requirements.txt
-    '';
-  };
+    if [ ! -d $PGDATA ]; then
+      initdb --no-locale --encoding=UTF8
+    fi
 
-  # Start the Django server when the workspace starts (optional)
-  idx.workspace.onStart = {
-    run-server = "python manage.py runserver 0.0.0.0:8000 &";
-  };
-
-  # Enable previews for Django
-  idx.previews = {
-    enable = true;
-    previews = {
-      web = {
-        command = [ "python" "manage.py" "runserver" "0.0.0.0:$PORT" ];
-        manager = "web";
-      };
-    };
-  };
+    pg_ctl start
+  '';
 }
