@@ -1,0 +1,31 @@
+.board-container {
+    width: 100%;
+}
+.board-members {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.supporter-card {
+    background-color: lightblue;
+    width: 200px !important;
+    text-align: center !important;
+    border: 1px solid #ddd !important;
+    padding: 10px;
+    border-radius: 5px;
+}
+.supporter-image {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 5px;
+}
+.supporter-name {
+    font-weight: bold;
+    margin: 10px 0;
+}
+.supporter-desc {
+    font-size: 0.9em;
+    color: #666;
+}
+}
