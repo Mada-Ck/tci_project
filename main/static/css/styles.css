@@ -740,8 +740,8 @@ section h2::after {
 
 .involvement-card img,
 .involvement-icon {
-    width: 50px;      /* Reduce image width */
-    height: 50px;     /* Reduce image height */
+    width: 70;      /* Reduce image width */
+    height: 70px;     /* Reduce image height */
     object-fit: contain;
     display: block;
     margin: 0 auto 0.5rem auto;
