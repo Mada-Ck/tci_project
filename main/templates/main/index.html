@@ -9,6 +9,209 @@
     <meta name="keywords" content="HIV/AIDS, nonprofit, Malawi, Thembi, healthcare, education">
     <!-- Favicon (assumed) -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    <!-- Embedded CSS for Newsletter and Contact Sections -->
+    <style>
+        /* Flexbox container for side-by-side layout */
+        .newsletter-contact-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    
+        /* Individual sections */
+        .form-section {
+            flex: 1;
+            min-width: 300px; /* Ensure responsiveness */
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+    
+        .form-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+    
+        /* Section headings and text */
+        .form-section h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+    
+        .form-section h2:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+        }
+    
+        .form-section p {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            line-height: 1.6;
+        }
+    
+        /* Contact info styling */
+        .contact-info p {
+            margin: 0.8rem 0;
+            font-size: 1rem;
+            color: #2c3e50;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+    
+        .contact-info a {
+            color: #3498db;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-left: 8px;
+        }
+    
+        .contact-info a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+    
+        /* Form styling */
+        .subscription-form,
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+    
+        .form-group {
+            position: relative;
+            text-align: left;
+        }
+    
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+    
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+    
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+    
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            background-color: #fff;
+        }
+    
+        /* Placeholder styling */
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #95a5a6;
+            opacity: 1;
+        }
+    
+        /* Error message styling */
+        .form-error {
+            display: none;
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            text-align: left;
+        }
+    
+        .form-error.active {
+            display: block;
+        }
+    
+        /* Button styling */
+        .form-button {
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fff;
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 0.5rem;
+        }
+    
+        .form-button:hover {
+            background: linear-gradient(135deg, #2980b9, #8e44ad);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+    
+        .form-button:active {
+            transform: translateY(0);
+        }
+    
+        /* Icon styling */
+        .contact-info p:before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+        }
+    
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .newsletter-contact-flex {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+    
+            .form-section {
+                min-width: 100%;
+                padding: 1.5rem;
+            }
+            
+            .form-button {
+                width: 100%;
+            }
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -259,7 +462,7 @@
     <!-- Donate Section -->
     <section id="donate" class="fade-in">
         <h2>Make a Difference Today</h2>
-        <p>90% of your donation goes directly to HIV programs like testing and PMTCT.</p>
+        <p>90% of your donation goes directly to HIV programs like teen club, PMTCT, Nutrition, Bursaries, and other programs.</p>
         <div class="donation-progress">Raised: $5,000 / Goal: $10,000</div>
         <div class="donate-options">
             <a href="{% url 'main:donate' %}" class="button">Donate Money</a>
@@ -300,43 +503,45 @@
         </div>
     </section>
 
-    <!-- Trust Signals Section -->
-    <section id="trust" class="fade-in">
-        <h2>Trusted by Our Community</h2>
-        <div class="trust-signals">
-            <img src="{% static 'images/ngora-logo.png' %}" alt="NGORA Accreditation" loading="lazy">
-            <img src="{% static 'images/thembi-logo.png' %}" alt="Thembi Community Initiative Logo" loading="lazy">
-            <p>Accredited by the Malawi Government and recognized by NGORA.</p>
-        </div>
-    </section>
+    <!-- Newsletter & Contact Section Side by Side -->
+    <div class="newsletter-contact-flex fade-in">
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="form-section">
+            <h2>Join Our Community</h2>
+            <p>Receive updates on our HIV programs and impact in Malawi.</p>
+            <form action="{% url 'main:subscribe' %}" method="post" class="subscription-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required aria-label="Email for newsletter subscription" class="form-input">
+                    <span class="form-error" aria-live="polite"></span>
+                </div>
+                <button type="submit" class="form-button" aria-label="Subscribe to newsletter">Subscribe</button>
+            </form>
+        </section>
 
-    <!-- Newsletter Section -->
-    <section id="newsletter" class="fade-in">
-        <h2>Join Our Community</h2>
-        <p>Receive updates on our HIV programs and impact in Malawi.</p>
-        <form action="{% url 'main:subscribe' %}" method="post" class="subscription-form">
-            {% csrf_token %}
-            <input type="email" name="email" placeholder="Your Email" required aria-label="Email for newsletter subscription">
-            <button type="submit" class="button" aria-label="Subscribe to newsletter">Subscribe</button>
-        </form>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="fade-in">
-        <h2>Contact Us</h2>
-        <p>We’d love to hear from you! Reach out to learn more or get involved.</p>
-        <div class="contact-info">
-            <p><strong>Email:</strong> thembicommunityinitiatives@gmail.com</p>
-            <p><strong>Phone:</strong> +265 888 30 96 55</p>
-            <p><strong>Address:</strong> Thembi Community Initiative (TCI), Box 79, Chitipa, Malawi</p>
-        </div>
-        <form action="{% url 'main:contact' %}" method="post" class="contact-form">
-            {% csrf_token %}
-            <input type="email" name="email" placeholder="Your Email" required aria-label="Your email address">
-            <textarea name="message" placeholder="Your Message" required aria-label="Your message"></textarea>
-            <button type="submit" class="button" aria-label="Send contact message">Send</button>
-        </form>
-    </section>
+        <!-- Contact Section -->
+        <section id="contact" class="form-section">
+            <h2>Contact Us</h2>
+            <p>We’d love to hear from you! Reach out to learn more or get involved.</p>
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:thembicommunityinitiatives@gmail.com">thembicommunityinitiatives@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+265888309655">+265 888 30 96 55</a></p>
+                <p><strong>Address:</strong> Thembi Community Initiative (TCI), Box 79, Chitipa, Malawi</p>
+            </div>
+            <form action="{% url 'main:contact' %}" method="post" class="contact-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required aria-label="Your email address" class="form-input">
+                    <span class="form-error" aria-live="polite"></span>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your Message" required aria-label="Your message" class="form-input form-textarea"></textarea>
+                    <span class="form-error" aria-live="polite"></span>
+                </div>
+                <button type="submit" class="form-button" aria-label="Send contact message">Send</button>
+            </form>
+        </section>
+    </div>
 
     <!-- Sticky CTA -->
     <a href="{% url 'main:donate' %}" class="sticky-cta" aria-label="Support our HIV programs">Support Us</a>
@@ -345,9 +550,68 @@
 {% block extra_js %}
     <!-- Ensure Bootstrap JS is loaded -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Personalization and Carousel Fix -->
+    <!-- JavaScript for Newsletter and Contact Forms, and Existing Functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Form Validation and Dynamic Behavior for Newsletter and Contact
+            const forms = document.querySelectorAll('.subscription-form, .contact-form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent default for demo; remove in production
+                    let isValid = true;
+
+                    // Validate inputs
+                    const inputs = form.querySelectorAll('.form-input, .form-textarea');
+                    inputs.forEach(input => {
+                        const errorSpan = input.nextElementSibling;
+                        if (!input.value.trim()) {
+                            errorSpan.textContent = `Please enter your ${input.name}.`;
+                            errorSpan.classList.add('active');
+                            input.classList.add('error');
+                            isValid = false;
+                        } else if (input.type === 'email' && !validateEmail(input.value)) {
+                            errorSpan.textContent = 'Please enter a valid email address.';
+                            errorSpan.classList.add('active');
+                            input.classList.add('error');
+                            isValid = false;
+                        } else {
+                            errorSpan.classList.remove('active');
+                            input.classList.remove('error');
+                        }
+                    });
+
+                    // If valid, simulate form submission
+                    if (isValid) {
+                        const button = form.querySelector('.form-button');
+                        button.textContent = 'Submitting...';
+                        setTimeout(() => {
+                            button.textContent = form.classList.contains('subscription-form') ? 'Subscribe' : 'Send';
+                            alert('Form submitted successfully!'); // Replace with actual submission logic
+                            form.reset();
+                        }, 1000);
+                    }
+                });
+            });
+
+            // Real-time validation on input
+            const inputs = document.querySelectorAll('.form-input, .form-textarea');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const errorSpan = input.nextElementSibling;
+                    if (input.value.trim()) {
+                        errorSpan.classList.remove('active');
+                        input.classList.remove('error');
+                    }
+                });
+            });
+
+            // Email validation function
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            // Existing JavaScript for Hero, Impact, and Carousel
             // Personalize Hero Title
             const heroTitle = document.querySelector('.carousel-item.active .hero-title');
             if (document.cookie.includes("visited=true")) {

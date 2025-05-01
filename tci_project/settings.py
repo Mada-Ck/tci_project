@@ -92,9 +92,15 @@ USE_TZ = True
 # Static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'main' / 'static',
+    BASE_DIR / 'static',
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Add this for development
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',
+    ]
 
 # Media files
 MEDIA_URL = '/media/'

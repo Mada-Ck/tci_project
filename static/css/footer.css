@@ -1,0 +1,194 @@
+.site-footer {
+    background-color: #f8f9fa;
+    padding: 3rem 0;
+    margin-top: auto;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Add new styles for footer lists */
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-list li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-list a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-list a:hover {
+    color: #1877f2;
+}
+
+/* Contact list specific styles */
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-list i {
+    color: #1877f2;
+    width: 20px;
+}
+
+/* Legal section styles */
+.footer-legal {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.footer-legal p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-section {
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.footer-map {
+    text-align: center;
+}
+
+.map-small {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.footer-navigation {
+    margin: 1rem 0;
+}
+
+/* Update footer links style */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.footer-links li::after {
+    content: '|';
+    margin: 0 0.5rem;
+    color: #dee2e6;
+}
+
+.footer-links li:last-child::after {
+    display: none;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: #555;
+}
+
+.social-icon.facebook:hover {
+    background-color: #1877f2;
+}
+
+.social-icon.twitter:hover {
+    background-color: #1da1f2;
+}
+
+/* Add Instagram social icon */
+.social-icon.instagram:hover {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Responsive improvements */
+@media (min-width: 768px) {
+    .footer-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer-section {
+        text-align: center;
+    }
+    
+    .contact-list li {
+        justify-content: center;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .footer-links li::after {
+        display: none;
+    }
+}
+
+/* Add skip link styles */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+}

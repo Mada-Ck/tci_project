@@ -397,11 +397,29 @@ main, .content-wrapper, #content {
 .hero-content h1 {
     margin-bottom: 1rem;
     font-size: 2.5rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    letter-spacing: 1px;
 }
 
 .hero-content p {
     margin-bottom: 1rem;
     font-size: 1rem;
+}
+
+/* Center card rows and limit width for better alignment */
+.hiv-row,
+.initiative-row,
+.service-row,
+.blog-row,
+.program-row,
+.involvement-row,
+.story-row,
+.impact-stats,
+.trust-signals {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
 }
 
 /* General Section Styling */
@@ -413,21 +431,28 @@ section {
     width: 100%;
 }
 
+section h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+}
+
+section h2::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, #c00 40%, #0078d7 100%);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
 #hero, footer, .message-bar, .top-bar {
     max-width: none;
-    margin-left: 0;
-    margin-right: 0;
-}
-
-/* HIV Services Section (With Hover Effect) */
-#hiv-services {
-    background-color: var(--section-bg);
-}
-
-.hiv-row {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
     flex-wrap: wrap;
 }
 
@@ -624,9 +649,7 @@ section {
 
 .blog-text {
     padding: 1.5rem;
-    text-align:
-
- left;
+    text-align: left;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -696,43 +719,32 @@ section {
     background-color: var(--background-color);
 }
 
+/* Compact Get Involved cards */
 .involvement-row {
     display: flex;
     flex-wrap: wrap;
+    gap: 1rem;              /* Reduce space between cards */
     justify-content: center;
-    gap: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .involvement-card {
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    box-shadow: var(--card-shadow);
-    padding: 1.5rem;
-    flex: 1 1 300px;
-    max-width: 380px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+    max-width: 240px;       /* Make cards narrower */
+    padding: 1rem 0.75rem;  /* Less padding */
+    margin: 0.5rem 0;       /* Less vertical margin */
+    min-height: 220px;      /* Optional: keep cards uniform */
+    box-sizing: border-box;
+    flex: 1 1 200px;
 }
 
-.involvement-card i {
-    font-size: 2.5rem;
-    color: #c00;
-    margin-bottom: 1rem;
-}
-
-.involvement-card h3 {
-    color: #c00;
-    margin-bottom: 0.5rem;
-}
-
-.involvement-card p {
-    flex-grow: 1;
-    margin-bottom: 1rem;
-}
-
-.involvement-card .button {
-    margin-top: auto;
+.involvement-card img,
+.involvement-icon {
+    width: 50px;      /* Reduce image width */
+    height: 50px;     /* Reduce image height */
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 0.5rem auto;
 }
 
 /* Stories Section */
@@ -801,6 +813,18 @@ section {
     text-decoration: underline;
 }
 
+/* Card hover glow effect */
+.hiv-card:hover,
+.initiative-card:hover,
+.service-card:hover,
+.blog-card:hover,
+.program-card:hover,
+.involvement-card:hover,
+.story-card:hover {
+    box-shadow: 0 8px 24px rgba(0,120,215,0.12), 0 2px 8px rgba(0,0,0,0.10);
+    border-color: #0078d7;
+}
+
 /* Donate Section */
 #donate {
     background-color: var(--background-color);
@@ -859,12 +883,18 @@ section {
 }
 
 .impact-item span {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #0078d7;
     display: block;
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #c00;
-    margin: 0;
-    line-height: 1.2;
+    margin-bottom: 0.25rem;
+    animation: popIn 0.7s cubic-bezier(.68,-0.55,.27,1.55) both;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
 }
 
 .impact-item p {
@@ -915,29 +945,78 @@ section {
     max-width: 500px;
     margin: 1rem auto 0;
     gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-radius: 8px;
+    background: var(--card-bg, #fff);
+    padding: 1.5rem;
+    margin-top: 1rem;
 }
 
 .subscription-form input[type="email"] {
     flex-grow: 1;
     padding: 0.75rem;
-    border: 1px solid var(--card-border);
+    border: 1.5px solid #ccc;
     border-radius: 5px;
     background-color: var(--card-bg);
     color: var(--text-color);
+    margin-bottom: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M12 13.5c-2.33 0-7 1.17-7 3.5V19h14v-2c0-2.33-4.67-3.5-7-3.5zm0-2c1.38 0 2.5-1.12 2.5-2.5S13.38 6.5 12 6.5 9.5 7.62 9.5 9 10.62 11.5 12 11.5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 0.75rem center;
+    padding-left: 2.5rem;
+}
+
+.subscription-form input[type="email"]:focus {
+    border-color: #0078d7;
+    box-shadow: 0 0 0 3px rgba(0,120,215,0.15);
+    outline: none;
 }
 
 .subscription-form button {
     padding: 0.75rem 1.5rem;
     white-space: nowrap;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.subscription-form button:hover {
+    background: linear-gradient(90deg, #c00 60%, #0078d7 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* Side-by-side layout for newsletter and contact sections */
+.newsletter-contact-flex {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 0 auto 3rem auto;
+    flex-wrap: wrap;
+}
+
+.newsletter-contact-flex > section {
+    flex: 1 1 350px;
+    min-width: 320px;
+    max-width: 500px;
+    background: var(--card-bg, #fff);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    padding: 2rem 1.5rem;
+    margin: 0;
 }
 
 /* Contact Section */
 #contact {
     background-color: var(--background-color);
+    text-align: left;
+    align-items: flex-start;
 }
 
 #contact h2 {
     margin-bottom: 0.5rem;
+    text-align: left;
+    align-items: flex-start;
 }
 
 #contact > p {
@@ -945,10 +1024,13 @@ section {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    text-align: left;
+    align-items: flex-start;
 }
 
 .contact-info {
-    text-align: center;
+    text-align: left;
+    align-items: flex-start;
     margin-bottom: 2rem;
 }
 
@@ -961,16 +1043,34 @@ section {
     margin: 0 auto;
     display: grid;
     gap: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-radius: 8px;
+    background: var(--card-bg, #fff);
+    padding: 1.5rem;
+    margin-top: 1rem;
 }
 
 .contact-form input[type="email"],
 .contact-form textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid var(--card-border);
+    border: 1.5px solid #ccc;
     border-radius: 5px;
     background-color: var(--card-bg);
     color: var(--text-color);
+    margin-bottom: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M12 13.5c-2.33 0-7 1.17-7 3.5V19h14v-2c0-2.33-4.67-3.5-7-3.5zm0-2c1.38 0 2.5-1.12 2.5-2.5S13.38 6.5 12 6.5 9.5 7.62 9.5 9 10.62 11.5 12 11.5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 0.75rem center;
+    padding-left: 2.5rem;
+}
+
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: #0078d7;
+    box-shadow: 0 0 0 3px rgba(0,120,215,0.15);
+    outline: none;
 }
 
 .contact-form textarea {
@@ -978,11 +1078,30 @@ section {
     resize: vertical;
 }
 
-.contact-form button {
+contact-form button {
     padding: 0.75rem 1.5rem;
     justify-self: center;
     width: auto;
     min-width: 150px;
+    transition: background 0.2s, transform 0.2s;
+}
+
+contact-form button:hover {
+    background: linear-gradient(90deg, #c00 60%, #0078d7 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* Validation feedback */
+.form-error {
+    color: #c00;
+    font-size: 0.95em;
+    margin-bottom: 0.5rem;
+}
+
+.form-success {
+    color: #090;
+    font-size: 0.95em;
+    margin-bottom: 0.5rem;
 }
 
 /* General Button Styles */
@@ -1003,6 +1122,16 @@ section {
 .button:hover {
     background-color: #a00;
     color: #fff !important;
+}
+
+/* Button interactivity */
+.button, .btn, button {
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.button:hover, .btn:hover, button:hover {
+    box-shadow: 0 4px 16px rgba(0,120,215,0.12);
+    transform: scale(1.04);
 }
 
 /* Footer */
@@ -1170,6 +1299,16 @@ footer {
     text-align: right; /* Align text to the right */
     max-width: 250px; /* Limit width for better readability */
     color: var(--footer-text);
+}
+
+/* Make the footer certificate image small like the header logo */
+.certificate-image {
+    width: 60px;
+    height: auto;
+    max-height: 60px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 0.5rem auto;
 }
 
 /* Social Links with Brand Colors */
@@ -1421,7 +1560,7 @@ footer {
     padding: 1.5rem;
     background-color: var(--about-sidebar-bg);
     border: 1px solid var(--about-sidebar-border);
-    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow */
     border-radius: 8px;
     height: fit-content;
 }
@@ -1449,7 +1588,7 @@ footer {
     padding: 0.7rem 1rem;
     text-decoration: none;
     color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease, border-left 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-left 0.3s ease, transform 0.3s ease; /* Add transform transition */
     border-left: 4px solid transparent;
     border-radius: 4px;
 }
@@ -1460,6 +1599,7 @@ footer {
     color: #c00;
     border-left: 4px solid #c00;
     font-weight: bold;
+    transform: translateX(5px); /* Slight shift on hover */
 }
 
 .about-sidebar ul ul {
@@ -1972,17 +2112,19 @@ details .details-content-padding p:last-child {
     padding: 0.5rem 1rem;
     background-color: var(--section-bg);
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid var(--card-border);
 }
 
 .toggle-header:hover {
     background-color: var(--dropdown-item-hover-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
 }
 
 .toggle-icon {
     font-size: 1rem;
     transition: transform 0.3s ease;
+    color: #c00; /* Make the icon red */
 }
 
 .toggle-header.active .toggle-icon {
@@ -1997,6 +2139,7 @@ details .details-content-padding p:last-child {
     border: 1px solid var(--card-border);
     border-top: none;
     border-radius: 0 0 5px 5px;
+    background-color: var(--card-bg); /* Add a background to the content */
 }
 
 .toggle-content.active {
@@ -2027,12 +2170,31 @@ details .details-content-padding p:last-child {
     border-radius: 8px;
     padding: 1.5rem;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .vision-mission-row .info-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #fefefe; /* Slightly lighter background on hover */
+}
+
+.vision-mission-row .info-card h3 {
+    color: #c00;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.vision-mission-row .info-card h3::before {
+    content: "\f0a3"; /* Font Awesome icon (e.g., a trophy) */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #c00;
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
 /* Expandable Info Cards */
@@ -2331,6 +2493,13 @@ details .details-content-padding p:last-child {
     }
     .member-card {
         width: calc(50% - 0.75rem);
+    }
+}
+
+@media (max-width: 900px) {
+    .newsletter-contact-flex {
+        flex-direction: column;
+        gap: 1.5rem;
     }
 }
 

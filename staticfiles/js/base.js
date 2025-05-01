@@ -1,53 +1,80 @@
-// Map Initialization
+// Initialize small map
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize small map in footer
-    const mapContainer = document.querySelector('.map-container');
-    const toggleMapBtn = document.getElementById('toggle-map');
-    const modal = document.getElementById('map-modal');
-    const modalMapContainer = document.getElementById('modal-map');
-    const closeModal = document.querySelector('.modal .close');
+    // Small map
+    var smallMap = L.map('map-small').setView([-9.7026, 33.2732], 10); // Chitipa, Malawi
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18,
+    }).addTo(smallMap);
+    L.marker([-9.7026, 33.2732]).addTo(smallMap)
+        .bindPopup('Thembi Community Initiative<br>Chitipa, Malawi')
+        .openPopup();
 
-    if (mapContainer) {
-        // Placeholder for small map (replace with actual map API like Google Maps or Leaflet)
-        const smallMap = document.createElement('div');
-        smallMap.style.width = '100%';
-        smallMap.style.height = '100%';
-        smallMap.style.backgroundColor = '#e0e0e0'; // Placeholder background
-        smallMap.innerHTML = '<p style="text-align: center; line-height: 150px;">Small Map Placeholder</p>';
-        mapContainer.appendChild(smallMap);
-        mapContainer.classList.add('map-loaded');
-    }
+    // Modal map
+    var modalMap = null;
+    var modal = document.getElementById('map-modal');
+    var toggleMapBtn = document.getElementById('toggle-map');
+    var closeBtn = document.querySelector('.close');
 
-    // Toggle modal for larger map
-    if (toggleMapBtn && modal && modalMapContainer) {
+    if (toggleMapBtn && modal && closeBtn) {
         toggleMapBtn.addEventListener('click', function () {
             modal.style.display = 'flex';
-            document.body.classList.add('modal-open');
+            if (!modalMap) {
+                modalMap = L.map('modal-map').setView([-9.7026, 33.2732], 10);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    maxZoom: 18,
+                }).addTo(modalMap);
+                L.marker([-9.7026, 33.2732]).addTo(modalMap)
+                    .bindPopup('Thembi Community Initiative<br>Chitipa, Malawi')
+                    .openPopup();
+            }
+            setTimeout(function () {
+                modalMap.invalidateSize();
+            }, 100);
+        });
 
-            // Initialize larger map in modal (replace with actual map API)
-            const largeMap = document.createElement('div');
-            largeMap.style.width = '100%';
-            largeMap.style.height = '100%';
-            largeMap.style.backgroundColor = '#e0e0e0'; // Placeholder background
-            largeMap.innerHTML = '<p style="text-align: center; line-height: 400px;">Large Map Placeholder</p>';
-            modalMapContainer.innerHTML = '';
-            modalMapContainer.appendChild(largeMap);
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
         });
     }
 
-    // Close modal
-    if (closeModal && modal) {
-        closeModal.addEventListener('click', function () {
-            modal.style.display = 'none';
-            document.body.classList.remove('modal-open');
-        });
+    // Set current year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Close modal when clicking outside
-        modal.addEventListener('click', function (e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.classList.remove('modal-open');
+    // Theme toggle
+    var themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
+            var html = document.documentElement;
+            var sunIcon = themeToggle.querySelector('.fa-sun');
+            var moonIcon = themeToggle.querySelector('.fa-moon');
+            if (html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                sunIcon.classList.add('d-none');
+                moonIcon.classList.remove('d-none');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                sunIcon.classList.remove('d-none');
+                moonIcon.classList.add('d-none');
             }
         });
+    }
+
+    // Hero carousel personalization
+    const heroTitle = document.querySelector('.carousel-item.active .hero-title');
+    if (heroTitle) {
+        if (document.cookie.includes("visited=true")) {
+            heroTitle.textContent = heroTitle.dataset.welcomeBack;
+        } else {
+            heroTitle.textContent = heroTitle.dataset.default;
+            document.cookie = "visited=true; max-age=31536000";
+        }
     }
 });

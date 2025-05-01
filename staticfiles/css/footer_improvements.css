@@ -1,0 +1,299 @@
+/* Suggested Footer Improvements */
+
+footer {
+    /* Use CSS Grid for a more structured layout */
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(250px, 1fr)
+    ); /* Responsive columns */
+    gap: 2rem; /* Space between grid items */
+    padding: 3rem 1rem; /* Increased padding for better spacing */
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    /* Remove max-width and centering from the container as the grid handles it */
+    /* max-width: 1200px; */
+    /* margin: 0 auto; */
+    display: contents; /* Make the container transparent to the grid */
+}
+
+/* Contact & Social Section */
+.footer-contact-social {
+    /* Removed nested flexbox, contact and social will be direct grid children */
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    /* gap: 2rem; */
+}
+
+.footer-contact {
+    text-align: left; /* Align contact information to the left */
+}
+
+.footer-contact h3 {
+    margin-bottom: 1rem; /* Increased bottom margin */
+    font-size: 1.2rem; /* Slightly larger heading */
+    color: var(--footer-text);
+    font-weight: 600;
+}
+
+.contact-options {
+    /* Removed nested flexbox, options will be direct children */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
+    /* gap: 1.5rem; */
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(150px, 1fr)
+    ); /* Responsive contact options */
+    gap: 1rem;
+}
+
+.contact-option {
+    display: flex;
+    align-items: center;
+    text-align: left; /* Align text to the left within options */
+    /* Removed flex-direction */
+    /* flex-direction: column; */
+    /* min-width: 80px; */
+}
+
+.contact-option i {
+    font-size: 1.2rem; /* Slightly smaller icon */
+    margin-right: 0.5rem; /* Icon to the left of text */
+    color: #c00;
+    transition: transform 0.3s ease;
+}
+
+.contact-option:hover i {
+    transform: scale(1.1);
+}
+
+.contact-option span {
+    font-size: 0.9rem; /* Slightly larger text */
+    color: var(--footer-text);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    /* Removed centering as alignment is handled by contact-option */
+    /* justify-content: center; */
+    gap: 1rem;
+    margin-top: 1rem; /* Add space above social icons */
+}
+
+.social-links a {
+    font-size: 1.5rem; /* Larger icons */
+    transition: transform 0.3s ease;
+}
+
+/* Footer Links Columns */
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    /* Removed flexbox properties */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* gap: 1.5rem; */
+    /* min-width: 300px; */
+    /* flex-wrap: wrap; */
+}
+
+.footer-links-column {
+    /* flex: 1; */
+    /* min-width: 140px; */
+}
+
+.footer-links h4 {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    color: var(--footer-text);
+    font-weight: 600;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links a {
+    color: var(--footer-link-color);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--footer-link-hover-color);
+    padding-left: 5px;
+}
+
+/* Map Section */
+.footer-map {
+    text-align: center;
+    padding: 1rem; /* Added padding */
+}
+
+.footer-map h4 {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    color: var(--footer-text);
+    font-weight: 600;
+}
+
+.map-small {
+    /* Slightly larger map with a subtle border */
+    max-width: 350px;
+    height: 180px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin: 0 auto 1rem; /* Center and add bottom margin */
+}
+
+/* Acknowledgement Section */
+.footer-acknowledgement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* Removed max-width and centering as grid handles it */
+    /* max-width: 1200px; */
+    /* margin: 0 auto; */
+    grid-column: 1 / -1; /* Span all columns */
+}
+
+/* Container for the Thembi logo and accreditation text */
+.logos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+/* NGORA section (right side) */
+.ngora-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.footer-logo,
+.accreditation-logo {
+    height: 60px; /* Slightly larger logos */
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+    margin: 0;
+}
+
+.accreditation-text {
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: right;
+    max-width: 250px;
+    color: var(--footer-text);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem; /* Increased padding */
+    font-size: 0.8rem;
+    /* Removed max-width and centering */
+    /* max-width: 1200px; */
+    /* margin: 0 auto; */
+    grid-column: 1 / -1; /* Span all columns */
+}
+
+.footer-bottom p {
+    margin: 0 0 0.5rem;
+}
+
+.footer-bottom-links {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Increased gap */
+    flex-wrap: wrap;
+}
+
+.footer-bottom-links a,
+.footer-bottom-links span {
+    color: var(--footer-link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin: 0 0.5rem;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--footer-link-hover-color);
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .footer-contact {
+        text-align: center; /* Center contact on smaller screens */
+    }
+    .contact-options {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+        justify-items: center; /* Center items horizontally */
+    }
+    .contact-option {
+        text-align: center; /* Center text within options */
+        flex-direction: column; /* Stack icon and text vertically */
+    }
+    .contact-option i {
+        margin-right: 0;
+        margin-bottom: 0.5rem; /* Icon above text */
+    }
+    .social-links {
+        justify-content: center; /* Center social icons */
+        margin-top: 0.5rem; /* Adjust spacing */
+    }
+    .footer-links {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust column width */
+        text-align: center; /* Center align links */
+    }
+    .footer-links-column {
+        margin-bottom: 1rem; /* Add bottom margin to columns */
+    }
+    .footer-links ul {
+        padding-left: 0; /* Remove list padding for centered alignment */
+    }
+    .footer-links li {
+        margin-bottom: 0.2rem; /* Reduce margin between list items */
+    }
+    .footer-map {
+        padding: 0.5rem; /* Adjust map padding */
+    }
+    .map-small {
+        max-width: 100%; /* Full width map on smaller screens */
+    }
+    .logos-container,
+    .ngora-section {
+        align-items: center; /* Center logos and text */
+        text-align: center;
+    }
+    .ngora-section {
+        align-items: center;
+    }
+    .accreditation-text {
+        text-align: center;
+    }
+}
