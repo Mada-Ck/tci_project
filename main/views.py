@@ -1,20 +1,68 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 import requests
 import json
 import uuid
 from .forms import DonationForm, ContactForm
-from .models import Donation, ContactMessage
+from .models import Donation, ContactMessage, BlogPost, Testimonial, HIVTestRecord, TeenClubMember, PMTCTCase, EducationSupportLog, YouthTrainingLog, Beneficiary
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import hmac
 import hashlib
+import datetime
+from django.db.models import Sum
 
-# Static Pages - Home
-def index(request):
-    return render(request, 'main/index.html')
+# Homepage: Show latest 3 blog posts and featured testimonial
+def home_view(request):
+    latest_posts = BlogPost.objects.order_by('-created_at')[:3]
+    featured_testimonial = Testimonial.objects.filter(feature_on_homepage=True).first()
+    hero_title = "Your Hero Title Logic"  # Or your actual logic
+
+    # --- CALCULATE IMPACT STATS ---
+    try:
+        # Health Records: Sum of specific health activities (e.g., tests + PMTCT)
+        total_hiv_tests = HIVTestRecord.objects.count()
+        total_pmtct_cases = PMTCTCase.objects.count()
+        health_records_count = total_hiv_tests + total_pmtct_cases
+    except Exception as e:
+        print(f"Error calculating health_records_count: {e}")
+        health_records_count = 0
+
+    try:
+        teen_club_count = TeenClubMember.objects.filter(is_active=True).count()
+    except Exception:
+        teen_club_count = 0
+
+    pmtct_cases_count = total_pmtct_cases  # Already calculated above
+
+    try:
+        education_beneficiaries_count = EducationSupportLog.objects.values('beneficiary_name').distinct().count()
+    except Exception:
+        education_beneficiaries_count = 0
+
+    try:
+        youth_trained_sum_result = YouthTrainingLog.objects.aggregate(total_attendees=Sum('num_attendees'))
+        youth_trained_count = youth_trained_sum_result['total_attendees'] or 0
+    except Exception:
+        youth_trained_count = 0
+
+    impact_stats_data = {
+        'health_records': health_records_count,  # Sum of activities
+        'teen_club': teen_club_count,
+        'pmtct': pmtct_cases_count,
+        'education': education_beneficiaries_count,
+        'youth_trained': youth_trained_count,
+    }
+
+    context = {
+        'latest_posts': latest_posts,
+        'featured_testimonial': featured_testimonial,
+        'hero_title': hero_title,
+        'impact_stats': impact_stats_data,
+    }
+    return render(request, 'main/index.html', context)
 
 # Static Pages - About Section
 def about_us(request):
@@ -255,3 +303,17 @@ def paychangu_webhook(request):
             return HttpResponse(status=200)
         return HttpResponse(status=403)
     return HttpResponse(status=400)
+
+# Blog post detail
+def blog_post_detail_view(request, post_slug):
+    post = get_object_or_404(BlogPost, slug=post_slug)
+    return render(request, 'main/blog_post_detail.html', {'post': post})
+
+# Blog list page
+def blog_list(request):
+    posts = BlogPost.objects.all().order_by('-created_at')
+    return render(request, 'main/blog_list.html', {'posts': posts})
+
+# Blog post
+def blog_post(request, slug):
+    pass

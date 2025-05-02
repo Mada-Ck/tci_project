@@ -1,0 +1,87 @@
+/* --- Responsive Utilities & Media Queries --- */
+
+/* Example: Hide on mobile */
+.hide-mobile {
+    display: block;
+}
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Example: Show only on mobile */
+.show-mobile {
+    display: none;
+}
+@media (max-width: 768px) {
+    .show-mobile {
+        display: block !important;
+    }
+}
+
+/* General responsive adjustments */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 98vw;
+    }
+}
+
+@media (max-width: 991px) {
+    .container {
+        max-width: 95vw;
+    }
+    .row,
+    .hiv-cards-column,
+    .program-row,
+    .initiative-row,
+    .blog-row,
+    .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .col,
+    .hiv-card,
+    .program-card,
+    .initiative-card,
+    .blog-card {
+        max-width: 100%;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-section {
+        padding: 2.5rem 0 1.5rem 0;
+    }
+    .hero-image,
+    .hero-carousel img {
+        max-width: 100%;
+    }
+    .blog-image,
+    .initiative-card img {
+        max-height: 140px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hiv-card,
+    .program-card,
+    .initiative-card,
+    .blog-card {
+        min-width: 100%;
+        padding: 1rem;
+    }
+    .blog-image,
+    .initiative-card img {
+        max-height: 100px;
+    }
+    .footer-content {
+        padding: 0 0.5rem;
+    }
+}

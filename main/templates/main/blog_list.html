@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section id="blog" class="fade-in">
+    <h2>All Blog Posts</h2>
+    <div class="blog-row">
+        {% for post in posts %}
+            <div class="blog-card">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.excerpt|default:post.content|truncatechars:150 }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="blog-image" loading="lazy">
+                {% else %}
+                    <img src="{% static 'images/default-blog.jpg' %}" alt="Default blog image" class="blog-image" loading="lazy">
+                {% endif %}
+                <a href="{% url 'main:blog_post' slug=post.slug %}" class="button update-button">
+                    Read Full Story
+                </a>
+            </div>
+        {% empty %}
+            <p>No blog posts yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

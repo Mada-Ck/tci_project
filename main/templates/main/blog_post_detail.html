@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} - Thembi Community Initiative{% endblock %}
+
+{% block content %}
+<section class="blog-post-full fade-in">
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+        <p class="post-meta">
+            <span class="post-date">{{ post.date }}</span>
+            {% if post.author %} | <span class="post-author">{{ post.author }}</span>{% endif %}
+        </p>
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="blog-image-full-width">
+        {% endif %}
+        <div class="post-content">
+            {{ post.content|safe }}
+        </div>
+        <hr>
+        <div class="post-navigation">
+            <a href="{% url 'main:index' %}" class="button">« Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

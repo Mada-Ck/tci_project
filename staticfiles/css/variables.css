@@ -1,0 +1,72 @@
+/* Define CSS Variables for Light and Dark Themes */
+:root {
+    --primary-color: #c00;
+    --secondary-color: #ffcc00;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --navbar-bg: #fff;
+    --navbar-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --nav-link-color: #000;
+    --nav-link-hover-color: #555;
+    --top-bar-bg: #f8f8f8;
+    --top-bar-link-color: #555;
+    --top-bar-link-hover-color: #c00;
+    --message-bar-bg: #f0f0f0;
+    --message-bar-text: #333;
+    --message-bar-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --card-bg: #fff;
+    --card-border: #ddd;
+    --card-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --footer-bg: #333;
+    --footer-text: #fff;
+    --footer-link-color: #ccc;
+    --footer-link-hover-color: #fff;
+    --dropdown-bg: #f9f9f9;
+    --dropdown-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    --dropdown-item-color: #333;
+    --dropdown-item-hover-bg: #ddd;
+    --dropdown-item-hover-color: #c00;
+    --section-bg: #f9f9f9;
+    --hero-overlay-bg: rgba(0, 0, 0, 0.7);
+    --about-sidebar-bg: #f8f8f8;
+    --about-sidebar-border: #ddd;
+    --heading-color: #c00;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --transition: 0.2s all cubic-bezier(.4,0,.2,1);
+    --container-width: 1200px;
+    --font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+[data-theme="dark"] {
+    --background-color: #222;
+    --text-color: #ddd;
+    --navbar-bg: #2a2a2a;
+    --navbar-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    --nav-link-color: #fff;
+    --nav-link-hover-color: #ccc;
+    --top-bar-bg: #333;
+    --top-bar-link-color: #ccc;
+    --top-bar-link-hover-color: #c00;
+    --message-bar-bg: #333;
+    --message-bar-text: #ddd;
+    --message-bar-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    --card-bg: #333;
+    --card-border: #444;
+    --card-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    --footer-bg: #1a1a1a;
+    --footer-text: #ddd;
+    --footer-link-color: #aaa;
+    --footer-link-hover-color: #fff;
+    --dropdown-bg: #444;
+    --dropdown-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.1);
+    --dropdown-item-color: #ddd;
+    --dropdown-item-hover-bg: #555;
+    --dropdown-item-hover-color: #c00;
+    --section-bg: #333;
+    --hero-overlay-bg: rgba(0, 0, 0, 0.85);
+    --about-sidebar-bg: #2a2a2a;
+    --about-sidebar-border: #444;
+    --heading-color: #ffcc00;
+    --box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}

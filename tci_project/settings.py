@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+'ckeditor',
+'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -38,20 +40,14 @@ ROOT_URLCONF = 'tci_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': False,  # Changed to False to allow custom loaders
+        'DIRS': [BASE_DIR / 'templates'],  # Global templates directory
+        'APP_DIRS': True,                  # Enable app templates (main/templates/)
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
-            'loaders': [
-                ('django.template.loaders.cached.Loader', [
-                    'django.template.loaders.filesystem.Loader',  # For DIRS
-                    'django.template.loaders.app_directories.Loader',  # For app templates
-                ]),
             ],
         },
     },
@@ -105,6 +101,9 @@ if DEBUG:
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# CKEditor configuration
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -192,3 +191,13 @@ if os.environ.get('IDX'):
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
     DEBUG = True
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ...your urls...
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

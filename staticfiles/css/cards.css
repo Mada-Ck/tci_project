@@ -1,0 +1,331 @@
+/* --- General Card Styles --- */
+.card,
+.hiv-card,
+.program-card,
+.initiative-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* --- HIV Services Cards --- */
+.hiv-cards-column {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.hiv-card {
+    flex: 1 1 300px;
+    max-width: 350px;
+    min-width: 250px;
+}
+.hiv-card:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+.hiv-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.hiv-card p {
+    font-size: 1rem;
+    color: #666;
+}
+.hiv-card .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+/* --- Program Cards --- */
+.program-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.program-card {
+    flex: 1 1 300px;
+    max-width: 350px;
+    min-width: 250px;
+}
+.program-card i {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+.program-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.program-card p {
+    font-size: 1rem;
+    color: #666;
+}
+.program-card .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+/* --- Initiative Cards --- */
+#initiatives {
+    padding: 2rem 0;
+    background-color: #f9f9f9;
+}
+.initiative-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.initiative-row:last-child {
+    margin-bottom: 0;
+}
+.initiative-card {
+    flex: 1 1 300px;
+    max-width: 350px;
+    min-width: 250px;
+}
+.initiative-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px 8px 0 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.initiative-card img:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+.initiative-text {
+    padding: 1rem;
+    text-align: left;
+}
+.initiative-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.initiative-text p {
+    font-size: 1rem;
+    color: #666;
+}
+.initiative-text .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+/* --- Services Cards --- */
+#services {
+    padding: 2rem 0;
+    background-color: #f9f9f9;
+}
+.service-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.service-card {
+    flex: 1 1 300px;
+    max-width: 350px;
+    min-width: 250px;
+    text-align: center;
+}
+.service-card i {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.service-card p {
+    font-size: 1rem;
+    color: #666;
+}
+.service-description {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #999;
+}
+.service-card .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+/* --- Get Involved Cards --- */
+#get-involved {
+    background-color: var(--background-color);
+}
+
+.involvement-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.involvement-card {
+    max-width: 240px;
+    padding: 1rem 0.75rem;
+    margin: 0.5rem 0;
+    min-height: 220px;
+    box-sizing: border-box;
+    flex: 1 1 200px;
+}
+
+.involvement-card img,
+.involvement-icon {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 0.5rem auto;
+}
+
+/* --- Stories Cards --- */
+#stories {
+    background-color: var(--section-bg);
+}
+
+.story-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.story-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    flex: 1 1 300px;
+    max-width: 380px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+}
+
+.story-card img,
+.story-card video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    background-color: #eee;
+}
+
+.story-card .story-text {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.story-card h3 {
+    color: #c00;
+    margin-bottom: 0.5rem;
+}
+
+.story-card p {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.story-link {
+    color: #c00;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.story-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Hover Effects for Cards --- */
+.hiv-card:hover,
+.initiative-card:hover,
+.service-card:hover,
+.blog-card:hover,
+.program-card:hover,
+.involvement-card:hover,
+.story-card:hover {
+    box-shadow: 0 8px 24px rgba(0,120,215,0.12), 0 2px 8px rgba(0,0,0,0.10);
+    border-color: #0078d7;
+}
+
+/* --- Responsive for Cards --- */
+@media (max-width: 991px) {
+    .hiv-card,
+    .program-card,
+    .initiative-card {
+        flex-basis: calc(50% - 1rem);
+        max-width: none;
+    }
+}
+@media (max-width: 768px) {
+    .hiv-cards-column,
+    .program-row,
+    .initiative-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .hiv-card,
+    .program-card,
+    .initiative-card {
+        max-width: 500px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .initiative-card img {
+        height: 140px;
+    }
+}
+@media (max-width: 576px) {
+    .hiv-card,
+    .program-card,
+    .initiative-card {
+        min-width: 100%;
+        padding: 1rem;
+    }
+    .initiative-card img {
+        height: 100px;
+    }
+}

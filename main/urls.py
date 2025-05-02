@@ -4,7 +4,7 @@ from . import views
 app_name = 'main'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.home_view, name='index'),
     path('about-us/', views.about_us, name='about_us'),
     path('what-we-do/', views.what_we_do, name='what_we_do'),
     path('governance/', views.governance, name='governance'),
@@ -42,4 +42,7 @@ urlpatterns = [
     path('terms-of-use/', views.terms_of_use, name='terms_of_use'),
     path('subscribe/', views.subscribe, name='subscribe'),  # Added
     path('webhook/paychangu/', views.paychangu_webhook, name='paychangu_webhook'),
+    path('blog/<slug:slug>/', views.blog_post, name='blog_post'),
+    path('blog/', views.blog_list, name='blog_list'),
+    path('story/<slug:post_slug>/', views.blog_post_detail_view, name='blog_post_detail'),
 ]

@@ -7,223 +7,10 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="Thembi Community Initiative supports HIV-affected families in Malawi with healthcare, education, and empowerment.">
     <meta name="keywords" content="HIV/AIDS, nonprofit, Malawi, Thembi, healthcare, education">
-    <!-- Favicon (assumed) -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
-    <!-- Embedded CSS for Newsletter and Contact Sections -->
-    <style>
-        /* Flexbox container for side-by-side layout */
-        .newsletter-contact-flex {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: space-between;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    
-        /* Individual sections */
-        .form-section {
-            flex: 1;
-            min-width: 300px; /* Ensure responsiveness */
-            padding: 2rem;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
-        }
-    
-        .form-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-    
-        /* Section headings and text */
-        .form-section h2 {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            text-align: left;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-    
-        .form-section h2:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, #3498db, #9b59b6);
-        }
-    
-        .form-section p {
-            font-size: 1rem;
-            color: #7f8c8d;
-            margin-bottom: 1.5rem;
-            text-align: left;
-            line-height: 1.6;
-        }
-    
-        /* Contact info styling */
-        .contact-info p {
-            margin: 0.8rem 0;
-            font-size: 1rem;
-            color: #2c3e50;
-            text-align: left;
-            display: flex;
-            align-items: center;
-        }
-    
-        .contact-info a {
-            color: #3498db;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin-left: 8px;
-        }
-    
-        .contact-info a:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-    
-        /* Form styling */
-        .subscription-form,
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-    
-        .form-group {
-            position: relative;
-            text-align: left;
-        }
-    
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-    
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            font-size: 1rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-    
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-    
-        .form-input:focus,
-        .form-textarea:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-            background-color: #fff;
-        }
-    
-        /* Placeholder styling */
-        .form-input::placeholder,
-        .form-textarea::placeholder {
-            color: #95a5a6;
-            opacity: 1;
-        }
-    
-        /* Error message styling */
-        .form-error {
-            display: none;
-            color: #e74c3c;
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            text-align: left;
-        }
-    
-        .form-error.active {
-            display: block;
-        }
-    
-        /* Button styling */
-        .form-button {
-            padding: 0.9rem 1.8rem;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #fff;
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 0.5rem;
-        }
-    
-        .form-button:hover {
-            background: linear-gradient(135deg, #2980b9, #8e44ad);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-    
-        .form-button:active {
-            transform: translateY(0);
-        }
-    
-        /* Icon styling */
-        .contact-info p:before {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            vertical-align: middle;
-        }
-    
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .newsletter-contact-flex {
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 1rem;
-            }
-    
-            .form-section {
-                min-width: 100%;
-                padding: 1.5rem;
-            }
-            
-            .form-button {
-                width: 100%;
-            }
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
-    <!-- Message Bar -->
-    <div class="message-bar">
-        <div class="message-content">
-            <p>Support our HIV Care programs today!</p>
-            <p>Join our Teen Club to empower youth in Malawi.</p>
-            <p>Your donation helps 200+ mothers through PMTCT.</p>
-        </div>
-    </div>
-
     <!-- Hero Section with Carousel -->
     <section id="hero" class="carousel slide" data-bs-ride="carousel" role="region" aria-label="Featured Impact Stories">
         <div class="carousel-inner">
@@ -268,25 +55,72 @@
         <button class="carousel-pause" type="button" data-bs-target="#hero" data-bs-pause="hover" aria-label="Pause Carousel">Pause</button>
     </section>
 
+    <div class="message-bar">
+        <div class="message-content">
+            <p>Support our HIV Care programs today!</p>
+            <p>Join our Teen Club to empower youth in Malawi.</p>
+            <p>Your donation helps 200+ mothers through PMTCT.</p>
+        </div>
+    </div>
+
     <!-- HIV Services Section -->
     <section id="hiv-services" class="fade-in">
         <h2>Fighting HIV/AIDS in Malawi</h2>
         <p>We provide free testing, counseling, and PMTCT to empower communities and reduce stigma.</p>
-        <div class="hiv-row">
-            <div class="hiv-card">
-                <h3>HIV Testing</h3>
-                <p>Reached 500+ community members with free HIV tests.</p>
-                <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+        <div class="hiv-content-layout">
+            <div class="hiv-row">
+                <div class="hiv-card">
+                    <h3>HIV Testing</h3>
+                    <p>Reached 500+ community members with free HIV tests.</p>
+                    <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+                </div>
+                <div class="hiv-card">
+                    <h3>PMTCT</h3>
+                    <p>Supported 200+ mothers to prevent HIV transmission to infants.</p>
+                    <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+                </div>
+                <div class="hiv-card">
+                    <h3>Counseling</h3>
+                    <p>Empowering families with stigma-free support.</p>
+                    <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+                </div>
             </div>
-            <div class="hiv-card">
-                <h3>PMTCT</h3>
-                <p>Supported 200+ mothers to prevent HIV transmission to infants.</p>
-                <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
-            </div>
-            <div class="hiv-card">
-                <h3>Counseling</h3>
-                <p>Empowering families with stigma-free support.</p>
-                <a href="{% url 'main:hiv_services' %}" class="button">Learn More</a>
+            <div class="hiv-update-column">
+                <div class="featured-testimonial-column">
+                    {% if featured_testimonial %}
+                        <div class="testimonial-content-wrapper">
+                            {% if featured_testimonial.author_image %}
+                            <div class="testimonial-image-container">
+                                <img src="{{ featured_testimonial.author_image.url }}"
+                                     alt="Photo of {{ featured_testimonial.author_name }}"
+                                     class="testimonial-author-image">
+                            </div>
+                            {% endif %}
+                            <div class="testimonial-text-content">
+                                {% if featured_testimonial.related_program_info %}
+                                    <h3>Impact Story: {{ featured_testimonial.related_program_info }}</h3>
+                                {% else %}
+                                    <h3>A Voice from the Community</h3>
+                                {% endif %}
+                                <blockquote class="testimonial-quote">
+                                    {{ featured_testimonial.quote|linebreaksbr }}
+                                </blockquote>
+                                <cite class="testimonial-author">
+                                    — {{ featured_testimonial.author_name }}
+                                    {% if featured_testimonial.author_relation %}
+                                        <span class="author-desc">({{ featured_testimonial.author_relation }})</span>
+                                    {% endif %}
+                                </cite>
+                            </div>
+                        </div>
+                        <a href="#" class="button testimonial-button">More Stories</a>
+                    {% else %}
+                        <h3>Empowering Communities</h3>
+                        <img src="{% static 'images/tci-logo-placeholder.png' %}" alt="Thembi Community Initiative" class="testimonial-fallback-logo">
+                        <p>Learn how our diverse programs, from bursaries to farming support, are creating lasting change and fostering hope across Chitipa.</p>
+                        <a href="{% url 'main:what_we_do' %}" class="button update-button">Our Programs</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </section>
@@ -353,34 +187,41 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
+    <!-- Blog Section - Enhanced Classes and Structure -->
     <section id="blog" class="fade-in">
         <h2>Latest Updates</h2>
         <div class="blog-row">
-            <div class="blog-card">
-                <img src="{% static 'images/blog-post1.jpg' %}" alt="TCI aiding flood-affected family in Malawi" loading="lazy">
-                <div class="blog-text">
-                    <h3>Supporting Families in Crisis</h3>
-                    <p>Learn how TCI aids families affected by hunger.</p>
-                    <a href="#" class="button">Read More</a>
+            {% if latest_posts %}
+                {% for post in latest_posts %}
+                <div class="blog-card">
+                    <a href="{% url 'main:blog_post_detail' post_slug=post.slug %}" class="blog-card-image-link">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy" class="blog-card-image">
+                        {% else %}
+                            <img src="{% static 'images/blog-placeholder.jpg' %}" alt="Thembi Update" loading="lazy" class="blog-card-image">
+                        {% endif %}
+                    </a>
+                    <div class="blog-text">
+                        <h3>
+                            <a href="{% url 'main:blog_post_detail' post_slug=post.slug %}">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+<p class="blog-meta">Published: {{ post.created_at|date:"M d, Y" }}</p>
+                        {% if post.excerpt %}
+                            <p class="blog-excerpt">{{ post.excerpt }}</p>
+                        {% else %}
+                            <p class="blog-excerpt">{{ post.content|striptags|truncatewords:20 }}</p>
+                        {% endif %}
+                        <a href="{% url 'main:blog_post_detail' post_slug=post.slug %}" class="button blog-read-more">
+                            Read More
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="blog-card">
-                <img src="{% static 'images/blog-post2.jpg' %}" alt="Teen Club empowerment session" loading="lazy">
-                <div class="blog-text">
-                    <h3>Teen Club Success</h3>
-                    <p>Discover how our Teen Club empowers youth.</p>
-                    <a href="{% url 'main:join_teen_club' %}" class="button">Read More</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="{% static 'images/blog-hiv.jpg' %}" alt="HIV awareness event in Chitipa" loading="lazy">
-                <div class="blog-text">
-                    <h3>Fighting HIV Stigma</h3>
-                    <p>Our campaign reached 300+ youth with prevention education.</p>
-                    <a href="#" class="button">Read More</a>
-                </div>
-            </div>
+                {% endfor %}
+            {% else %}
+                <p>No recent updates available.</p>
+            {% endif %}
         </div>
     </section>
 
@@ -475,31 +316,46 @@
     <section id="impact" class="fade-in">
         <h2>Our Impact</h2>
         <div class="impact-stats">
-            <div class="impact-item" data-count="300">
-                <img src="{% static 'images/impact-health-records.png' %}" alt="Health Records Icon" class="impact-icon">
-                <span>0</span>
-                <p>Health Records</p>
-            </div>
-            <div class="impact-item" data-count="280">
-                <img src="{% static 'images/impact-teen-club.png' %}" alt="Teen Club Members Icon" class="impact-icon">
-                <span>0</span>
-                <p>Teen Club Members</p>
-            </div>
-            <div class="impact-item" data-count="90">
-                <img src="{% static 'images/impact-pmtct.png' %}" alt="PMTCT Cases Icon" class="impact-icon">
-                <span>0</span>
-                <p>PMTCT Cases</p>
-            </div>
-            <div class="impact-item" data-count="400">
-                <img src="{% static 'images/impact-education.png' %}" alt="Education Beneficiaries Icon" class="impact-icon">
-                <span>0</span>
-                <p>Education Beneficiaries</p>
-            </div>
-            <div class="impact-item" data-count="350">
-                <img src="{% static 'images/impact-youth-trained.png' %}" alt="Youth Trained Icon" class="impact-icon">
-                <span>0</span>
-                <p>Youth Trained</p>
-            </div>
+            {% if impact_stats %}
+
+                <!-- Health Records -->
+                <div class="impact-item" data-count="{{ impact_stats.health_records }}">
+                    <img src="{% static 'images/impact-health-records.png' %}" alt="Health Records Icon" class="impact-icon">
+                    <span>0</span>
+                    <p>Health Records</p>
+                </div>
+
+                <!-- Teen Club Members -->
+                <div class="impact-item" data-count="{{ impact_stats.teen_club }}">
+                    <img src="{% static 'images/impact-teen-club.png' %}" alt="Teen Club Members Icon" class="impact-icon">
+                    <span>0</span>
+                    <p>Teen Club Members</p>
+                </div>
+
+                <!-- PMTCT Cases -->
+                <div class="impact-item" data-count="{{ impact_stats.pmtct }}">
+                    <img src="{% static 'images/impact-pmtct.png' %}" alt="PMTCT Cases Icon" class="impact-icon">
+                    <span>0</span>
+                    <p>PMTCT Cases</p>
+                </div>
+
+                <!-- Education Beneficiaries -->
+                <div class="impact-item" data-count="{{ impact_stats.education }}">
+                    <img src="{% static 'images/impact-education.png' %}" alt="Education Beneficiaries Icon" class="impact-icon">
+                    <span>0</span>
+                    <p>Education Beneficiaries</p>
+                </div>
+
+                <!-- Youth Trained -->
+                <div class="impact-item" data-count="{{ impact_stats.youth_trained }}">
+                    <img src="{% static 'images/impact-youth-trained.png' %}" alt="Youth Trained Icon" class="impact-icon">
+                    <span>0</span>
+                    <p>Youth Trained</p>
+                </div>
+
+            {% else %}
+                <p>Impact data is currently being compiled. Check back soon!</p>
+            {% endif %}
         </div>
     </section>
 
@@ -508,11 +364,14 @@
         <!-- Newsletter Section -->
         <section id="newsletter" class="form-section">
             <h2>Join Our Community</h2>
-            <p>Receive updates on our HIV programs and impact in Malawi.</p>
-            <form action="{% url 'main:subscribe' %}" method="post" class="subscription-form">
+            <p>Stay deeply connected to the heart of our mission in Chitipa, Malawi. By subscribing to our newsletter, you’ll receive powerful and uplifting stories from the communities we serve, detailed updates on our life-changing HIV and health programs, and transparent insights into how your generous support is transforming lives every day.</p>
+            <p>Be more than a supporter... </p> 
+            <p>Ve a part of a movement rooted in compassion, hope, and resilience. Sign up for the Thembi Community Initiative newsletter and walk alongside us as we build healthier, empowered, and self-reliant communities together, in all the communities we serve</p>
+            <form action="{% url 'main:subscribe' %}" method="post" class="subscription-form" novalidate>
                 {% csrf_token %}
                 <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required aria-label="Email for newsletter subscription" class="form-input">
+<label for="newsletter-email">Email Address</label>
+                    <input type="email" id="newsletter-email" name="email" placeholder="Your Email" required aria-label="Email for newsletter subscription" class="form-input">
                     <span class="form-error" aria-live="polite"></span>
                 </div>
                 <button type="submit" class="form-button" aria-label="Subscribe to newsletter">Subscribe</button>
@@ -614,11 +473,13 @@
             // Existing JavaScript for Hero, Impact, and Carousel
             // Personalize Hero Title
             const heroTitle = document.querySelector('.carousel-item.active .hero-title');
-            if (document.cookie.includes("visited=true")) {
-                heroTitle.textContent = heroTitle.dataset.welcomeBack;
-            } else {
-                heroTitle.textContent = heroTitle.dataset.default;
-                document.cookie = "visited=true; max-age=31536000";
+            if (heroTitle) {
+                if (document.cookie.includes("visited=true")) {
+                    heroTitle.textContent = heroTitle.dataset.welcomeBack;
+                } else {
+                    heroTitle.textContent = heroTitle.dataset.default;
+                    document.cookie = "visited=true; max-age=31536000";
+                }
             }
 
             // Impact Counter Animation
@@ -645,16 +506,18 @@
 
             // Fix Carousel Duplication
             const carousel = document.querySelector('#hero');
-            carousel.addEventListener('slid.bs.carousel', function() {
-                const items = carousel.querySelectorAll('.carousel-item');
-                items.forEach(item => {
-                    if (!item.classList.contains('active')) {
-                        item.style.display = 'none';
-                    } else {
-                        item.style.display = 'block';
-                    }
+            if (carousel) {
+                carousel.addEventListener('slid.bs.carousel', function() {
+                    const items = carousel.querySelectorAll('.carousel-item');
+                    items.forEach(item => {
+                        if (!item.classList.contains('active')) {
+                            item.style.display = 'none';
+                        } else {
+                            item.style.display = 'block';
+                        }
+                    });
                 });
-            });
+            }
         });
     </script>
 {% endblock %}
